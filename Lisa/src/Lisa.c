@@ -30,9 +30,11 @@ char transmitData[30];
 int transmitBufferLength, transmitDataLength;
 
 char ReceiveBuffer[1024];
-char ReceivedData[30];
+char ReceivedData[500];
 int receiveBufferLength = 1024, receiveDataLength;
 bool bitReceived = false, dataReceived = false;
+
+int receiverBufferCounter, bitCount = 8, receiverBitCounter;
 
 void SetUpGPIOPins()
 {
@@ -186,14 +188,18 @@ int main(void)
 		// Checking for the data received flag and receive if the data is not received
 		if(dataReceived)
 		{
-			ProcessReceivedData();
+			LISAProcessingReceivedData();
 			dataReceived = false;
 		}
 
-		if(bitReceived)
+		if(bitReceived && receiverBufferCounter < receiveBufferLength)
 		{
 			ReceiveData();
 			bitReceived = false;
+		}
+		else
+		{
+			dataReceived = true;
 		}
 		// This loop handles the receiving of the bit
 		while(!bitReceived && !dataReceived)

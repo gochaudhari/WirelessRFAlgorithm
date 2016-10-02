@@ -9,7 +9,7 @@
 #define RECEIVERSOURCE_H_
 
 void ReceiveData();
-void ProcessReceivedData();
+void LISAProcessingReceivedData();
 void SetUpReceiveInterrupt();
 
 #endif /* RECEIVERSOURCE_H_ */

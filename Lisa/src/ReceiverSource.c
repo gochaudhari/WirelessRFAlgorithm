@@ -15,43 +15,71 @@
 #include <ReceiverSource.h>
 #include <stdint.h>
 
-extern char ReceiveBuffer[50];
-extern char ReceivedData[30];
+extern char ReceiveBuffer[1024];
+extern char ReceivedData[500];
 extern int receiveBufferLength, receiveDataLength;
 extern bool bitReceived, dataReceived;
+extern int receiverBufferCounter, bitCount, receiverBitCounter;
 
 // This function receives the data sent from the transmitter
 // Algorithm
 // 1) This would just listen to the transmitter i.e a while loop would call this function
 // 2)
+// This function behaves like a loop function
 void ReceiveData()
 {
-	int counter = 0, bitCount = 8, bitCounter = 0;
-	uint8_t pinValue;
+	static uint8_t pinValue;
 
-	for(counter = 0; counter < receiveBufferLength; counter++)
+	/*	for(counter = 0; counter < receiveBufferLength; counter++)
 	{
-		pinValue = 0x00;
-		for(bitCounter = bitCount - 1; bitCounter >= 0; bitCounter--)
-		{
-			// Record the value of the pin either 1 or 0
-			if((ReceivePinValue >> 7) & 0x01)
-			{
-				pinValue |= (0x01 << bitCounter);
-			}
-		}
-		ReceiveBuffer[counter] = pinValue;
+	pinValue = 0x00;
+	for(bitCounter = bitCount - 1; bitCounter >= 0; bitCounter--)
+	{
+	// Record the value of the pin either 1 or 0
+	if((ReceivePinValue >> 7) & 0x01)
+	{
+	pinValue |= (0x01 << bitCounter);
 	}
-	dataReceived = true;
+	}
+	ReceiveBuffer[counter] = pinValue;
+	}
+	dataReceived = true;*/
+
+	if((ReceivePinValue >> 7) & 0x01)
+	{
+		pinValue |= (0x01 << receiverBitCounter);
+	}
+	receiverBitCounter++;
+
+	if(receiverBitCounter == 8)
+	{
+		ReceiveBuffer[receiverBufferCounter] = pinValue;
+		receiverBufferCounter++;
+		receiverBitCounter = 0;
+		pinValue = 0x00;
+	}
 }
 
-void ProcessReceivedData()
+void LISAProcessingReceivedData()
 {
-	int counter = 0, syncFieldCount = 0;
-	bool firstSection = false, secondSection = false, goodStream = false;
-	char *messageStatus;
+	int dataCounter = 0;
+	bool syncFieldDetected = false;
+	char dataByte;
+	int bitCounter = 0;
 
-	for(counter = 0; counter < receiveBufferLength; counter++)
+	if(!syncFieldDetected)
+	{
+		for()
+		dataByte = (ReceiveBuffer << 1);
+	}
+	for(dataCounter = 0; dataCounter < receiveBufferLength; dataCounter++)
+	{
+		dataByte = ReceiveBuffer[dataCounter];
+
+
+	}
+
+	for(dataCounter = 0; dataCounter < receiveBufferLength; counter++)
 	{
 		if(ReceiveBuffer[counter] == 0x5)
 		{
@@ -75,10 +103,7 @@ void ProcessReceivedData()
 		{
 		case "FirstSection":
 			firstSection = true;
-
-
 		}*/
-
 	}
 }
 
@@ -87,7 +112,7 @@ void SetUpReceiveInterrupt()
 {
 	/*
 	 * Interrupt Enable for 2.7
-	*/
+	 */
 	IRQn_Type IRQnType = EINT3_IRQn;
 	LPC_GPIOINT->IO2IntEnR = 0;
 	LPC_GPIOINT->IO2IntEnR |= (1 << ReceivePin);
