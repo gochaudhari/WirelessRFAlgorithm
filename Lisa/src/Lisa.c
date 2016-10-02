@@ -28,6 +28,7 @@
 char transmitBuffer[50];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
 char transmitData[30];
 int transmitBufferLength, transmitDataLength;
+int sizeOfsyncField = 32;
 
 char ReceiveBuffer[1024];
 char ReceivedData[500];
@@ -89,7 +90,6 @@ void SetUpTimer()
 void TIMER0_IRQHandler()
 {
 	// Exit from Sleep
-
 	bitReceived = true;
 }
 #endif
@@ -160,17 +160,17 @@ int main(void)
 	// 1) T: Create the sync stream for 64 bits.
 	CreateSyncStream();
 	// 1) T: Print the created sync stream
-	PrintData(transmitBuffer, 8, 0);
+	PrintData(transmitBuffer, transmitBufferLength, 0);
 
 	// 2) T: Take data from user
-	printf("\nEnter the data to be transmitted");
+	printf("\nEnter the data to be transmitted: ");
 	scanf("%s", &transmitData);
 	transmitDataLength = strlen(transmitData);
 
 	// 3) T: Combine the repeating pattern and the user input data
 	AppendUserData(transmitData);
 	// 3) T: Print the created final stream
-	PrintData(transmitBuffer, transmitBufferLength, 8);
+	PrintData(transmitBuffer, transmitBufferLength, sizeOfsyncField);
 
 	// T: Transmit the formed data
 	TransmitData();
@@ -178,7 +178,7 @@ int main(void)
 
 #ifdef Receive
 	// 4) R: Receive all the data in a variable.
-	ReceiveData();
+//	ReceiveData();
 #endif
 
 	// Never Ending Loop

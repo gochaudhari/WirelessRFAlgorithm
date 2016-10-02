@@ -18,18 +18,29 @@
 extern char transmitBuffer[50];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
 extern char transmitData[30];
 extern int transmitBufferLength, transmitDataLength;
+extern int sizeOfsyncField;
 
 // This function creates the initial sync stream (Size : 64 bytes)
 void CreateSyncStream()
 {
-	int sizeOfData = 8, dataCounter;
-	uint8_t repeatPattern = 0x5;
+	int dataCounter;
+	uint8_t firstRepeatPattern = 0x5;
+	uint8_t secondRepeatPattern = 0xA;
 
-	for(dataCounter = 0; dataCounter < sizeOfData; dataCounter++)
+	for(dataCounter = 0; dataCounter < sizeOfsyncField; dataCounter++)
 	{
-		// Append the repeating pattern
-		transmitBuffer[dataCounter] = ((repeatPattern << 4) & 0xF0) | (dataCounter & 0x0F);
-		transmitBufferLength++;
+		// Append the repeating pattern 0x5x
+		if(dataCounter < 16)
+		{
+			transmitBuffer[dataCounter] = ((firstRepeatPattern << 4) & 0xF0) | (dataCounter & 0x0F);
+			transmitBufferLength++;
+		}
+		// Append the repeating pattern 0xAx
+		else
+		{
+			transmitBuffer[dataCounter] = ((secondRepeatPattern << 4) & 0xF0) | (dataCounter & 0x0F);
+			transmitBufferLength++;
+		}
 	}
 }
 

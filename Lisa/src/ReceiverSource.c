@@ -69,8 +69,8 @@ void LISAProcessingReceivedData()
 
 	if(!syncFieldDetected)
 	{
-		for()
-		dataByte = (ReceiveBuffer << 1);
+//		for()
+//		dataByte = (ReceiveBuffer << 1);
 	}
 	for(dataCounter = 0; dataCounter < receiveBufferLength; dataCounter++)
 	{
@@ -79,7 +79,7 @@ void LISAProcessingReceivedData()
 
 	}
 
-	for(dataCounter = 0; dataCounter < receiveBufferLength; counter++)
+	/*for(dataCounter = 0; dataCounter < receiveBufferLength; counter++)
 	{
 		if(ReceiveBuffer[counter] == 0x5)
 		{
@@ -99,12 +99,12 @@ void LISAProcessingReceivedData()
 			firstSection = false;
 			secondSection = false;
 		}
-		/*		switch(messageStatus)
+				switch(messageStatus)
 		{
 		case "FirstSection":
 			firstSection = true;
-		}*/
-	}
+		}
+	}*/
 }
 
 #ifdef ReceiveDebug
