@@ -9,10 +9,10 @@
 #define ALLDEFS_H_
 
 // This is for debug purposes
-//#define Transmit
-//#define Receive
+#define Transmit
+#define Receive
 //#define TransmitDebug
-#define ReceiveDebug
+//#define ReceiveDebug
 
 // General defines
 #define true					1

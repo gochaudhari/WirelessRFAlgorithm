@@ -2,7 +2,7 @@
  * ReceiverSource.c
  *
  *  Created on: Sep 20, 2016
- *      Author: gocha
+ *      Author: Gaurao Chaudhari
  */
 
 #ifdef __USE_CMSIS

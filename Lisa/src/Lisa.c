@@ -57,6 +57,7 @@ void SetUpGPIOPins()
 #endif
 }
 
+#if defined(Transmit) && defined(Receive)
 void SetUpTimer()
 {
 	// PCONP register for Timer 0
@@ -80,19 +81,25 @@ void SetUpTimer()
     /* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
     LPC_TIM0->MR0 = 0xFFFF;
 }
+#endif
 
+#if defined(Transmit) && defined(Receive)
 void TIMER0_IRQHandler()
 {
 	// Exit from Sleep
 
 	bitReceived = true;
 }
+#endif
 
+#ifdef Receive
 void EINT3_IRQHandler(void)
 {
 	LPC_GPIOINT->IO2IntClr |= 1 << ReceivePin;
 }
+#endif
 
+#if defined(Transmit) && defined(Receive)
 void PrintData(char *buffer, int length, int characterPosition)
 {
 	int counter;
@@ -112,10 +119,11 @@ void PrintData(char *buffer, int length, int characterPosition)
 		}
 	}
 }
+#endif
 
 int main(void)
 {
-	// TODO: insert code here
+
 	// Setup the GPIO Ports here at this position
 	SetUpGPIOPins();
 
