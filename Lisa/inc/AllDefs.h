@@ -9,7 +9,7 @@
 #define ALLDEFS_H_
 
 // This is for debug purposes
-#define Transmit
+//#define Transmit
 #define Receive
 //#define TransmitDebug
 //#define ReceiveDebug
@@ -39,4 +39,5 @@ typedef int bool;
 #define Timer0PCONP					1
 #define Timer0PCLK					2
 
+#define MachingSyncCapability		8
 #endif /* ALLDEFS_H_ */

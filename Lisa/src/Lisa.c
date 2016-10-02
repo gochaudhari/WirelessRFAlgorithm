@@ -29,7 +29,7 @@ char transmitBuffer[50];				// 8 bytes of initial sync and then next is the data
 char transmitData[30];
 int transmitBufferLength, transmitDataLength;
 
-char ReceiveBuffer[50];
+char ReceiveBuffer[1024];
 char ReceivedData[30];
 int receiveBufferLength = 1024, receiveDataLength;
 bool bitReceived = false, dataReceived = false;
@@ -57,7 +57,7 @@ void SetUpGPIOPins()
 #endif
 }
 
-#if defined(Transmit) && defined(Receive)
+#if defined(Transmit) || defined(Receive)
 void SetUpTimer()
 {
 	// PCONP register for Timer 0
@@ -83,7 +83,7 @@ void SetUpTimer()
 }
 #endif
 
-#if defined(Transmit) && defined(Receive)
+#if defined(Transmit) || defined(Receive)
 void TIMER0_IRQHandler()
 {
 	// Exit from Sleep
@@ -92,14 +92,14 @@ void TIMER0_IRQHandler()
 }
 #endif
 
-#ifdef Receive
+#ifdef ReceiveDebug
 void EINT3_IRQHandler(void)
 {
 	LPC_GPIOINT->IO2IntClr |= 1 << ReceivePin;
 }
 #endif
 
-#if defined(Transmit) && defined(Receive)
+#if defined(Transmit) || defined(Receive)
 void PrintData(char *buffer, int length, int characterPosition)
 {
 	int counter;
@@ -127,8 +127,10 @@ int main(void)
 	// Setup the GPIO Ports here at this position
 	SetUpGPIOPins();
 
+#if defined(Transmit) && defined(Receive)
 	// Turn on the timer
 	SetUpTimer();
+#endif
 
 #ifdef TransmitDebug
 	// There won't be anything done by the controller in the transmit mode since the button does everything.
