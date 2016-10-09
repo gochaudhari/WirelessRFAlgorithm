@@ -1,7 +1,7 @@
 /*
 ===============================================================================
  Name        : Lisa.c
- Author      : $(author)
+ Author      : Gaurao Chaudhari
  Version     :
  Copyright   : $(copyright)
  Description : main definition
@@ -74,29 +74,39 @@ void SetUpTimer()
 
 	/* Enable the timer, and increment on PCLK */
     LPC_TIM0->TC = 0;
-    LPC_TIM0->TCR = 1;
+    LPC_TIM0->TCR = 0x2;
     LPC_TIM0->CTCR = 0;
+
+    LPC_TIM0->PR = 0;
+    LPC_TIM0->PC = 0;
 
 	/*4. Interrupts: See register T0/1/2/3MCR (Table 430) and T0/1/2/3CCR (Table 431) for
 	match and capture events. */
     LPC_TIM0->MCR |= (0x3 << 0);
 
     /* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
-    LPC_TIM0->MR0 = 0xFFFF;
+    LPC_TIM0->MR0 = 0xabcd;
+
+    IRQn_Type timerIRQType = TIMER0_IRQn;
+    NVIC_EnableIRQ(timerIRQType);
 }
 #endif
 
 #if defined(Transmit) || defined(Receive)
 void TIMER0_IRQHandler()
 {
-	// Exit from Sleep
+	// Reset the interrupt
+	LPC_TIM0->IR |= (1 << 0);
+
+	// Reset the counter.
+	LPC_TIM0->TCR = 0x02;
 
 #ifdef Receive
 	bitReceived = true;
 #endif
 
 #ifdef Transmit
-	bitSent = true;
+	bitSent = false;
 #endif
 }
 #endif
@@ -135,11 +145,6 @@ int main(void)
 
 	// Setup the GPIO Ports here at this position
 	SetUpGPIOPins();
-
-#if defined(Transmit) && defined(Receive)
-	// Turn on the timer
-	SetUpTimer();
-#endif
 
 #ifdef TransmitDebug
 	// There won't be anything done by the controller in the transmit mode since the button does everything.
@@ -187,10 +192,26 @@ int main(void)
 	// 4) R: Receive all the data in a variable.
 //	ReceiveData();
 #endif
-	LISAProcessingReceivedData();
+//	LISAProcessingReceivedData();
 	// Never Ending Loop
+#if defined(Transmit) || defined(Receive)
+	// Turn on the timer
+	SetUpTimer();
+#endif
+
+//    LPC_TIM0->TCR = 0x1;
 	while(1)
 	{
+#ifdef Transmit
+		if(!bitSent)
+		{
+			// Send the bit;
+			bitSent = true;
+			// Un-reset the counter.
+			LPC_TIM0->TCR = 0x1;
+		}
+#endif
+
 #ifdef Receive
 		// Checking for the data received flag and receive if the data is not received
 		if(dataReceived)
@@ -226,7 +247,6 @@ int main(void)
 			printf("\nReceived = 0");
 		}
 #endif
-
 	}
 	return 0;
 }
