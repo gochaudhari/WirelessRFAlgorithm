@@ -33,10 +33,10 @@ int sizeOfsyncField = 32;
 char ReceiveBuffer[1024];
 char ReceivedData[500];
 int receiveBufferLength = 1024, receiveDataLength;
-bool bitReceived = false, dataReceived = false, bitSent = false;
+bool bitReceived = false, dataReceived = false, bitReadyForTransmit = false;
 
 int receiverBufferCounter, bitCount = 8, receiverBitCounter;
-int transmitBufferCounter, transmitBitCounter;
+int transmitBufferCounter, transmitBitCounter = 8;
 
 void SetUpGPIOPins()
 {
@@ -107,7 +107,7 @@ void TIMER0_IRQHandler()
 #endif
 
 #ifdef Transmit
-	bitSent = false;
+	bitReadyForTransmit = true;
 #endif
 }
 #endif
@@ -138,7 +138,7 @@ void PrintData(char *buffer, int length, int characterPosition)
 			printf("%c", buffer[counter]);
 		}
 	}
-	printf("\n Data Printed");
+	printf("\nData Printed");
 }
 #endif
 
@@ -212,10 +212,10 @@ int main(void)
 			// Un-reset the counter.
 			LPC_TIM0->TCR = 0x1;
 		}*/
-		if(bitTransmitted && transmitBufferCounter < transmitBufferLength)
+		if(bitReadyForTransmit && transmitBufferCounter < transmitBufferLength)
 		{
 			TransmitData();
-			bitTransmitted = false;
+			bitReadyForTransmit = false;
 		}
 
 #endif

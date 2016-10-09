@@ -19,6 +19,7 @@ extern char TransmitBuffer[50];				// 8 bytes of initial sync and then next is t
 extern char TransmittedData[30];
 extern int transmitBufferLength, transmitDataLength;
 extern int sizeOfsyncField;
+extern int transmitBufferCounter, transmitBitCounter;
 
 // This function creates the initial sync stream (Size : 64 bytes)
 void CreateSyncStream()
@@ -63,7 +64,7 @@ void TransmitData()
 
 	uint8_t pinValue;
 
-	if(transmitBitCounter>=0)
+	if(transmitBitCounter >= 0)
 	{
 		pinValue = (TransmitBuffer[transmitBufferCounter] >> transmitBitCounter) & 0x01;
 		TransmitPinValue = (pinValue << 6);
@@ -71,13 +72,10 @@ void TransmitData()
 	transmitBitCounter--;
 
 
-	if(transmitBitCounter==0)
+	if(transmitBitCounter == 0)
 	{
-		if(transmitBufferCounter<transmitBufferLength)
-		{
-			transmitBufferCounter++;
-			transmitBitCounter=8;
-		}
+		transmitBufferCounter++;
+		transmitBitCounter = 8;
 	}
 
 	/*for(counter = 0; counter < transmitBufferLength; counter++)s
