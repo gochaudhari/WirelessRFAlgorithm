@@ -25,15 +25,15 @@
 // TODO: insert other definitions and declarations here
 
 // General Defs
-char transmitBuffer[50];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
-char transmitData[30];
+char TransmitBuffer[50];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
+char TransmittedData[30];
 int transmitBufferLength, transmitDataLength;
 int sizeOfsyncField = 32;
 
 char ReceiveBuffer[1024];
 char ReceivedData[500];
 int receiveBufferLength = 1024, receiveDataLength;
-bool bitReceived = false, dataReceived = false;
+bool bitReceived = false, dataReceived = false, bitSent = false;
 
 int receiverBufferCounter, bitCount = 8, receiverBitCounter;
 
@@ -90,7 +90,14 @@ void SetUpTimer()
 void TIMER0_IRQHandler()
 {
 	// Exit from Sleep
+
+#ifdef Receive
 	bitReceived = true;
+#endif
+
+#ifdef Transmit
+	bitSent = true;
+#endif
 }
 #endif
 
@@ -160,17 +167,17 @@ int main(void)
 	// 1) T: Create the sync stream for 64 bits.
 	CreateSyncStream();
 	// 1) T: Print the created sync stream
-	PrintData(transmitBuffer, transmitBufferLength, 0);
+	PrintData(TransmitBuffer, transmitBufferLength, 0);
 
 	// 2) T: Take data from user
 	printf("\nEnter the data to be transmitted: ");
-	scanf("%s", &transmitData);
-	transmitDataLength = strlen(transmitData);
+	scanf("%s", &TransmittedData);
+	transmitDataLength = strlen(TransmittedData);
 
 	// 3) T: Combine the repeating pattern and the user input data
-	AppendUserData(transmitData);
+	AppendUserData(TransmittedData);
 	// 3) T: Print the created final stream
-	PrintData(transmitBuffer, transmitBufferLength, sizeOfsyncField);
+	PrintData(TransmitBuffer, transmitBufferLength, sizeOfsyncField);
 
 	// T: Transmit the formed data
 	TransmitData();
@@ -180,7 +187,7 @@ int main(void)
 	// 4) R: Receive all the data in a variable.
 //	ReceiveData();
 #endif
-
+	LISAProcessingReceivedData();
 	// Never Ending Loop
 	while(1)
 	{

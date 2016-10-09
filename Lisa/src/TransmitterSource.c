@@ -15,8 +15,8 @@
 #include <AllDefs.h>
 
 // General Defs
-extern char transmitBuffer[50];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
-extern char transmitData[30];
+extern char TransmitBuffer[50];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
+extern char TransmittedData[30];
 extern int transmitBufferLength, transmitDataLength;
 extern int sizeOfsyncField;
 
@@ -32,13 +32,13 @@ void CreateSyncStream()
 		// Append the repeating pattern 0x5x
 		if(dataCounter < 16)
 		{
-			transmitBuffer[dataCounter] = ((firstRepeatPattern << 4) & 0xF0) | (dataCounter & 0x0F);
+			TransmitBuffer[dataCounter] = ((firstRepeatPattern << 4) & 0xF0) | (dataCounter & 0x0F);
 			transmitBufferLength++;
 		}
 		// Append the repeating pattern 0xAx
 		else
 		{
-			transmitBuffer[dataCounter] = ((secondRepeatPattern << 4) & 0xF0) | (dataCounter & 0x0F);
+			TransmitBuffer[dataCounter] = ((secondRepeatPattern << 4) & 0xF0) | (dataCounter & 0x0F);
 			transmitBufferLength++;
 		}
 	}
@@ -50,7 +50,7 @@ void AppendUserData(char *transmitDataAppend)
 
 	for(counter = 0; counter < transmitDataLength; counter++)
 	{
-		transmitBuffer[transmitBufferLength] = (transmitDataAppend[counter] & 0xFF);
+		TransmitBuffer[transmitBufferLength] = (transmitDataAppend[counter] & 0xFF);
 		transmitBufferLength++;
 	}
 }
@@ -65,7 +65,7 @@ void TransmitData()
 	{
 		for(bitCounter = bitCount-1; bitCounter >= 0; bitCounter--)
 		{
-			pinValue = (transmitBuffer[counter] >> bitCounter) & 0x01;
+			pinValue = (TransmitBuffer[counter] >> bitCounter) & 0x01;
 			TransmitPinValue = (pinValue << 6);
 		}
 	}

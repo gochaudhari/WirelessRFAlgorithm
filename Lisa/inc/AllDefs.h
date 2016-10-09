@@ -10,7 +10,7 @@
 
 // This is for debug purposes
 #define Transmit
-//#define Receive
+#define Receive
 //#define TransmitDebug
 //#define ReceiveDebug
 

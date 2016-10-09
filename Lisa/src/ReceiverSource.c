@@ -14,12 +14,14 @@
 #include <AllDefs.h>
 #include <ReceiverSource.h>
 #include <stdint.h>
+#include <string.h>
 
 extern char ReceiveBuffer[1024];
 extern char ReceivedData[500];
 extern int receiveBufferLength, receiveDataLength;
 extern bool bitReceived, dataReceived;
 extern int receiverBufferCounter, bitCount, receiverBitCounter;
+extern char TransmitBuffer[50];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
 
 // This function receives the data sent from the transmitter
 // Algorithm
@@ -62,49 +64,88 @@ void ReceiveData()
 
 void LISAProcessingReceivedData()
 {
-	int dataCounter = 0;
-	bool syncFieldDetected = false;
-	char dataByte;
+	int numberCounter = 0, fullBitsCounter = 0, byteCounter = 0, checkCounter = 0, countForFourBits = 0;
+	bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+	char dataByte, nextByte, detectedByte;
 	int bitCounter = 0;
 
+	strncpy(ReceiveBuffer, TransmitBuffer, 50);
+
+	dataByte = ReceiveBuffer[0];
 	if(!syncFieldDetected)
 	{
-//		for()
-//		dataByte = (ReceiveBuffer << 1);
+		while(1)
+		{
+			if(fullBitsCounter == 8)
+			{
+				dataByte = ReceiveBuffer[byteCounter];
+				fullBitsCounter = 0;
+				checkCounter = 0;
+				byteCounter++;
+			}
+
+			if(ignoreFourBits)
+			{
+				countForFourBits++;
+			}
+
+			if(countForFourBits == 4)
+			{
+				ignoreFourBits = false;
+			}
+
+			if(!ignoreFourBits) {
+				if(!firstHalfDetected)
+				{
+					secondHalfDetected = false;
+					if(((dataByte >> 4)& 0xF) == 0x5)
+					{
+						detectedByte = ((dataByte >> 4)& 0xF);
+						// first half detected
+						firstHalfDetected = true;
+						// Search for the next
+						ignoreFourBits = true;
+						countForFourBits = 0;
+					}
+				}
+				else
+				{
+					firstHalfDetected = false;
+					if(((dataByte >> 4)& 0xF) == numberCounter)
+					{
+						detectedByte = ((dataByte >> 4)& 0xF);
+						secondHalfDetected = true;
+						ignoreFourBits = true;
+						numberCounter++;
+						countForFourBits = 0;
+					}
+				}
+			}
+
+			if(checkCounter < 4)
+			{
+				dataByte = dataByte << 1;
+				fullBitsCounter++;
+				checkCounter++;
+			}
+
+			if(checkCounter == 4 && fullBitsCounter != 8)
+			{
+				if(byteCounter < receiveBufferLength)
+				{
+					nextByte = ReceiveBuffer[byteCounter+1];
+					dataByte |= (nextByte >> 4);
+					checkCounter = 0;
+				}
+				else
+				{
+					nextByte = 0;
+					checkCounter = 0;
+				}
+			}
+		}
+		//		dataByte = (ReceiveBuffer << 1);
 	}
-	for(dataCounter = 0; dataCounter < receiveBufferLength; dataCounter++)
-	{
-		dataByte = ReceiveBuffer[dataCounter];
-
-
-	}
-
-	/*for(dataCounter = 0; dataCounter < receiveBufferLength; counter++)
-	{
-		if(ReceiveBuffer[counter] == 0x5)
-		{
-			messageStatus = "FirstSection";
-			firstSection = true;
-		}
-		else if(syncFieldCount == ReceiveBuffer[counter])
-		{
-
-			messageStatus = "SecondSection";
-			secondSection = true;
-		}
-
-		if(firstSection && secondSection)
-		{
-			goodStream = true;
-			firstSection = false;
-			secondSection = false;
-		}
-				switch(messageStatus)
-		{
-		case "FirstSection":
-			firstSection = true;
-		}
-	}*/
 }
 
 #ifdef ReceiveDebug
