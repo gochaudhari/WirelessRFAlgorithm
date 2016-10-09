@@ -137,6 +137,7 @@ void PrintData(char *buffer, int length, int characterPosition)
 			printf("%c", buffer[counter]);
 		}
 	}
+	printf("\n Data Printed");
 }
 #endif
 
@@ -192,14 +193,14 @@ int main(void)
 	// 4) R: Receive all the data in a variable.
 //	ReceiveData();
 #endif
-//	LISAProcessingReceivedData();
+
 	// Never Ending Loop
 #if defined(Transmit) || defined(Receive)
 	// Turn on the timer
 	SetUpTimer();
 #endif
 
-//    LPC_TIM0->TCR = 0x1;
+    LPC_TIM0->TCR = 0x1;
 	while(1)
 	{
 #ifdef Transmit
@@ -216,18 +217,25 @@ int main(void)
 		// Checking for the data received flag and receive if the data is not received
 		if(dataReceived)
 		{
-			LISAProcessingReceivedData();
+//			LISAProcessingReceivedData();
 			dataReceived = false;
+			PrintData(ReceiveBuffer, receiveBufferLength, 1024);
 		}
 
-		if(bitReceived && receiverBufferCounter < receiveBufferLength)
+		if(bitReceived)
 		{
-			ReceiveData();
+			if(receiverBufferCounter < receiveBufferLength)
+			{
+				ReceiveData();
+
+				// Re-enable the timer to receive next bit
+				LPC_TIM0->TCR = 0x1;
+			}
+			else
+			{
+				dataReceived = true;
+			}
 			bitReceived = false;
-		}
-		else
-		{
-			dataReceived = true;
 		}
 		// This loop handles the receiving of the bit
 		while(!bitReceived && !dataReceived)
