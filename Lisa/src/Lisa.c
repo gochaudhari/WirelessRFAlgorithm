@@ -25,9 +25,9 @@
 // TODO: insert other definitions and declarations here
 
 // General Defs
-char TransmitBuffer[50];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
+char TransmitBuffer[1024];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
 char TransmittedData[30];
-int transmitBufferLength, transmitDataLength;
+int transmitBufferLength = 1024, transmitDataLength;
 int sizeOfsyncField = 32;
 
 char ReceiveBuffer[1024];
@@ -36,6 +36,7 @@ int receiveBufferLength = 1024, receiveDataLength;
 bool bitReceived = false, dataReceived = false, bitSent = false;
 
 int receiverBufferCounter, bitCount = 8, receiverBitCounter;
+int transmitBufferCounter, transmitBitCounter;
 
 void SetUpGPIOPins()
 {
@@ -204,13 +205,19 @@ int main(void)
 	while(1)
 	{
 #ifdef Transmit
-		if(!bitSent)
+/*		if(!bitSent)
 		{
 			// Send the bit;
 			bitSent = true;
 			// Un-reset the counter.
 			LPC_TIM0->TCR = 0x1;
+		}*/
+		if(bitTransmitted && transmitBufferCounter < transmitBufferLength)
+		{
+			TransmitData();
+			bitTransmitted = false;
 		}
+
 #endif
 
 #ifdef Receive

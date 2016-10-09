@@ -58,15 +58,36 @@ void AppendUserData(char *transmitDataAppend)
 // This function transmits the data to the wire
 void TransmitData()
 {
-	int counter = 0, bitCount = 8, bitCounter = 0;
+	//int counter = 0, bitCount = 8, bitCounter = 0;
+	//int transmitBufferCounter, transmitBitCounter;
+
 	uint8_t pinValue;
 
-	for(counter = 0; counter < transmitBufferLength; counter++)
+	if(transmitBitCounter>=0)
+	{
+		pinValue = (TransmitBuffer[transmitBufferCounter] >> transmitBitCounter) & 0x01;
+		TransmitPinValue = (pinValue << 6);
+	}
+	transmitBitCounter--;
+
+
+	if(transmitBitCounter==0)
+	{
+		if(transmitBufferCounter<transmitBufferLength)
+		{
+			transmitBufferCounter++;
+			transmitBitCounter=8;
+		}
+	}
+
+	/*for(counter = 0; counter < transmitBufferLength; counter++)s
 	{
 		for(bitCounter = bitCount-1; bitCounter >= 0; bitCounter--)
 		{
 			pinValue = (TransmitBuffer[counter] >> bitCounter) & 0x01;
 			TransmitPinValue = (pinValue << 6);
+
 		}
 	}
+*/
 }
