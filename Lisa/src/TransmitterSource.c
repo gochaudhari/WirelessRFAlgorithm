@@ -75,7 +75,7 @@ void TransmitData()
 	if(transmitBitCounter == 0)
 	{
 		transmitBufferCounter++;
-		transmitBitCounter = 8;
+		transmitBitCounter = 7;
 	}
 
 	/*for(counter = 0; counter < transmitBufferLength; counter++)s

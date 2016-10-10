@@ -27,7 +27,7 @@
 // General Defs
 char TransmitBuffer[1024];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
 char TransmittedData[30];
-int transmitBufferLength = 1024, transmitDataLength;
+int transmitBufferLength, transmitDataLength;
 int sizeOfsyncField = 32;
 
 char ReceiveBuffer[1024];
@@ -36,7 +36,7 @@ int receiveBufferLength = 1024, receiveDataLength;
 bool bitReceived = false, dataReceived = false, bitReadyForTransmit = false;
 
 int receiverBufferCounter, bitCount = 8, receiverBitCounter;
-int transmitBufferCounter, transmitBitCounter = 8;
+int transmitBufferCounter, transmitBitCounter = 7;
 
 void SetUpGPIOPins()
 {
@@ -86,7 +86,7 @@ void SetUpTimer()
     LPC_TIM0->MCR |= (0x3 << 0);
 
     /* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
-    LPC_TIM0->MR0 = 0xabcd;
+    LPC_TIM0->MR0 = 41000;		//1) 43981 2) 35000 3) 38000 4)
 
     IRQn_Type timerIRQType = TIMER0_IRQn;
     NVIC_EnableIRQ(timerIRQType);
@@ -174,7 +174,7 @@ int main(void)
 	// 1) T: Create the sync stream for 64 bits.
 	CreateSyncStream();
 	// 1) T: Print the created sync stream
-	PrintData(TransmitBuffer, transmitBufferLength, 0);
+//	PrintData(TransmitBuffer, transmitBufferLength, 0);
 
 	// 2) T: Take data from user
 	printf("\nEnter the data to be transmitted: ");
@@ -216,6 +216,7 @@ int main(void)
 		{
 			TransmitData();
 			bitReadyForTransmit = false;
+		    LPC_TIM0->TCR = 0x1;
 		}
 
 #endif
@@ -225,6 +226,7 @@ int main(void)
 		if(dataReceived)
 		{
 //			LISAProcessingReceivedData();
+			printf("\nData Reception Complete\n");
 			dataReceived = false;
 			PrintData(ReceiveBuffer, receiveBufferLength, 1024);
 		}
