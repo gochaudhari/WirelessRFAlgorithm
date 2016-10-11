@@ -51,6 +51,11 @@ void ReceiveData()
 	{
 		pinValue |= (0x01 << receiverBitCounter);
 	}
+	else
+	{
+		pinValue |= (0x00 << receiverBitCounter);
+	}
+//	printf("%d", (ReceivePinValue >> 7) & 0x01);
 	receiverBitCounter++;
 
 	if(receiverBitCounter == 8)

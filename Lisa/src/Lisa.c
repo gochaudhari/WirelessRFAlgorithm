@@ -30,9 +30,9 @@ char TransmittedData[30];
 int transmitBufferLength, transmitDataLength;
 int sizeOfsyncField = 32;
 
-char ReceiveBuffer[1024];
+char ReceiveBuffer[200];
 char ReceivedData[500];
-int receiveBufferLength = 1024, receiveDataLength;
+int receiveBufferLength = 200, receiveDataLength;
 bool bitReceived = false, dataReceived = false, bitReadyForTransmit = false;
 
 int receiverBufferCounter, bitCount = 8, receiverBitCounter;
@@ -78,7 +78,7 @@ void SetUpTimer()
     LPC_TIM0->TCR = 0x2;
     LPC_TIM0->CTCR = 0;
 
-    LPC_TIM0->PR = 0;
+    LPC_TIM0->PR = 1000;
     LPC_TIM0->PC = 0;
 
 	/*4. Interrupts: See register T0/1/2/3MCR (Table 430) and T0/1/2/3CCR (Table 431) for
@@ -86,7 +86,7 @@ void SetUpTimer()
     LPC_TIM0->MCR |= (0x3 << 0);
 
     /* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
-    LPC_TIM0->MR0 = 41000;		//1) 43981 2) 35000 3) 38000 4)
+    LPC_TIM0->MR0 = 500;		//1) 43981 2) 35000 3) 38000 4) 41000
 
     IRQn_Type timerIRQType = TIMER0_IRQn;
     NVIC_EnableIRQ(timerIRQType);
@@ -233,18 +233,17 @@ int main(void)
 
 		if(bitReceived)
 		{
+			bitReceived = false;
 			if(receiverBufferCounter < receiveBufferLength)
 			{
 				ReceiveData();
-
-				// Re-enable the timer to receive next bit
 				LPC_TIM0->TCR = 0x1;
+				// Re-enable the timer to receive next bit
 			}
 			else
 			{
 				dataReceived = true;
 			}
-			bitReceived = false;
 		}
 		// This loop handles the receiving of the bit
 		while(!bitReceived && !dataReceived)

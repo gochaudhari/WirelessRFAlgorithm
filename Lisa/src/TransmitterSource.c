@@ -64,15 +64,12 @@ void TransmitData()
 
 	uint8_t pinValue;
 
-	if(transmitBitCounter >= 0)
-	{
-		pinValue = (TransmitBuffer[transmitBufferCounter] >> transmitBitCounter) & 0x01;
-		TransmitPinValue = (pinValue << 6);
-	}
+	pinValue = (TransmitBuffer[transmitBufferCounter] >> transmitBitCounter) & 0x01;
+	TransmitPinValue = (pinValue << 6);
 	transmitBitCounter--;
 
 
-	if(transmitBitCounter == 0)
+	if(transmitBitCounter == -1)
 	{
 		transmitBufferCounter++;
 		transmitBitCounter = 7;
