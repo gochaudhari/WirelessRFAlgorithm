@@ -10,6 +10,7 @@
 
 void ReceiveData();
 void LISAProcessingReceivedData();
+void ProcessLISAOnReceivedData();
 void SetUpReceiveInterrupt();
 
 #endif /* RECEIVERSOURCE_H_ */

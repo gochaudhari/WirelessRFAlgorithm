@@ -30,7 +30,7 @@ extern char TransmitBuffer[50];				// 8 bytes of initial sync and then next is t
 // This function behaves like a loop function
 void ReceiveData()
 {
-	static uint8_t pinValue;
+	static uint8_t pinValue = 0;
 
 	/*	for(counter = 0; counter < receiveBufferLength; counter++)
 	{
@@ -56,13 +56,14 @@ void ReceiveData()
 		pinValue |= (0x00 << receiverBitCounter);
 	}
 //	printf("%d", (ReceivePinValue >> 7) & 0x01);
-	receiverBitCounter++;
+	receiverBitCounter--;
 
-	if(receiverBitCounter == 8)
+	if(receiverBitCounter == -1)
 	{
+//		printf("-");
 		ReceiveBuffer[receiverBufferCounter] = pinValue;
 		receiverBufferCounter++;
-		receiverBitCounter = 0;
+		receiverBitCounter = 7;
 		pinValue = 0x00;
 	}
 }
@@ -79,6 +80,7 @@ void LISAProcessingReceivedData()
 	dataByte = ReceiveBuffer[0];
 	if(!syncFieldDetected)
 	{
+		printf("\n\nAfter LISA Implementation\n");
 		while(1)
 		{
 			if(fullBitsCounter == 8)
@@ -106,6 +108,18 @@ void LISAProcessingReceivedData()
 					if(((dataByte >> 4)& 0xF) == 0x5)
 					{
 						detectedByte = ((dataByte >> 4)& 0xF);
+						printf("%x", detectedByte);
+						// first half detected
+						firstHalfDetected = true;
+						// Search for the next
+						ignoreFourBits = true;
+						countForFourBits = 0;
+					}
+
+					if(((dataByte >> 4)& 0xF) == 0xA)
+					{
+						detectedByte = ((dataByte >> 4)& 0xF);
+						printf("%x", detectedByte);
 						// first half detected
 						firstHalfDetected = true;
 						// Search for the next
@@ -119,10 +133,16 @@ void LISAProcessingReceivedData()
 					if(((dataByte >> 4)& 0xF) == numberCounter)
 					{
 						detectedByte = ((dataByte >> 4)& 0xF);
+						printf("%x", detectedByte);
 						secondHalfDetected = true;
 						ignoreFourBits = true;
 						numberCounter++;
 						countForFourBits = 0;
+					}
+
+					if(numberCounter == 16)
+					{
+						numberCounter = 0;
 					}
 				}
 			}
@@ -150,6 +170,62 @@ void LISAProcessingReceivedData()
 			}
 		}
 		//		dataByte = (ReceiveBuffer << 1);
+	}
+}
+
+void ProcessLISAOnReceivedData()
+{
+	int mainByteCount = 0, internalBufferCount = 0, firstBitIndex = 0, secondBitIndex = 0;
+	uint8_t firstByte = 0x00, secondByte = 0x00;
+	uint8_t Buffer[receiveBufferLength], localByte = 0x00;
+
+//	strncpy(ReceiveBuffer, TransmitBuffer, 50);
+	printf("\n");
+
+	while(mainByteCount < 700)
+	{
+		if(firstBitIndex == 0)
+		{
+			// This is new 8 byte data frame start.
+			// So copy this data in the new Buffer
+			for(internalBufferCount = 0; internalBufferCount < 50/*receiveBufferLength*/; internalBufferCount++)
+			{
+				Buffer[internalBufferCount] = ReceiveBuffer[mainByteCount + internalBufferCount];
+				printf("%x", Buffer[internalBufferCount]);
+			}
+			printf("\n");
+			firstBitIndex = 1;
+			secondBitIndex = 0;
+			firstByte = ReceiveBuffer[mainByteCount];
+			secondByte = ReceiveBuffer[mainByteCount + 1];
+		}
+		else
+		{
+			// Start storing bytes in  new Buffer for the firstBit and lastBit
+			for(internalBufferCount = 0; internalBufferCount < 50/*receiveBufferLength*/; internalBufferCount++)
+			{
+				Buffer[internalBufferCount] = 0;
+				localByte = 0x00;
+				firstByte = ReceiveBuffer[mainByteCount + internalBufferCount];
+				secondByte = ReceiveBuffer[mainByteCount + internalBufferCount + 1];
+
+				localByte |= (firstByte << firstBitIndex);
+				localByte |= (secondByte >> (7 - secondBitIndex));
+
+				Buffer[internalBufferCount] = localByte;
+				printf("%x", Buffer[internalBufferCount]);
+			}
+			printf("\n");
+			firstBitIndex++;
+			secondBitIndex++;
+
+			if(firstBitIndex == 8 && secondBitIndex == 7)
+			{
+				firstBitIndex = 0;
+				secondBitIndex = 0;
+				mainByteCount++;
+			}
+		}
 	}
 }
 

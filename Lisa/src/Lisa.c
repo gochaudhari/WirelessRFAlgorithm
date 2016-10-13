@@ -30,12 +30,13 @@ char TransmittedData[30];
 int transmitBufferLength, transmitDataLength;
 int sizeOfsyncField = 32;
 
-char ReceiveBuffer[200];
+char ReceiveBuffer[] = {'0xa0', '0xa2', '0xa4', '0xa6', '0xa8', '0xaa', '0xac', '0xae', '0xb0', '0xb2', '0xb4', '0xb6', '0xb8', '0xba', '0xbc', '0xbf', '0x41', '0x43', '0x45', '0x47', '0x49', '0x4b', '0x4d', '0x4f', '0x51', '0x53', '0x55', '0x57', '0x59', '0x5b', '0x5d', '0x5e', '0xaa', '0xaa', '0xaa', '0xaa', '0xaa', '0x00', '0x00'};
+//char ReceiveBuffer[] = {"a0a2a4a6a8aaacaeb0b2b4b6b8babcbf41434547494b4d4f51535557595b5d5eaaaaaaaaaa0000000000000"};
 char ReceivedData[500];
-int receiveBufferLength = 200, receiveDataLength;
+int receiveBufferLength = 1024, receiveDataLength;
 bool bitReceived = false, dataReceived = false, bitReadyForTransmit = false;
 
-int receiverBufferCounter, bitCount = 8, receiverBitCounter;
+int receiverBufferCounter, bitCount = 8, receiverBitCounter = 7;
 int transmitBufferCounter, transmitBitCounter = 7;
 
 void SetUpGPIOPins()
@@ -51,6 +52,9 @@ void SetUpGPIOPins()
 	// Setting the direction of 2.6 as transmitter (output)
 	LPC_GPIO2->FIODIR0 |= 1 << TransmitPin;
 	LPC_GPIO2->FIODIR0 &= ~(1 << ReceivePin);
+
+	LPC_GPIO2->FIOCLR0 |= (1 << TransmitPin);
+	LPC_GPIO2->FIOCLR0 |= (1 << ReceivePin);
 
 #ifdef TransmitDebug
 
@@ -78,7 +82,7 @@ void SetUpTimer()
     LPC_TIM0->TCR = 0x2;
     LPC_TIM0->CTCR = 0;
 
-    LPC_TIM0->PR = 1000;
+    LPC_TIM0->PR = 0;			//1000
     LPC_TIM0->PC = 0;
 
 	/*4. Interrupts: See register T0/1/2/3MCR (Table 430) and T0/1/2/3CCR (Table 431) for
@@ -86,7 +90,7 @@ void SetUpTimer()
     LPC_TIM0->MCR |= (0x3 << 0);
 
     /* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
-    LPC_TIM0->MR0 = 500;		//1) 43981 2) 35000 3) 38000 4) 41000
+    LPC_TIM0->MR0 = 100;			//1000
 
     IRQn_Type timerIRQType = TIMER0_IRQn;
     NVIC_EnableIRQ(timerIRQType);
@@ -146,6 +150,7 @@ int main(void)
 {
 
 	// Setup the GPIO Ports here at this position
+
 	SetUpGPIOPins();
 
 #ifdef TransmitDebug
@@ -226,9 +231,10 @@ int main(void)
 		if(dataReceived)
 		{
 //			LISAProcessingReceivedData();
+			ProcessLISAOnReceivedData();
 			printf("\nData Reception Complete\n");
 			dataReceived = false;
-			PrintData(ReceiveBuffer, receiveBufferLength, 1024);
+//			PrintData(ReceiveBuffer, receiveBufferLength, 1024);
 		}
 
 		if(bitReceived)

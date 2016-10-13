@@ -9,7 +9,7 @@
 #define ALLDEFS_H_
 
 // This is for debug purposes
-//#define Transmit
+#define Transmit
 #define Receive
 //#define TransmitDebug
 //#define ReceiveDebug
