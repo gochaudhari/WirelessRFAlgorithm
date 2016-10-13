@@ -10,9 +10,9 @@
 
 void ReceiveData();
 void LISAProcessingReceivedData();
-void ProcessLISAOnReceivedData();
+int ProcessLISAOnReceivedData();
 void SetUpReceiveInterrupt();
-void FindMessage();
+int* FindMessage();
 void IncrementSyncbytes();
 
 #endif /* RECEIVERSOURCE_H_ */

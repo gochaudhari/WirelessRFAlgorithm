@@ -33,7 +33,7 @@ int sizeOfsyncField = 32;
 //char ReceiveBuffer[] = {0xa0, 0xa2, 0xa4, 0xa6, 0xa8, 0xaa, 0xac, 0xae, 0xb0, 0xb2, 0xb4, 0xb6, 0xb8, 0xba, 0xbc, 0xbf, 0x41, 0x43, 0x45, 0x47, 0x49, 0x4b, 0x4d, 0x4f, 0x51, 0x53, 0x55, 0x57, 0x59, 0x5b, 0x5d, 0x5e, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0x00, 0x00};
 //char ReceiveBuffer[] = {"a0a2a4a6a8aaacaeb0b2b4b6b8babcbf41434547494b4d4f51535557595b5d5eaaaaaaaaaa0000000000000"};
 char ReceiveBuffer[60];
-char ReceivedData[500];
+uint8_t Buffer[60];
 int receiveBufferLength = 60, receiveDataLength;
 bool bitReceived = false, dataReceived = false, bitReadyForTransmit = false;
 
@@ -125,7 +125,7 @@ void EINT3_IRQHandler(void)
 #endif
 
 #if defined(Transmit) || defined(Receive)
-void PrintData(char *buffer, int length, int characterPosition)
+void PrintData(uint8_t *buffer, int length, int characterPosition)
 {
 	int counter;
 	for(counter = 0; counter < length; counter++)
@@ -232,10 +232,10 @@ int main(void)
 		if(dataReceived)
 		{
 //			LISAProcessingReceivedData();
-			ProcessLISAOnReceivedData();
+			int dataIndex = ProcessLISAOnReceivedData();
 			printf("\nData Reception Complete\n");
 			dataReceived = false;
-//			PrintData(ReceiveBuffer, receiveBufferLength, 1024);
+			PrintData(Buffer, receiveBufferLength, 32);
 		}
 
 		if(bitReceived)
