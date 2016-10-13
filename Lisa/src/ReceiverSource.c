@@ -22,6 +22,8 @@ extern int receiveBufferLength, receiveDataLength;
 extern bool bitReceived, dataReceived;
 extern int receiverBufferCounter, bitCount, receiverBitCounter;
 extern char TransmitBuffer[50];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
+char lower_nibble;
+int sync_field_count;
 
 // This function receives the data sent from the transmitter
 // Algorithm
@@ -32,21 +34,6 @@ void ReceiveData()
 {
 	static uint8_t pinValue = 0;
 
-	/*	for(counter = 0; counter < receiveBufferLength; counter++)
-	{
-	pinValue = 0x00;
-	for(bitCounter = bitCount - 1; bitCounter >= 0; bitCounter--)
-	{
-	// Record the value of the pin either 1 or 0
-	if((ReceivePinValue >> 7) & 0x01)
-	{
-	pinValue |= (0x01 << bitCounter);
-	}
-	}
-	ReceiveBuffer[counter] = pinValue;
-	}
-	dataReceived = true;*/
-
 	if((ReceivePinValue >> 7) & 0x01)
 	{
 		pinValue |= (0x01 << receiverBitCounter);
@@ -55,16 +42,68 @@ void ReceiveData()
 	{
 		pinValue |= (0x00 << receiverBitCounter);
 	}
-//	printf("%d", (ReceivePinValue >> 7) & 0x01);
+	//	printf("%d", (ReceivePinValue >> 7) & 0x01);
 	receiverBitCounter--;
 
 	if(receiverBitCounter == -1)
 	{
-//		printf("-");
-//		ReceiveBuffer[receiverBufferCounter] = pinValue;
+		//		printf("-");
+		ReceiveBuffer[receiverBufferCounter] = pinValue;
 		receiverBufferCounter++;
 		receiverBitCounter = 7;
 		pinValue = 0x00;
+	}
+}
+
+void FindMessage(char ReceiveBuffer[])
+{
+	int dataCounter=0;
+	char dataByte;
+	int no_of_sync_bytes = 32;
+	bool startOfDataString = false;
+	int error_count = 0;
+
+	for(dataCounter = 0; dataCounter < receiveBufferLength; dataCounter++)
+	{
+		dataByte = ReceiveBuffer[dataCounter];
+		if(startOfDataString){
+			printf("%c",dataByte);
+		}
+
+		if(sync_field_count<32)
+		{
+			if(((dataByte & 0xF0) == 0x50)|| ((dataByte & 0xF0) == 0xa0))
+			{
+				if((dataByte & 0x0F) == lower_nibble)
+				{
+					IncrementSyncbytes();
+				}
+				else
+				{
+					error_count++;
+					IncrementSyncbytes();
+				}
+			}
+			else
+			{
+				error_count++;
+				IncrementSyncbytes();
+			}
+		}
+		else if(startOfDataString==false){
+			dataCounter = dataCounter + (no_of_sync_bytes - (sync_field_count+1));
+			//printf("after datacounter %d\n",dataCounter);
+			startOfDataString=true;
+		}
+	}
+}
+
+void IncrementSyncbytes(){
+	lower_nibble++;
+	sync_field_count++;
+	if(lower_nibble==16)
+	{
+		lower_nibble=0;
 	}
 }
 
@@ -179,7 +218,7 @@ void ProcessLISAOnReceivedData()
 	uint8_t firstByte = 0x00, secondByte = 0x00;
 	uint8_t Buffer[receiveBufferLength], localByte = 0x00;
 
-//	strncpy(ReceiveBuffer, TransmitBuffer, 50);
+	//	strncpy(ReceiveBuffer, TransmitBuffer, 50);
 	printf("\n");
 
 	while(mainByteCount < 700)
