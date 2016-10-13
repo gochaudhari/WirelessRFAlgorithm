@@ -17,6 +17,7 @@
 #include <string.h>
 
 extern char ReceiveBuffer[1024];
+uint8_t Buffer[1024];
 extern char ReceivedData[500];
 extern int receiveBufferLength, receiveDataLength;
 extern bool bitReceived, dataReceived;
@@ -55,7 +56,7 @@ void ReceiveData()
 	}
 }
 
-void FindMessage(char ReceiveBuffer[])
+void FindMessage()
 {
 	int dataCounter=0;
 	char dataByte;
@@ -65,12 +66,13 @@ void FindMessage(char ReceiveBuffer[])
 
 	for(dataCounter = 0; dataCounter < receiveBufferLength; dataCounter++)
 	{
-		dataByte = ReceiveBuffer[dataCounter];
-		if(startOfDataString){
-			printf("%c",dataByte);
+		dataByte = Buffer[dataCounter];
+		if(startOfDataString)
+		{
+			printf("%c", dataByte);
 		}
 
-		if(sync_field_count<32)
+		if(sync_field_count < 32)
 		{
 			if(((dataByte & 0xF0) == 0x50)|| ((dataByte & 0xF0) == 0xa0))
 			{
@@ -93,7 +95,11 @@ void FindMessage(char ReceiveBuffer[])
 		else if(startOfDataString==false){
 			dataCounter = dataCounter + (no_of_sync_bytes - (sync_field_count+1));
 			//printf("after datacounter %d\n",dataCounter);
-			startOfDataString=true;
+
+			if(error_count < 10)
+			{
+				startOfDataString = true;
+			}
 		}
 	}
 }
@@ -216,7 +222,7 @@ void ProcessLISAOnReceivedData()
 {
 	int mainByteCount = 0, internalBufferCount = 0, firstBitIndex = 0, secondBitIndex = 0;
 	uint8_t firstByte = 0x00, secondByte = 0x00;
-	uint8_t Buffer[receiveBufferLength], localByte = 0x00;
+	uint8_t localByte = 0x00;
 
 	//	strncpy(ReceiveBuffer, TransmitBuffer, 50);
 	printf("\n");
@@ -230,9 +236,9 @@ void ProcessLISAOnReceivedData()
 			for(internalBufferCount = 0; internalBufferCount < 50/*receiveBufferLength*/; internalBufferCount++)
 			{
 				Buffer[internalBufferCount] = ReceiveBuffer[mainByteCount + internalBufferCount];
-				printf("%x", Buffer[internalBufferCount]);
+//				printf("%x", Buffer[internalBufferCount]);
 			}
-			printf("\n");
+//			printf("\n");
 			firstBitIndex = 1;
 			secondBitIndex = 0;
 			firstByte = ReceiveBuffer[mainByteCount];
@@ -252,9 +258,9 @@ void ProcessLISAOnReceivedData()
 				localByte |= (secondByte >> (7 - secondBitIndex));
 
 				Buffer[internalBufferCount] = localByte;
-				printf("%x", Buffer[internalBufferCount]);
+//				printf("%x", Buffer[internalBufferCount]);
 			}
-			printf("\n");
+//			printf("\n");
 			firstBitIndex++;
 			secondBitIndex++;
 
@@ -264,6 +270,7 @@ void ProcessLISAOnReceivedData()
 				secondBitIndex = 0;
 				mainByteCount++;
 			}
+			FindMessage();
 		}
 	}
 }
