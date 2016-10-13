@@ -61,7 +61,7 @@ void ReceiveData()
 	if(receiverBitCounter == -1)
 	{
 //		printf("-");
-		ReceiveBuffer[receiverBufferCounter] = pinValue;
+//		ReceiveBuffer[receiverBufferCounter] = pinValue;
 		receiverBufferCounter++;
 		receiverBitCounter = 7;
 		pinValue = 0x00;
