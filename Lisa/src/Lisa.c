@@ -25,7 +25,7 @@
 // TODO: insert other definitions and declarations here
 
 // General Defs
-char TransmitBuffer[1024];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
+uint8_t TransmitBuffer[1024];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
 char TransmittedData[30];
 int transmitBufferLength, transmitDataLength;
 int sizeOfsyncField = 32;
@@ -79,22 +79,22 @@ void SetUpTimer()
 	port pins with timer functions through the PINMODE registers.*/
 
 	/* Enable the timer, and increment on PCLK */
-    LPC_TIM0->TC = 0;
-    LPC_TIM0->TCR = 0x2;
-    LPC_TIM0->CTCR = 0;
+	LPC_TIM0->TC = 0;
+	LPC_TIM0->TCR = 0x2;
+	LPC_TIM0->CTCR = 0;
 
-    LPC_TIM0->PR = 1000;			//1000
-    LPC_TIM0->PC = 0;
+	LPC_TIM0->PR = 1000;			//1000
+	LPC_TIM0->PC = 0;
 
 	/*4. Interrupts: See register T0/1/2/3MCR (Table 430) and T0/1/2/3CCR (Table 431) for
 	match and capture events. */
-    LPC_TIM0->MCR |= (0x3 << 0);
+	LPC_TIM0->MCR |= (0x3 << 0);
 
-    /* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
-    LPC_TIM0->MR0 = 1000;			//1000
+	/* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
+	LPC_TIM0->MR0 = 1000;			//1000
 
-    IRQn_Type timerIRQType = TIMER0_IRQn;
-    NVIC_EnableIRQ(timerIRQType);
+	IRQn_Type timerIRQType = TIMER0_IRQn;
+	NVIC_EnableIRQ(timerIRQType);
 }
 #endif
 
@@ -151,6 +151,8 @@ int main(void)
 {
 
 	// Setup the GPIO Ports here at this position
+	char communicationSelect;
+	bool transmit = false, receive = false;
 
 	SetUpGPIOPins();
 
@@ -176,86 +178,118 @@ int main(void)
 	 * 6) R: Ignore rest of the bits and then read the actual data
 	 */
 
-#ifdef Transmit
-	// 1) T: Create the sync stream for 64 bits.
-	CreateSyncStream();
-	// 1) T: Print the created sync stream
-//	PrintData(TransmitBuffer, transmitBufferLength, 0);
+	printf("Want to Transmit or Receive (T or R): ");
+	scanf("%c", &communicationSelect);
+	if(communicationSelect == 'T')
+	{
+		transmit = true;
+		receive = false;
+	}
+	else if(communicationSelect == 'R')
+	{
+		receive = true;
+		transmit = false;
+	}
 
-	// 2) T: Take data from user
-	printf("\nEnter the data to be transmitted: ");
-	scanf("%s", &TransmittedData);
-	transmitDataLength = strlen(TransmittedData);
-
-	// 3) T: Combine the repeating pattern and the user input data
-	AppendUserData(TransmittedData);
-	// 3) T: Print the created final stream
-	PrintData(TransmitBuffer, transmitBufferLength, sizeOfsyncField);
-
-	// T: Transmit the formed data
-	TransmitData();
-#endif
-
-#ifdef Receive
-	// 4) R: Receive all the data in a variable.
-//	ReceiveData();
-#endif
-
-	// Never Ending Loop
 #if defined(Transmit) || defined(Receive)
 	// Turn on the timer
 	SetUpTimer();
 #endif
 
-    LPC_TIM0->TCR = 0x1;
+#ifdef Transmit
+	// 1) T: Create the sync stream for 64 bits.
+	CreateSyncStream();
+	//	PrintData(TransmitBuffer, transmitBufferLength, 0);
+#endif
+
+	// Starting the timer
+	LPC_TIM0->TCR = 0x1;
+
 	while(1)
 	{
-#ifdef Transmit
-/*		if(!bitSent)
-		{
-			// Send the bit;
-			bitSent = true;
-			// Un-reset the counter.
-			LPC_TIM0->TCR = 0x1;
-		}*/
-		if(bitReadyForTransmit && transmitBufferCounter < transmitBufferLength)
-		{
-			TransmitData();
-			bitReadyForTransmit = false;
-		    LPC_TIM0->TCR = 0x1;
-		}
 
+#ifdef Transmit
+		// If asked for transmitting, then send the data
+		if(transmit)
+		{
+			// 2) T: Take data from user
+			printf("\nEnter the data to be transmitted: ");
+			scanf("%s", &TransmittedData);
+			transmitDataLength = strlen(TransmittedData);
+
+			// 3) T: Combine the repeating pattern and the user input data
+			AppendUserData(TransmittedData);
+			// 3) T: Print the created final stream
+			PrintData(TransmitBuffer, transmitBufferLength, sizeOfsyncField);
+		}
+#endif
+
+		// This loop handles the transmission and receiving of the bit
+		while(transmit || receive)
+		{
+#ifdef Transmit
+			if(transmit)
+			{
+				// Transmit the data here in this loop
+				if(bitReadyForTransmit && transmitBufferCounter < transmitBufferLength)
+				{
+					TransmitData();
+					bitReadyForTransmit = false;
+					LPC_TIM0->TCR = 0x1;
+				}
+				else if(transmitBufferCounter == transmitBufferLength)
+				{
+					transmit = false;
+				}
+			}
 #endif
 
 #ifdef Receive
-		// Checking for the data received flag and receive if the data is not received
-		if(dataReceived)
-		{
-//			LISAProcessingReceivedData();
-			int dataIndex = ProcessLISAOnReceivedData();
-			printf("\nData Reception Complete\n");
-			dataReceived = false;
-			PrintData(Buffer, receiveBufferLength, 32);
+			if(receive)
+			{
+				// Checking for the data received flag and receive if the data is not received
+				if(dataReceived)
+				{
+					//			LISAProcessingReceivedData();
+					int dataIndex = ProcessLISAOnReceivedData();
+					printf("\nData Reception Complete\n");
+					dataReceived = false;
+					PrintData(Buffer, receiveBufferLength, 32);
+					transmit = true;
+					receive = false;
+				}
+
+				if(bitReceived)
+				{
+					bitReceived = false;
+					if(receiverBufferCounter < receiveBufferLength)
+					{
+						ReceiveData();
+						LPC_TIM0->TCR = 0x1;
+						// Re-enable the timer to receive next bit
+					}
+					else
+					{
+						dataReceived = true;
+					}
+				}
+			}
+#endif
 		}
 
-		if(bitReceived)
+#if defined(Transmit) && defined(Receive)
+		printf("Want to Transmit or Receive (T or R): ");
+		scanf("%c", &communicationSelect);
+
+		if(communicationSelect == 'T')
 		{
-			bitReceived = false;
-			if(receiverBufferCounter < receiveBufferLength)
-			{
-				ReceiveData();
-				LPC_TIM0->TCR = 0x1;
-				// Re-enable the timer to receive next bit
-			}
-			else
-			{
-				dataReceived = true;
-			}
+			transmit = true;
+			receive = false;
 		}
-		// This loop handles the receiving of the bit
-		while(!bitReceived && !dataReceived)
+		else if(communicationSelect == 'R')
 		{
-			// Make the controller to go to sleep in this loop
+			receive = true;
+			transmit = false;
 		}
 #endif
 

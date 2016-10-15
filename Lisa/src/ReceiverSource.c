@@ -53,7 +53,7 @@ void ReceiveData()
 	}
 }
 
-int * FindMessage()
+int* FindMessage()
 {
 	int dataCounter = 0;
 	char dataByte;
