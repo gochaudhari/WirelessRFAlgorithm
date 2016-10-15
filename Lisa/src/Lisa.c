@@ -35,7 +35,7 @@ int sizeOfsyncField = 32;
 char ReceiveBuffer[1024];
 uint8_t Buffer[1024];
 int receiveBufferLength = 1024, receiveDataLength;
-bool bitReceived = false, dataReceived = false, bitReadyForTransmit = false;
+bool bitReceived = false, receiveBufferFull = false, bitReadyForTransmit = false, dataReceived = false;
 
 int receiverBufferCounter, bitCount = 8, receiverBitCounter = 7;
 int transmitBufferCounter, transmitBitCounter = 7;
@@ -152,7 +152,7 @@ int main(void)
 
 	// Setup the GPIO Ports here at this position
 	char communicationSelect;
-	bool transmit = false, receive = false, sendAckowledgement = false;
+	bool transmit = false, receive = false, sendAckowledgement = false, receiveAcknowledgement = false;
 	char acknowledgement[8] = "ACKSENT";
 
 	SetUpGPIOPins();
@@ -214,6 +214,11 @@ int main(void)
 		{
 			transmit = true;
 			receive = false;
+		}
+		else if(receiveAcknowledgement)
+		{
+			receive = true;
+			transmit = false;
 		}
 		else
 		{
@@ -277,6 +282,7 @@ int main(void)
 				{
 					transmit = false;
 					sendAckowledgement = false;
+					receiveAcknowledgement = true;
 				}
 			}
 #endif
@@ -285,14 +291,25 @@ int main(void)
 			if(receive)
 			{
 				// Checking for the data received flag and receive if the data is not received
-				if(dataReceived)
+				if(receiveBufferFull)
 				{
-					//			LISAProcessingReceivedData();
-					ProcessLISAOnReceivedData();
-					printf("\nData Reception Complete\n");
-					dataReceived = false;
-					PrintData(Buffer, receiveBufferLength, 32);
-					sendAckowledgement = true;
+					dataReceived = ProcessLISAOnReceivedData();
+
+					if(dataReceived)
+					{
+						printf("\nData Reception Complete\n");
+						receiveBufferFull = false;
+
+						PrintData(Buffer, receiveBufferLength, 32);
+						if(!receiveAcknowledgement)
+						{
+							sendAckowledgement = true;
+						}
+					}
+					else
+					{
+						bitReceived = true;
+					}
 				}
 
 				if(bitReceived)
@@ -306,7 +323,7 @@ int main(void)
 					}
 					else
 					{
-						dataReceived = true;
+						receiveBufferFull = true;
 					}
 				}
 			}

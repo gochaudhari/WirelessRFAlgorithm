@@ -10,7 +10,7 @@
 
 void ReceiveData();
 void LISAProcessingReceivedData();
-int ProcessLISAOnReceivedData();
+bool ProcessLISAOnReceivedData();
 void SetUpReceiveInterrupt();
 int* FindMessage();
 

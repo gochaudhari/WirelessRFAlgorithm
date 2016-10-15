@@ -203,17 +203,17 @@ void LISAProcessingReceivedData()
 	}
 }
 
-int ProcessLISAOnReceivedData()
+bool ProcessLISAOnReceivedData()
 {
 	int mainByteCount = 0, internalBufferCount = 0, firstBitIndex = 0, secondBitIndex = 0;
 	uint8_t firstByte = 0x00, secondByte = 0x00;
 	uint8_t localByte = 0x00;
 	int dataStartIndex = 0;
-	int *dataStatus;
+	bool dataReceivedStatus = false;
 	//	strncpy(ReceiveBuffer, TransmitBuffer, 50);
 	printf("\n");
 
-	while(mainByteCount < 700)
+	while(mainByteCount < 1024)
 	{
 		if(firstBitIndex == 0)
 		{
@@ -258,13 +258,13 @@ int ProcessLISAOnReceivedData()
 			}
 		}
 		dataStatus = FindMessage();
-		if(dataStatus[0] == true)
+		dataReceivedStatus = dataStart[0];
+		if(dataReceivedStatus == true)
 		{
 			break;
 		}
 	}
-	dataStartIndex = dataStatus[1];
-	return dataStartIndex;
+	return dataReceivedStatus;
 }
 
 #ifdef ReceiveDebug
