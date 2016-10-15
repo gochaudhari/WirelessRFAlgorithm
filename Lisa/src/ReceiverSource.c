@@ -21,7 +21,7 @@ extern uint8_t Buffer[1024];
 extern int receiveBufferLength, receiveDataLength;
 extern bool bitReceived, dataReceived;
 extern int receiverBufferCounter, bitCount, receiverBitCounter;
-extern char TransmitBuffer[50];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
+extern char TransmitBuffer[50]; // 8 bytes of initial sync and then next is the data. Assume 8 + 8
 char lower_nibble;
 int sync_field_count;
 
@@ -63,12 +63,32 @@ int * FindMessage()
 	bool startOfDataString = false;
 	int error_count = 0;
 	static int retValues[2] = {0, 0};
+	bool earlyDetectionFinish = false;
 
 	for(dataCounter = 0; dataCounter < receiveBufferLength; dataCounter++)
 	{
 		dataByte = Buffer[dataCounter];
+		if( !(((dataByte & 0xF0) == 0x50) || ((dataByte & 0xF0) == 0xA0) ) && !(earlyDetectionFinish))
+            {
+                printf("returning early 1\n");
+                return retValues;
+            }
+        else if(!earlyDetectionFinish)
+            {
+                if((dataByte & 0xF0) == 0xA0)
+                {
+                    printf("returning early 2\n");
+                    return retValues;
+                }
 
-		if(sync_field_count < 32)
+                lower_nibble = dataByte & 0x0F;
+                no_of_sync_bytes = no_of_sync_bytes - lower_nibble;
+                earlyDetectionFinish = true;
+            }
+
+        printf("synce bytes%d \n", no_of_sync_bytes);
+
+		if(sync_field_count < no_of_sync_bytes)
 		{
 			if(((dataByte & 0xF0) == 0x50)|| ((dataByte & 0xF0) == 0xa0))
 			{
