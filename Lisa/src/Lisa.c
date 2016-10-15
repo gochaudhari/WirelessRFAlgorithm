@@ -152,7 +152,7 @@ int main(void)
 
 	// Setup the GPIO Ports here at this position
 	char communicationSelect;
-	bool transmit = false, receive = false;
+	bool transmit = false, receive = false, sendAckowledgement = false;
 
 	SetUpGPIOPins();
 
@@ -240,6 +240,7 @@ int main(void)
 				else if(transmitBufferCounter == transmitBufferLength)
 				{
 					transmit = false;
+					sendAckowledgement = false;
 				}
 			}
 #endif
@@ -255,8 +256,7 @@ int main(void)
 					printf("\nData Reception Complete\n");
 					dataReceived = false;
 					PrintData(Buffer, receiveBufferLength, 32);
-					transmit = true;
-					receive = false;
+					sendAckowledgement = true;
 				}
 
 				if(bitReceived)
@@ -278,18 +278,27 @@ int main(void)
 		}
 
 #if defined(Transmit) && defined(Receive)
-		printf("Want to Transmit or Receive (T or R): ");
-		scanf("%c", &communicationSelect);
 
-		if(communicationSelect == 'T')
+		if(sendAckowledgement)
 		{
 			transmit = true;
 			receive = false;
 		}
-		else if(communicationSelect == 'R')
+		else
 		{
-			receive = true;
-			transmit = false;
+			printf("Want to Transmit or Receive (T or R): ");
+			scanf("%c", &communicationSelect);
+
+			if(communicationSelect == 'T')
+			{
+				transmit = true;
+				receive = false;
+			}
+			else if(communicationSelect == 'R')
+			{
+				receive = true;
+				transmit = false;
+			}
 		}
 #endif
 
