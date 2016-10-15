@@ -32,9 +32,9 @@ int sizeOfsyncField = 32;
 
 //char ReceiveBuffer[] = {0xa0, 0xa2, 0xa4, 0xa6, 0xa8, 0xaa, 0xac, 0xae, 0xb0, 0xb2, 0xb4, 0xb6, 0xb8, 0xba, 0xbc, 0xbf, 0x41, 0x43, 0x45, 0x47, 0x49, 0x4b, 0x4d, 0x4f, 0x51, 0x53, 0x55, 0x57, 0x59, 0x5b, 0x5d, 0x5e, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0x00, 0x00};
 //char ReceiveBuffer[] = {"a0a2a4a6a8aaacaeb0b2b4b6b8babcbf41434547494b4d4f51535557595b5d5eaaaaaaaaaa0000000000000"};
-char ReceiveBuffer[60];
-uint8_t Buffer[60];
-int receiveBufferLength = 60, receiveDataLength;
+char ReceiveBuffer[1024];
+uint8_t Buffer[1024];
+int receiveBufferLength = 1024, receiveDataLength;
 bool bitReceived = false, dataReceived = false, bitReadyForTransmit = false;
 
 int receiverBufferCounter, bitCount = 8, receiverBitCounter = 7;
@@ -83,7 +83,7 @@ void SetUpTimer()
 	LPC_TIM0->TCR = 0x2;
 	LPC_TIM0->CTCR = 0;
 
-	LPC_TIM0->PR = 1000;			//1000
+	LPC_TIM0->PR = 200;			//1000
 	LPC_TIM0->PC = 0;
 
 	/*4. Interrupts: See register T0/1/2/3MCR (Table 430) and T0/1/2/3CCR (Table 431) for
@@ -91,7 +91,7 @@ void SetUpTimer()
 	LPC_TIM0->MCR |= (0x3 << 0);
 
 	/* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
-	LPC_TIM0->MR0 = 1000;			//1000
+	LPC_TIM0->MR0 = 100;			//1000
 
 	IRQn_Type timerIRQType = TIMER0_IRQn;
 	NVIC_EnableIRQ(timerIRQType);
@@ -179,7 +179,7 @@ int main(void)
 	 * 6) R: Ignore rest of the bits and then read the actual data
 	 */
 
-	printf("Want to Transmit or Receive (T or R): ");
+	printf("\n Want to Transmit or Receive (T or R): ");
 	scanf("%c", &communicationSelect);
 	if(communicationSelect == 'T')
 	{
@@ -209,17 +209,52 @@ int main(void)
 	while(1)
 	{
 
+#if defined(Transmit) && defined(Receive)
+		if(sendAckowledgement)
+		{
+			transmit = true;
+			receive = false;
+		}
+		else
+		{
+			printf("\nWant to Transmit or Receive (T or R): ");
+			scanf("%c", &communicationSelect);
+
+			if(communicationSelect == 'T')
+			{
+				transmit = true;
+				receive = false;
+			}
+			else if(communicationSelect == 'R')
+			{
+				receive = true;
+				transmit = false;
+			}
+		}
+#endif
+
 #ifdef Transmit
 		// If asked for transmitting, then send the data
 		if(transmit)
 		{
-			// 2) T: Take data from user
-			printf("\nEnter the data to be transmitted: ");
-			scanf("%s", &TransmittedData);
-			transmitDataLength = strlen(TransmittedData);
+			if(sendAckowledgement)
+			{
+				transmitDataLength = strlen(acknowledgement);
 
-			// 3) T: Combine the repeating pattern and the user input data
-			AppendUserData(TransmittedData);
+				// 3) T: Combine the repeating pattern and the user input data
+				AppendUserData(acknowledgement);
+			}
+			else
+			{
+				// 2) T: Take data from user
+				printf("\nEnter the data to be transmitted: ");
+				scanf("%s", &TransmittedData);
+				transmitDataLength = strlen(TransmittedData);
+
+				// 3) T: Combine the repeating pattern and the user input data
+				AppendUserData(TransmittedData);
+			}
+
 			// 3) T: Print the created final stream
 			PrintData(TransmitBuffer, transmitBufferLength, sizeOfsyncField);
 		}
@@ -253,7 +288,7 @@ int main(void)
 				if(dataReceived)
 				{
 					//			LISAProcessingReceivedData();
-					int dataIndex = ProcessLISAOnReceivedData();
+					ProcessLISAOnReceivedData();
 					printf("\nData Reception Complete\n");
 					dataReceived = false;
 					PrintData(Buffer, receiveBufferLength, 32);
@@ -277,38 +312,6 @@ int main(void)
 			}
 #endif
 		}
-
-#if defined(Transmit) && defined(Receive)
-
-		if(sendAckowledgement)
-		{
-			transmit = true;
-			receive = false;
-
-			transmitDataLength = strlen(acknowledgement);
-
-			// 3) T: Combine the repeating pattern and the user input data
-			AppendUserData(acknowledgement);
-			// 3) T: Print the created final stream
-			PrintData(TransmitBuffer, transmitBufferLength, sizeOfsyncField);
-		}
-		else
-		{
-			printf("Want to Transmit or Receive (T or R): ");
-			scanf("%c", &communicationSelect);
-
-			if(communicationSelect == 'T')
-			{
-				transmit = true;
-				receive = false;
-			}
-			else if(communicationSelect == 'R')
-			{
-				receive = true;
-				transmit = false;
-			}
-		}
-#endif
 
 #ifdef ReceiveDebug
 		// Record the value of the pin either 1 or 0
