@@ -22,7 +22,6 @@ extern int receiveBufferLength, receiveDataLength;
 extern bool bitReceived, dataReceived;
 extern int receiverBufferCounter, bitCount, receiverBitCounter;
 extern char TransmitBuffer[50]; // 8 bytes of initial sync and then next is the data. Assume 8 + 8
-char lower_nibble;
 int sync_field_count;
 
 // This function receives the data sent from the transmitter
@@ -53,7 +52,7 @@ void ReceiveData()
 	}
 }
 
-int* FindMessage()
+int * FindMessage()
 {
 	int dataCounter = 0;
 	char dataByte;
@@ -61,57 +60,32 @@ int* FindMessage()
 	bool startOfDataString = false;
 	int error_count = 0;
 	static int retValues[2] = {0, 0};
-	bool earlyDetectionFinish = false;
+	int receiveBufferLength = 1024;
+	char Kernel[32]=
+                 {       0x50,0x51,0x52,0x53,0x54,0x55,0x56,0x57,0x58,0x59,0x5A,0x5B,0x5C,0x5D,0x5E,0x5F,
+                         0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf
+                 };
 
 	for(dataCounter = 0; dataCounter < receiveBufferLength; dataCounter++)
 	{
 		dataByte = Buffer[dataCounter];
 
-		if( !(((dataByte & 0xF0) == 0x50) || ((dataByte & 0xF0) == 0xA0) ) && !(earlyDetectionFinish))
-            {
-                printf("returning early 1\n");
-                return retValues;
-            }
-        else if(!earlyDetectionFinish)
-            {
-                if((dataByte & 0xF0) == 0xA0)
-                {
-                    printf("returning early 2\n");
-                    return retValues;
-                }
-
-                lower_nibble = dataByte & 0x0F;
-                no_of_sync_bytes = no_of_sync_bytes - lower_nibble;
-                earlyDetectionFinish = true;
-            }
-
-        printf("synce bytes%d \n", no_of_sync_bytes);
-
 		if(sync_field_count < no_of_sync_bytes)
 		{
-			if(((dataByte & 0xF0) == 0x50)|| ((dataByte & 0xF0) == 0xa0))
+			if(Kernel[dataCounter] == dataByte)
 			{
-				if((dataByte & 0x0F) == lower_nibble)
-				{
-					IncrementSyncbytes();
-				}
-				else
-				{
-					error_count++;
-					IncrementSyncbytes();
-				}
+                	sync_field_count++;
 			}
 			else
 			{
 				error_count++;
-				IncrementSyncbytes();
+					sync_field_count++;
 			}
 		}
-		else if(startOfDataString == false){
-			dataCounter = dataCounter + (no_of_sync_bytes - (sync_field_count+1));
-			retValues[1] = dataCounter + 1;
-			//printf("after datacounter %d\n",dataCounter);
-
+		else if(startOfDataString == false)
+        {
+			retValues[1] = dataCounter;
+            printf("error count %d\n",error_count);
 			if(error_count < 10)
 			{
 				startOfDataString = true;
@@ -119,15 +93,6 @@ int* FindMessage()
 			retValues[0] = startOfDataString;
 			return retValues;
 		}
-	}
-}
-
-void IncrementSyncbytes(){
-	lower_nibble++;
-	sync_field_count++;
-	if(lower_nibble==16)
-	{
-		lower_nibble=0;
 	}
 }
 

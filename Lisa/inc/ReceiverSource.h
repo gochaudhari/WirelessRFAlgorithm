@@ -13,6 +13,5 @@ void LISAProcessingReceivedData();
 int ProcessLISAOnReceivedData();
 void SetUpReceiveInterrupt();
 int* FindMessage();
-void IncrementSyncbytes();
 
 #endif /* RECEIVERSOURCE_H_ */
