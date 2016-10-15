@@ -153,6 +153,7 @@ int main(void)
 	// Setup the GPIO Ports here at this position
 	char communicationSelect;
 	bool transmit = false, receive = false, sendAckowledgement = false;
+	char acknowledgement[8] = "ACKSENT";
 
 	SetUpGPIOPins();
 
@@ -283,6 +284,13 @@ int main(void)
 		{
 			transmit = true;
 			receive = false;
+
+			transmitDataLength = strlen(acknowledgement);
+
+			// 3) T: Combine the repeating pattern and the user input data
+			AppendUserData(acknowledgement);
+			// 3) T: Print the created final stream
+			PrintData(TransmitBuffer, transmitBufferLength, sizeOfsyncField);
 		}
 		else
 		{
