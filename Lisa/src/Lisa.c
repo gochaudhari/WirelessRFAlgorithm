@@ -143,7 +143,7 @@ void PrintData(uint8_t *buffer, int length, int characterPosition)
 			printf("%c", buffer[counter]);
 		}
 	}
-	printf("\nData Printed");
+	printf("\nData Printed\n\n");
 }
 #endif
 
@@ -203,9 +203,6 @@ int main(void)
 	//	PrintData(TransmitBuffer, transmitBufferLength, 0);
 #endif
 
-	// Starting the timer
-	LPC_TIM0->TCR = 0x1;
-
 	while(1)
 	{
 
@@ -214,17 +211,19 @@ int main(void)
 		{
 			transmit = true;
 			receive = false;
+			// Starting the timer
+			LPC_TIM0->TCR = 0x1;
 		}
 		else if(receiveAcknowledgement)
 		{
 			receive = true;
 			transmit = false;
+
+			// Starting the timer
+			LPC_TIM0->TCR = 0x1;
 		}
 		else
 		{
-			printf("\nWant to Transmit or Receive (T or R): ");
-			scanf("%c", &communicationSelect);
-
 			if(communicationSelect == 'T')
 			{
 				transmit = true;
@@ -280,6 +279,7 @@ int main(void)
 				}
 				else if(transmitBufferCounter == transmitBufferLength)
 				{
+					transmitBufferCounter = 0;
 					transmit = false;
 					sendAckowledgement = false;
 					receiveAcknowledgement = true;
@@ -305,6 +305,11 @@ int main(void)
 						{
 							sendAckowledgement = true;
 						}
+						else
+						{
+							receiveAcknowledgement = false;
+						}
+						receive = false;
 					}
 					else
 					{
@@ -323,6 +328,7 @@ int main(void)
 					}
 					else
 					{
+						receiverBufferCounter = 0;
 						receiveBufferFull = true;
 					}
 				}

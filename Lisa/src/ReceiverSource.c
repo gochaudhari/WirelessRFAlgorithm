@@ -210,7 +210,7 @@ bool ProcessLISAOnReceivedData()
 	uint8_t localByte = 0x00;
 	int dataStartIndex = 0;
 	bool dataReceivedStatus = false;
-	//	strncpy(ReceiveBuffer, TransmitBuffer, 50);
+	int *dataStatus;
 	printf("\n");
 
 	while(mainByteCount < 1024)
@@ -258,7 +258,7 @@ bool ProcessLISAOnReceivedData()
 			}
 		}
 		dataStatus = FindMessage();
-		dataReceivedStatus = dataStart[0];
+		dataReceivedStatus = dataStatus[0];
 		if(dataReceivedStatus == true)
 		{
 			break;
