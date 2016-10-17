@@ -216,7 +216,7 @@ int main(void)
 		}
 		else
 		{
-			printf("\nWant to Transmit or Receive (T or R): ");
+			printf("\n Want to Transmit or Receive (T or R): ");
 			scanf("%c", &communicationSelect);
 
 			if(communicationSelect == 'T')
@@ -286,13 +286,13 @@ int main(void)
 			if(transmit)
 			{
 				// Transmit the data here in this loop
-				if(bitReadyForTransmit && transmitBufferCounter < transmitBufferLength)
+				if(bitReadyForTransmit && transmitBufferCounter < transmitBufferLength+1)
 				{
 					TransmitData();
 					bitReadyForTransmit = false;
 					LPC_TIM0->TCR = 0x1;
 				}
-				else if(transmitBufferCounter == transmitBufferLength)
+				else if(transmitBufferCounter == transmitBufferLength+1)
 				{
 					transmitBufferCounter = 0;
 					transmit = false;
@@ -322,23 +322,23 @@ int main(void)
 
 						static int counter, byteCounter = 0;
 						// Copy the received data
-
-						ReceivedData = (char *)malloc(Buffer[sizeOfsyncField]);
+						
+						ReceivedData = (char *)malloc(sizeof(char) * Buffer[sizeOfsyncField]);
 						for(counter = sizeOfsyncField + 1; counter < receivedDataLength; counter++)
 						{
 							ReceivedData[byteCounter] = Buffer[counter];
 							byteCounter++;
 						}
-
-						printf("\n\nData Reception Complete (Error Count = %d)\nReceived Data", dataReceivedStatus[1]);
+						
+						printf("\n\nData Reception Complete (Error Count = %d)\nReceived Data", dataReceivedStatus[1]);						
 #ifdef EncryptedCommunication
 						DecryptReceivedSyncField(dataReceivedStatus[2]);
-#endif
-						PrintData(Buffer, receivedDataLength, sizeOfsyncField);
+#endif					
+						PrintData(Buffer, receiveBufferLength, sizeOfsyncField);
 
 #ifdef EncryptedCommunication
-						DecryptReceivedSyncField(dataReceivedStatus[2]);
-						printf("\nDecrypted Data");
+						DecryptReceivedSyncField(dataReceivedStatus[2]);						
+						printf("\n Decrypted Data");
 						PrintData(Buffer, receiveBufferLength, sizeOfsyncField);
 #endif
 
@@ -348,8 +348,8 @@ int main(void)
 						}
 						else
 						{
-							printf("\nAcknowledgement Received. Transmission Successful.");
-							receiveAcknowledgement = false;
+								printf("Acknowledgement Received.Transmission Successful.");
+								receiveAcknowledgement = false;
 						}
 						transmit = false;
 						receive = false;

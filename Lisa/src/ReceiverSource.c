@@ -129,7 +129,7 @@ int * FindMessage()
 
 			if(error_count < 10)
 			{
-//				printf("error count %d\n", error_count);
+				printf("error count %d\n", error_count);
 				startOfDataString = true;
 			}
 			retValues[0] = startOfDataString;
@@ -313,7 +313,7 @@ int* ProcessLISAOnReceivedData()
 				Buffer[internalBufferCount] = localByte;
 				if(localByte == 0x50)
 				{
-					int i = 2;;
+					int i = 2;
 				}
 //				printf("%x", Buffer[internalBufferCount]);
 			}
