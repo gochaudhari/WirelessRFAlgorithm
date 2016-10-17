@@ -216,7 +216,7 @@ int main(void)
 		}
 		else
 		{
-			printf("\n Want to Transmit or Receive (T or R): ");
+			printf("\nWant to Transmit or Receive (T or R): ");
 			scanf("%c", &communicationSelect);
 
 			if(communicationSelect == 'T')
@@ -322,21 +322,25 @@ int main(void)
 
 						static int counter, byteCounter = 0;
 						// Copy the received data
-						ReceivedData = (char *)malloc(sizeof(char) * Buffer[sizeOfsyncField]);
+
+						ReceivedData = (char *)malloc(Buffer[sizeOfsyncField]);
 						for(counter = sizeOfsyncField + 1; counter < receivedDataLength; counter++)
 						{
 							ReceivedData[byteCounter] = Buffer[counter];
 							byteCounter++;
 						}
 
+						printf("\n\nData Reception Complete (Error Count = %d)\nReceived Data", dataReceivedStatus[1]);
 #ifdef EncryptedCommunication
 						DecryptReceivedSyncField(dataReceivedStatus[2]);
-						printf("\n Decrypted Data");
+#endif
+						PrintData(Buffer, receivedDataLength, sizeOfsyncField);
+
+#ifdef EncryptedCommunication
+						DecryptReceivedSyncField(dataReceivedStatus[2]);
+						printf("\nDecrypted Data");
 						PrintData(Buffer, receiveBufferLength, sizeOfsyncField);
 #endif
-
-						printf("\nData Reception Complete (Error Count = %d)\n Received Data", dataReceivedStatus[1]);
-						PrintData(Buffer, receivedDataLength, sizeOfsyncField);
 
 						if(!receiveAcknowledgement)
 						{
@@ -344,11 +348,8 @@ int main(void)
 						}
 						else
 						{
-							if(!strcmp(ReceivedData, acknowledgement))
-							{
-								printf("Acknowledgement Received");
-								receiveAcknowledgement = false;
-							}
+							printf("\nAcknowledgement Received. Transmission Successful.");
+							receiveAcknowledgement = false;
 						}
 						transmit = false;
 						receive = false;

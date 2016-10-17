@@ -2,7 +2,7 @@
  * ReceiverSource.h
  *
  *  Created on: Sep 20, 2016
- *      Author: gocha
+ *      Author: Gaurao Chaudhari and Akshay Kanchar
  */
 
 #ifndef RECEIVERSOURCE_H_
