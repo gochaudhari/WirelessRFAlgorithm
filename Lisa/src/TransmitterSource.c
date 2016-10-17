@@ -13,6 +13,7 @@
 
 #include <TransmitterSource.h>
 #include <AllDefs.h>
+#include <stdlib.h>
 
 // General Defs
 extern char TransmitBuffer[50];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
@@ -20,6 +21,10 @@ extern char TransmittedData[30];
 extern int transmitBufferLength, transmitDataLength;
 extern int sizeOfsyncField;
 extern int transmitBufferCounter, transmitBitCounter;
+
+#ifdef EncryptedCommunication
+bool encryptEntireData = false;
+#endif
 
 // This function creates the initial sync stream (Size : 64 bytes)
 void CreateSyncStream()
@@ -70,5 +75,26 @@ void TransmitData()
 	{
 		transmitBufferCounter++;
 		transmitBitCounter = 7;
+	}
+}
+
+// This function does the XOR of the present data to any random digit
+void EncryptTransmitSyncField()
+{
+	uint8_t randomByte = 0x45;
+	int byteCounter = 0, encryptionLength = 0;
+
+	if(encryptEntireData)
+	{
+		encryptionLength = transmitBufferLength;
+	}
+	else
+	{
+		encryptionLength = 32;
+	}
+
+	for(byteCounter = 0; byteCounter < encryptionLength; byteCounter++)
+	{
+		TransmitBuffer[byteCounter] = TransmitBuffer[byteCounter] ^ randomByte;
 	}
 }

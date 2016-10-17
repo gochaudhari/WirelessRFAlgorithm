@@ -12,5 +12,6 @@
 void CreateSyncStream();
 void AppendUserData(char *transmitDataAppend);
 void TransmitData();
+void EncryptTransmitSyncField();
 
 #endif /* TRANSMITTERSOURCE_H_ */

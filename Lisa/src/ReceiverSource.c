@@ -84,7 +84,6 @@ int * FindMessage()
 		}
 		else if(startOfDataString == false)
 		{
-			retValues[1] = dataCounter;
 			sync_field_count = 0;
 
 			if(error_count < 10)
@@ -93,6 +92,7 @@ int * FindMessage()
 				startOfDataString = true;
 			}
 			retValues[0] = startOfDataString;
+			retValues[1] = error_count;
 			return retValues;
 		}
 	}
@@ -203,15 +203,14 @@ void LISAProcessingReceivedData()
 	}
 }
 
-bool ProcessLISAOnReceivedData()
+int* ProcessLISAOnReceivedData()
 {
 	int mainByteCount = 0, internalBufferCount = 0, firstBitIndex = 0, secondBitIndex = 0;
 	uint8_t firstByte = 0x00, secondByte = 0x00;
 	uint8_t localByte = 0x00;
 	int dataStartIndex = 0;
-	bool dataReceivedStatus = false;
-	int *dataStatus;
-//	printf("\n");
+	int dataReceivedStatus[2];
+	int* dataStatus;
 
 	while(mainByteCount < 1024)
 	{
@@ -258,13 +257,12 @@ bool ProcessLISAOnReceivedData()
 			}
 		}
 		dataStatus = FindMessage();
-		dataReceivedStatus = dataStatus[0];
-		if(dataReceivedStatus == true)
+		if(dataStatus[0] == true)
 		{
 			break;
 		}
 	}
-	return dataReceivedStatus;
+	return dataStatus;
 }
 
 #ifdef ReceiveDebug

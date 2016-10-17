@@ -130,6 +130,7 @@ void PrintData(uint8_t *buffer, int length, int characterPosition)
 {
 	int counter;
 	int totalLengthOfData = characterPosition + buffer[characterPosition + 1] + 1;
+	printf("\n");
 	for(counter = 0; counter < totalLengthOfData; counter++)
 	{
 		if(characterPosition == 0)
@@ -146,7 +147,7 @@ void PrintData(uint8_t *buffer, int length, int characterPosition)
 			printf("%c", buffer[counter]);
 		}
 	}
-	printf("\nData Printed\n\n");
+	printf("\nData Printed");
 }
 #endif
 
@@ -182,19 +183,6 @@ int main(void)
 	 * 6) R: Ignore rest of the bits and then read the actual data
 	 */
 
-	printf("\n Want to Transmit or Receive (T or R): ");
-	scanf("%c", &communicationSelect);
-	if(communicationSelect == 'T')
-	{
-		transmit = true;
-		receive = false;
-	}
-	else if(communicationSelect == 'R')
-	{
-		receive = true;
-		transmit = false;
-	}
-
 #if defined(Transmit) || defined(Receive)
 	// Turn on the timer
 	SetUpTimer();
@@ -227,6 +215,9 @@ int main(void)
 		}
 		else
 		{
+			printf("\n Want to Transmit or Receive (T or R): ");
+			scanf("%c", &communicationSelect);
+
 			if(communicationSelect == 'T')
 			{
 				transmit = true;
@@ -235,6 +226,11 @@ int main(void)
 			else if(communicationSelect == 'R')
 			{
 				receive = true;
+				transmit = false;
+			}
+			else
+			{
+				receive = false;
 				transmit = false;
 			}
 			LPC_TIM0->TCR = 0x1;
@@ -271,6 +267,12 @@ int main(void)
 
 			// 3) T: Print the created final stream
 			PrintData(TransmitBuffer, transmitBufferLength, sizeOfsyncField);
+
+			#ifdef EncryptedCommunication
+				EncryptTransmitSyncField();
+				// 3) T: Print the created final stream
+				PrintData(TransmitBuffer, transmitBufferLength, sizeOfsyncField);
+			#endif
 		}
 #endif
 
@@ -298,18 +300,20 @@ int main(void)
 			}
 #endif
 
+			int* dataReceivedStatus;
 #ifdef Receive
 			if(receive)
 			{
 				// Checking for the data received flag and receive if the data is not received
 				if(receiveBufferFull)
 				{
-					dataReceived = ProcessLISAOnReceivedData();
+					dataReceivedStatus = ProcessLISAOnReceivedData();
+					dataReceived = dataReceivedStatus[0];
 
 					if(dataReceived)
 					{
 						dataReceived = false;
-						printf("\nData Reception Complete\n");
+						printf("\nData Reception Complete (Error Count = %d)", dataReceivedStatus[1]);
 
 						PrintData(Buffer, receiveBufferLength, 32);
 						if(!receiveAcknowledgement)
