@@ -13,5 +13,6 @@ void LISAProcessingReceivedData();
 int* ProcessLISAOnReceivedData();
 void SetUpReceiveInterrupt();
 int* FindMessage();
+void DecryptReceivedSyncField(uint8_t key);
 
 #endif /* RECEIVERSOURCE_H_ */

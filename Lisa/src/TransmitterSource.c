@@ -23,7 +23,7 @@ extern int sizeOfsyncField;
 extern int transmitBufferCounter, transmitBitCounter;
 
 #ifdef EncryptedCommunication
-bool encryptEntireData = false;
+	extern bool encryptEntireData;
 #endif
 
 // This function creates the initial sync stream (Size : 64 bytes)
@@ -78,10 +78,11 @@ void TransmitData()
 	}
 }
 
+#ifdef EncryptedCommunication
 // This function does the XOR of the present data to any random digit
 void EncryptTransmitSyncField()
 {
-	uint8_t randomByte = 0x45;
+	uint8_t randomByte = rand();
 	int byteCounter = 0, encryptionLength = 0;
 
 	if(encryptEntireData)
@@ -98,3 +99,4 @@ void EncryptTransmitSyncField()
 		TransmitBuffer[byteCounter] = TransmitBuffer[byteCounter] ^ randomByte;
 	}
 }
+#endif

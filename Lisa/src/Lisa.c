@@ -20,10 +20,6 @@
 #include <ReceiverSource.h>
 #include <stdio.h>
 
-// TODO: insert other include files here
-
-// TODO: insert other definitions and declarations here
-
 // General Defs
 uint8_t TransmitBuffer[1024];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
 char TransmittedData[30];
@@ -35,11 +31,17 @@ int sizeOfsyncField = 32;
 //char ReceiveBuffer[] = {"a0a2a4a6a8aaacaeb0b2b4b6b8babcbf41434547494b4d4f51535557595b5d5eaaaaaaaaaa0000000000000"};
 char ReceiveBuffer[1024];
 uint8_t Buffer[1024];
-int receiveBufferLength = 1024, receiveDataLength;
+char *ReceivedData;
+int receiveBufferLength = 1024, receivedDataLength;
 bool bitReceived = false, receiveBufferFull = false, bitReadyForTransmit = false, dataReceived = false;
+
+#ifdef EncryptedCommunication
+	bool encryptEntireData = false;
+#endif
 
 int receiverBufferCounter, bitCount = 8, receiverBitCounter = 7;
 int transmitBufferCounter, transmitBitCounter = 7;
+const char *acknowledgement = "ACKSENT";
 
 void SetUpGPIOPins()
 {
@@ -147,7 +149,6 @@ void PrintData(uint8_t *buffer, int length, int characterPosition)
 			printf("%c", buffer[counter]);
 		}
 	}
-	printf("\nData Printed");
 }
 #endif
 
@@ -157,7 +158,7 @@ int main(void)
 	// Setup the GPIO Ports here at this position
 	char communicationSelect;
 	bool transmit = false, receive = false, sendAckowledgement = false, receiveAcknowledgement = false;
-	char acknowledgement[8] = "ACKSENT";
+	int* dataReceivedStatus;
 
 	SetUpGPIOPins();
 
@@ -265,11 +266,13 @@ int main(void)
 				AppendUserData(TransmittedData);
 			}
 
+			printf("\nData transmission: ");
 			// 3) T: Print the created final stream
 			PrintData(TransmitBuffer, transmitBufferLength, sizeOfsyncField);
 
 			#ifdef EncryptedCommunication
 				EncryptTransmitSyncField();
+				printf("\nEncrypted data transmission: ");
 				// 3) T: Print the created final stream
 				PrintData(TransmitBuffer, transmitBufferLength, sizeOfsyncField);
 			#endif
@@ -300,7 +303,6 @@ int main(void)
 			}
 #endif
 
-			int* dataReceivedStatus;
 #ifdef Receive
 			if(receive)
 			{
@@ -313,19 +315,41 @@ int main(void)
 					if(dataReceived)
 					{
 						dataReceived = false;
-						printf("\nData Reception Complete (Error Count = %d)", dataReceivedStatus[1]);
+						receivedDataLength = sizeOfsyncField + 1 + Buffer[sizeOfsyncField];
 
-						PrintData(Buffer, receiveBufferLength, 32);
+						static int counter, byteCounter = 0;
+						// Copy the received data
+						ReceivedData = (char *)malloc(sizeof(char) * Buffer[sizeOfsyncField]);
+						for(counter = sizeOfsyncField + 1; counter < receivedDataLength; counter++)
+						{
+							ReceivedData[byteCounter] = Buffer[counter];
+							byteCounter++;
+						}
+
+						printf("\nData Reception Complete (Error Count = %d)\n Received Data", dataReceivedStatus[1]);
+						PrintData(Buffer, receivedDataLength, sizeOfsyncField);
+
+#ifdef EncryptedCommunication
+						DecryptReceivedSyncField(dataReceivedStatus[2]);
+						printf("\n Decrypted Data");
+						PrintData(Buffer, receiveBufferLength, sizeOfsyncField);
+#endif
+
 						if(!receiveAcknowledgement)
 						{
 							sendAckowledgement = true;
 						}
 						else
 						{
-							receiveAcknowledgement = false;
+							if(!strcmp(ReceivedData, acknowledgement))
+							{
+								printf("Acknowledgement Received");
+								receiveAcknowledgement = false;
+							}
 						}
 						transmit = false;
 						receive = false;
+						free(ReceivedData);
 					}
 					else
 					{

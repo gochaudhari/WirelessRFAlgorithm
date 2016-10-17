@@ -18,10 +18,15 @@
 
 extern char ReceiveBuffer[1024];
 extern uint8_t Buffer[1024];
-extern int receiveBufferLength, receiveDataLength;
+extern int receiveBufferLength, receivedDataLength;
 extern bool bitReceived, dataReceived;
 extern int receiverBufferCounter, bitCount, receiverBitCounter;
 extern char TransmitBuffer[50]; // 8 bytes of initial sync and then next is the data. Assume 8 + 8
+
+extern int sizeOfsyncField;
+#ifdef EncryptedCommunication
+	extern bool encryptEntireData;
+#endif
 int sync_field_count;
 
 // This function receives the data sent from the transmitter
@@ -264,6 +269,27 @@ int* ProcessLISAOnReceivedData()
 	}
 	return dataStatus;
 }
+
+#ifdef EncryptedCommunication
+void DecryptReceivedSyncField(uint8_t key)
+{
+	int byteCounter = 0, encryptionLength = 0;
+
+	if(encryptEntireData)
+	{
+		encryptionLength = Buffer[sizeOfsyncField];
+	}
+	else
+	{
+		encryptionLength = 32;
+	}
+
+	for(byteCounter = 0; byteCounter < encryptionLength; byteCounter++)
+	{
+		Buffer[byteCounter] = Buffer[byteCounter] ^ key;
+	}
+}
+#endif
 
 #ifdef ReceiveDebug
 void SetUpReceiveInterrupt()
