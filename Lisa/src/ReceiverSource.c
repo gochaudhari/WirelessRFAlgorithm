@@ -64,12 +64,48 @@ int * FindMessage()
 	int no_of_sync_bytes = 32;
 	bool startOfDataString = false;
 	int error_count = 0;
-	static int retValues[2] = {0, 0};
-	int receiveBufferLength = 1024;
-	char Kernel[32]=
+	static int retValues[3] = {0, 0, 0};
+	int receiveBufferLength = 50;
+	uint8_t key;
+	uint8_t key_arr[31];
+	bool keyFound=false;
+
+	uint8_t Kernel[32]=
 	{       0x50,0x51,0x52,0x53,0x54,0x55,0x56,0x57,0x58,0x59,0x5A,0x5B,0x5C,0x5D,0x5E,0x5F,
 			0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf
 	};
+
+#if defined(EncryptedCommunication)
+
+		for(dataCounter = 0; dataCounter < receiveBufferLength; dataCounter++)
+		{
+			if(sync_field_count < no_of_sync_bytes)
+			{
+				dataByte = Buffer[dataCounter];
+
+				key_arr[dataCounter] = dataByte ^ Kernel[dataCounter];
+				sync_field_count++;
+			}
+			else if(!keyFound)
+			{
+				key = FindMostOccuringElement(key_arr);
+				keyFound =true;
+			}
+		}
+
+		sync_field_count=0;
+
+		for(dataCounter = 0; dataCounter<receiveBufferLength;dataCounter++)
+		{
+			if(sync_field_count < no_of_sync_bytes)
+			{
+				Buffer[dataCounter] = Buffer[dataCounter] ^ key;
+				sync_field_count++;
+			}
+		}
+
+		sync_field_count=0;
+#endif
 
 	for(dataCounter = 0; dataCounter < receiveBufferLength; dataCounter++)
 	{
@@ -98,9 +134,36 @@ int * FindMessage()
 			}
 			retValues[0] = startOfDataString;
 			retValues[1] = error_count;
+			retValues[2] = key;
 			return retValues;
 		}
 	}
+}
+
+uint8_t FindMostOccuringElement(uint8_t key_arr[])
+{
+	uint8_t current_key=key_arr[0];
+	int size_kernel=32, i=0;
+	int key_occurence_counter=0;
+
+	for(i=0;i<size_kernel;i++)
+	{
+		if(current_key==key_arr[i])
+		{
+			key_occurence_counter++;
+		}
+		else if(key_occurence_counter==0)
+		{
+			current_key=key_arr[i];
+			key_occurence_counter++;
+		}
+		else
+		{
+			key_occurence_counter--;
+		}
+	}
+
+	return current_key;
 }
 
 void LISAProcessingReceivedData()
