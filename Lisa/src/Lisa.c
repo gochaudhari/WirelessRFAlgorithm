@@ -299,6 +299,9 @@ int main(void)
 					receive = false;
 					sendAckowledgement = false;
 					receiveAcknowledgement = true;
+
+					// This makes the transmitter go low when the transmission is done
+					LPC_GPIO2->FIOCLR0 |= (1 << TransmitPin);
 				}
 			}
 #endif
@@ -326,14 +329,14 @@ int main(void)
 							byteCounter++;
 						}
 
-						printf("\nData Reception Complete (Error Count = %d)\n Received Data", dataReceivedStatus[1]);
-						PrintData(Buffer, receivedDataLength, sizeOfsyncField);
-
 #ifdef EncryptedCommunication
 						DecryptReceivedSyncField(dataReceivedStatus[2]);
 						printf("\n Decrypted Data");
 						PrintData(Buffer, receiveBufferLength, sizeOfsyncField);
 #endif
+
+						printf("\nData Reception Complete (Error Count = %d)\n Received Data", dataReceivedStatus[1]);
+						PrintData(Buffer, receivedDataLength, sizeOfsyncField);
 
 						if(!receiveAcknowledgement)
 						{
