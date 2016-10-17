@@ -211,7 +211,7 @@ bool ProcessLISAOnReceivedData()
 	int dataStartIndex = 0;
 	bool dataReceivedStatus = false;
 	int *dataStatus;
-	printf("\n");
+//	printf("\n");
 
 	while(mainByteCount < 1024)
 	{

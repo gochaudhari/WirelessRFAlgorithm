@@ -234,6 +234,7 @@ int main(void)
 				receive = true;
 				transmit = false;
 			}
+			LPC_TIM0->TCR = 0x1;
 		}
 #endif
 
@@ -297,8 +298,8 @@ int main(void)
 
 					if(dataReceived)
 					{
+						dataReceived = false;
 						printf("\nData Reception Complete\n");
-						receiveBufferFull = false;
 
 						PrintData(Buffer, receiveBufferLength, 32);
 						if(!receiveAcknowledgement)
@@ -315,6 +316,7 @@ int main(void)
 					{
 						bitReceived = true;
 					}
+					receiveBufferFull = false;
 				}
 
 				if(bitReceived)

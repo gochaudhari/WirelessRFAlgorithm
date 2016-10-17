@@ -517,7 +517,7 @@ END GROUP
                 0x20084000                __top_RamAHB32 = 0x20084000
                 0x20084000                __top_RAM2 = 0x20084000
 
-.text           0x00000000     0x4360
+.text           0x00000000     0x4358
  FILL mask 0xff
                 0x00000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -526,10 +526,10 @@ END GROUP
                 0x000000cc                . = ALIGN (0x4)
                 0x000000cc                __section_table_start = .
                 0x000000cc                __data_section_table = .
-                0x000000cc        0x4 LONG 0x4360 LOADADDR (.data)
+                0x000000cc        0x4 LONG 0x4358 LOADADDR (.data)
                 0x000000d0        0x4 LONG 0x10000000 ADDR (.data)
                 0x000000d4        0x4 LONG 0x18 SIZEOF (.data)
-                0x000000d8        0x4 LONG 0x4360 LOADADDR (.data_RAM2)
+                0x000000d8        0x4 LONG 0x4358 LOADADDR (.data_RAM2)
                 0x000000dc        0x4 LONG 0x2007c000 ADDR (.data_RAM2)
                 0x000000e0        0x4 LONG 0x0 SIZEOF (.data_RAM2)
                 0x000000e4                __data_section_table_end = .
@@ -613,40 +613,39 @@ END GROUP
  .text.PrintData
                 0x0000046c       0x7c ./src/Lisa.o
                 0x0000046c                PrintData
- .text.main     0x000004e8      0x234 ./src/Lisa.o
+ .text.main     0x000004e8      0x244 ./src/Lisa.o
                 0x000004e8                main
  .text.ReceiveData
-                0x0000071c       0x90 ./src/ReceiverSource.o
-                0x0000071c                ReceiveData
+                0x0000072c       0x90 ./src/ReceiverSource.o
+                0x0000072c                ReceiveData
  .text.FindMessage
-                0x000007ac       0xd8 ./src/ReceiverSource.o
-                0x000007ac                FindMessage
+                0x000007bc       0xd8 ./src/ReceiverSource.o
+                0x000007bc                FindMessage
  .text.ProcessLISAOnReceivedData
-                0x00000884      0x148 ./src/ReceiverSource.o
-                0x00000884                ProcessLISAOnReceivedData
+                0x00000894      0x13c ./src/ReceiverSource.o
+                0x00000894                ProcessLISAOnReceivedData
  .text.CreateSyncStream
-                0x000009cc       0x98 ./src/TransmitterSource.o
-                0x000009cc                CreateSyncStream
+                0x000009d0       0x98 ./src/TransmitterSource.o
+                0x000009d0                CreateSyncStream
  .text.AppendUserData
-                0x00000a64       0x50 ./src/TransmitterSource.o
-                0x00000a64                AppendUserData
+                0x00000a68       0x50 ./src/TransmitterSource.o
+                0x00000a68                AppendUserData
  .text.TransmitData
-                0x00000ab4       0x68 ./src/TransmitterSource.o
-                0x00000ab4                TransmitData
+                0x00000ab8       0x68 ./src/TransmitterSource.o
+                0x00000ab8                TransmitData
  .text.SystemInit
-                0x00000b1c       0xe4 D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug\libCMSIS_CORE_LPC17xx.a(system_LPC17xx.o)
-                0x00000b1c                SystemInit
- .text.__main   0x00000c00       0x14 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_semihost.a(_cr__main.o)
-                0x00000c00                __CR_SEMIHOST
-                0x00000c00                __main
+                0x00000b20       0xe4 D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug\libCMSIS_CORE_LPC17xx.a(system_LPC17xx.o)
+                0x00000b20                SystemInit
+ .text.__main   0x00000c04       0x14 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_semihost.a(_cr__main.o)
+                0x00000c04                __CR_SEMIHOST
+                0x00000c04                __main
  .text.fp_round
-                0x00000c14       0x4c c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
+                0x00000c18       0x4c c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
  .text.pr_dec.constprop.1
-                0x00000c60       0x26 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
- *fill*         0x00000c86        0x2 ff
- .text.sprintf  0x00000c88       0x6c c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
-                0x00000c88                sprintf
- *fill*         0x00000cf4        0x4 ff
+                0x00000c64       0x26 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
+ *fill*         0x00000c8a        0x2 ff
+ .text.sprintf  0x00000c8c       0x6c c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
+                0x00000c8c                sprintf
  .text.fp_display
                 0x00000cf8      0x8ec c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
  .text.vsnprintf
@@ -797,54 +796,53 @@ END GROUP
                 0x00004060                __write
  *(.rodata .rodata.* .constdata .constdata.*)
  .rodata        0x0000406c       0x90 ./src/Lisa.o
- .rodata        0x000040fc       0x56 ./src/ReceiverSource.o
+ .rodata        0x000040fc       0x53 ./src/ReceiverSource.o
  .rodata.str1.1
-                0x00004152       0x34 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
+                0x0000414f       0x34 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
                                  0x35 (size before relaxing)
  .rodata.str1.1
-                0x00004186        0x4 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(initio.o)
+                0x00004183        0x4 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(initio.o)
  .rodata.str1.1
-                0x0000418a       0x31 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(printf.o)
+                0x00004187       0x31 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(printf.o)
                                  0x38 (size before relaxing)
- *fill*         0x000041bb        0x5 ff
  .rodata.__huge_vall
-                0x000041c0        0x8 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(_hugeval.o)
-                0x000041c0                __huge_vall
+                0x000041b8        0x8 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(_hugeval.o)
+                0x000041b8                __huge_vall
  .rodata.str1.1
-                0x000041c8       0x18 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(alloc.o)
+                0x000041c0       0x18 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(alloc.o)
  .rodata.__ctype
-                0x000041e0      0x180 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(ctype.o)
-                0x000041e0                __ctype
-                0x00004360                . = ALIGN (0x4)
+                0x000041d8      0x180 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(ctype.o)
+                0x000041d8                __ctype
+                0x00004358                . = ALIGN (0x4)
 
-.glue_7         0x00004360        0x0
- .glue_7        0x00004360        0x0 linker stubs
+.glue_7         0x00004358        0x0
+ .glue_7        0x00004358        0x0 linker stubs
 
-.glue_7t        0x00004360        0x0
- .glue_7t       0x00004360        0x0 linker stubs
+.glue_7t        0x00004358        0x0
+ .glue_7t       0x00004358        0x0 linker stubs
 
-.vfp11_veneer   0x00004360        0x0
- .vfp11_veneer  0x00004360        0x0 linker stubs
+.vfp11_veneer   0x00004358        0x0
+ .vfp11_veneer  0x00004358        0x0 linker stubs
 
-.v4_bx          0x00004360        0x0
- .v4_bx         0x00004360        0x0 linker stubs
+.v4_bx          0x00004358        0x0
+ .v4_bx         0x00004358        0x0 linker stubs
 
-.iplt           0x00004360        0x0
- .iplt          0x00004360        0x0 ./src/Lisa.o
+.iplt           0x00004358        0x0
+ .iplt          0x00004358        0x0 ./src/Lisa.o
 
-.rel.dyn        0x00004360        0x0
- .rel.iplt      0x00004360        0x0 ./src/Lisa.o
+.rel.dyn        0x00004358        0x0
+ .rel.iplt      0x00004358        0x0 ./src/Lisa.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00004360                __exidx_start = .
+                0x00004358                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x00004360                __exidx_end = .
-                0x00004360                _etext = .
+                0x00004358                __exidx_end = .
+                0x00004358                _etext = .
 
-.data_RAM2      0x2007c000        0x0 load address 0x00004360
+.data_RAM2      0x2007c000        0x0 load address 0x00004358
  FILL mask 0xff
                 [!provide]                PROVIDE (__start_data_RAM2, .)
  *(.ramfunc.$RAM2)
@@ -860,7 +858,7 @@ END GROUP
                 0x10000000                . = ALIGN (0x4)
                 0x10000000                _end_uninit_RESERVED = .
 
-.data           0x10000000       0x18 load address 0x00004360
+.data           0x10000000       0x18 load address 0x00004358
  FILL mask 0xff
                 0x10000000                _data = .
  *(vtable)
@@ -885,7 +883,7 @@ END GROUP
                 0x10000018                . = ALIGN (0x4)
                 0x10000018                _edata = .
 
-.igot.plt       0x10000018        0x0 load address 0x00004378
+.igot.plt       0x10000018        0x0 load address 0x00004370
  .igot.plt      0x10000018        0x0 ./src/Lisa.o
 
 .bss_RAM2       0x2007c000        0x0
@@ -973,13 +971,13 @@ END GROUP
                 0xefff74b2                PROVIDE (__valid_user_code_checksum, (0x0 - ((((((_vStackTop + (ResetISR + 0x1)) + (NMI_Handler + 0x1)) + (HardFault_Handler + 0x1)) + (DEFINED (MemManage_Handler)?MemManage_Handler:0x0 + 0x1)) + (DEFINED (BusFault_Handler)?BusFault_Handler:0x0 + 0x1)) + (DEFINED (UsageFault_Handler)?UsageFault_Handler:0x0 + 0x1))))
 OUTPUT(Lisa.axf elf32-littlearm)
 
-.debug_info     0x00000000     0x1e01
+.debug_info     0x00000000     0x1df4
  .debug_info    0x00000000      0xd71 ./src/Lisa.o
- .debug_info    0x00000d71      0x688 ./src/ReceiverSource.o
- .debug_info    0x000013f9      0x45e ./src/TransmitterSource.o
- .debug_info    0x00001857      0x253 ./src/cr_startup_lpc175x_6x.o
- .debug_info    0x00001aaa       0x3f ./src/crp.o
- .debug_info    0x00001ae9      0x318 D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug\libCMSIS_CORE_LPC17xx.a(system_LPC17xx.o)
+ .debug_info    0x00000d71      0x67b ./src/ReceiverSource.o
+ .debug_info    0x000013ec      0x45e ./src/TransmitterSource.o
+ .debug_info    0x0000184a      0x253 ./src/cr_startup_lpc175x_6x.o
+ .debug_info    0x00001a9d       0x3f ./src/crp.o
+ .debug_info    0x00001adc      0x318 D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug\libCMSIS_CORE_LPC17xx.a(system_LPC17xx.o)
 
 .debug_abbrev   0x00000000      0x6e2
  .debug_abbrev  0x00000000      0x267 ./src/Lisa.o
@@ -1032,13 +1030,13 @@ OUTPUT(Lisa.axf elf32-littlearm)
  .debug_macro   0x00002260      0x12d D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug\libCMSIS_CORE_LPC17xx.a(system_LPC17xx.o)
  .debug_macro   0x0000238d      0x88c D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug\libCMSIS_CORE_LPC17xx.a(system_LPC17xx.o)
 
-.debug_line     0x00000000      0xd0a
- .debug_line    0x00000000      0x366 ./src/Lisa.o
- .debug_line    0x00000366      0x377 ./src/ReceiverSource.o
- .debug_line    0x000006dd      0x2c1 ./src/TransmitterSource.o
- .debug_line    0x0000099e       0xd5 ./src/cr_startup_lpc175x_6x.o
- .debug_line    0x00000a73       0x78 ./src/crp.o
- .debug_line    0x00000aeb      0x21f D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug\libCMSIS_CORE_LPC17xx.a(system_LPC17xx.o)
+.debug_line     0x00000000      0xd0c
+ .debug_line    0x00000000      0x369 ./src/Lisa.o
+ .debug_line    0x00000369      0x376 ./src/ReceiverSource.o
+ .debug_line    0x000006df      0x2c1 ./src/TransmitterSource.o
+ .debug_line    0x000009a0       0xd5 ./src/cr_startup_lpc175x_6x.o
+ .debug_line    0x00000a75       0x78 ./src/crp.o
+ .debug_line    0x00000aed      0x21f D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug\libCMSIS_CORE_LPC17xx.a(system_LPC17xx.o)
 
 .debug_str      0x00000000     0xae58
  .debug_str     0x00000000     0xa4ec ./src/Lisa.o
