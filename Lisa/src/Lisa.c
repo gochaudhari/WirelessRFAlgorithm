@@ -27,7 +27,8 @@
 // General Defs
 uint8_t TransmitBuffer[1024];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
 char TransmittedData[30];
-int transmitBufferLength, transmitDataLength;
+int transmitBufferLength;
+uint8_t transmitDataLength;
 int sizeOfsyncField = 32;
 
 //char ReceiveBuffer[] = {0xa0, 0xa2, 0xa4, 0xa6, 0xa8, 0xaa, 0xac, 0xae, 0xb0, 0xb2, 0xb4, 0xb6, 0xb8, 0xba, 0xbc, 0xbf, 0x41, 0x43, 0x45, 0x47, 0x49, 0x4b, 0x4d, 0x4f, 0x51, 0x53, 0x55, 0x57, 0x59, 0x5b, 0x5d, 0x5e, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0x00, 0x00};
@@ -128,17 +129,19 @@ void EINT3_IRQHandler(void)
 void PrintData(uint8_t *buffer, int length, int characterPosition)
 {
 	int counter;
-	for(counter = 0; counter < length; counter++)
+	int totalLengthOfData = characterPosition + buffer[characterPosition + 1] + 1;
+	for(counter = 0; counter < totalLengthOfData; counter++)
 	{
 		if(characterPosition == 0)
 		{
 			printf("%x", buffer[counter]);
 		}
-		else if(counter < characterPosition)
+
+		if(counter < characterPosition)
 		{
 			printf("%x", buffer[counter]);
 		}
-		else
+		else if((counter > characterPosition) && (counter < totalLengthOfData))
 		{
 			printf("%c", buffer[counter]);
 		}
@@ -246,6 +249,9 @@ int main(void)
 			{
 				transmitDataLength = strlen(acknowledgement);
 
+				TransmitBuffer[transmitBufferLength] = transmitDataLength;
+				transmitBufferLength++;
+
 				// 3) T: Combine the repeating pattern and the user input data
 				AppendUserData(acknowledgement);
 			}
@@ -255,6 +261,9 @@ int main(void)
 				printf("\nEnter the data to be transmitted: ");
 				scanf("%s", &TransmittedData);
 				transmitDataLength = strlen(TransmittedData);
+
+				TransmitBuffer[transmitBufferLength] = transmitDataLength;
+				transmitBufferLength++;
 
 				// 3) T: Combine the repeating pattern and the user input data
 				AppendUserData(TransmittedData);
@@ -282,6 +291,7 @@ int main(void)
 				{
 					transmitBufferCounter = 0;
 					transmit = false;
+					receive = false;
 					sendAckowledgement = false;
 					receiveAcknowledgement = true;
 				}
@@ -310,6 +320,7 @@ int main(void)
 						{
 							receiveAcknowledgement = false;
 						}
+						transmit = false;
 						receive = false;
 					}
 					else
