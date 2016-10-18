@@ -11,7 +11,7 @@
 // This is for debug purposes
 #define Transmit
 #define Receive
-//#define EncryptedCommunication
+#define EncryptedCommunication
 //#define TransmitDebug
 //#define ReceiveDebug
 

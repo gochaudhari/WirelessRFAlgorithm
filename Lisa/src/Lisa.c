@@ -86,7 +86,7 @@ void SetUpTimer()
 	LPC_TIM0->TCR = 0x2;
 	LPC_TIM0->CTCR = 0;
 
-	LPC_TIM0->PR = 200;			//1000
+	LPC_TIM0->PR = 200;			//200
 	LPC_TIM0->PC = 0;
 
 	/*4. Interrupts: See register T0/1/2/3MCR (Table 430) and T0/1/2/3CCR (Table 431) for
@@ -348,7 +348,7 @@ int main(void)
 						}
 						else
 						{
-								printf("Acknowledgement Received.Transmission Successful.");
+								printf("\nAcknowledgement Received.Transmission Successful.");
 								receiveAcknowledgement = false;
 						}
 						transmit = false;
