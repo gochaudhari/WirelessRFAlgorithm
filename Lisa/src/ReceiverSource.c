@@ -22,6 +22,7 @@ extern int receiveBufferLength, receivedDataLength;
 extern bool bitReceived, dataReceived;
 extern int receiverBufferCounter, bitCount, receiverBitCounter;
 extern char TransmitBuffer[50]; // 8 bytes of initial sync and then next is the data. Assume 8 + 8
+extern uint8_t scrambleAndDescrambleOrder;
 
 extern int sizeOfsyncField;
 #ifdef EncryptedCommunication
@@ -356,6 +357,14 @@ void DecryptReceivedSyncField(uint8_t key)
 		Buffer[byteCounter] = Buffer[byteCounter] ^ key;
 	}
 }
+#endif
+
+#ifdef ScramblingAndDescrambling
+void DescrambleReceivedData()
+{
+
+}
+
 #endif
 
 #ifdef ReceiveDebug

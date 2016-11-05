@@ -26,6 +26,7 @@ char TransmittedData[30];
 int transmitBufferLength;
 uint8_t transmitDataLength;
 int sizeOfsyncField = 32;
+uint8_t scrambleAndDescrambleOrder;
 
 //char ReceiveBuffer[] = {0xa0, 0xa2, 0xa4, 0xa6, 0xa8, 0xaa, 0xac, 0xae, 0xb0, 0xb2, 0xb4, 0xb6, 0xb8, 0xba, 0xbc, 0xbf, 0x41, 0x43, 0x45, 0x47, 0x49, 0x4b, 0x4d, 0x4f, 0x51, 0x53, 0x55, 0x57, 0x59, 0x5b, 0x5d, 0x5e, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0x00, 0x00};
 //char ReceiveBuffer[] = {"a0a2a4a6a8aaacaeb0b2b4b6b8babcbf41434547494b4d4f51535557595b5d5eaaaaaaaaaa0000000000000"};
@@ -76,6 +77,7 @@ void SetUpTimer()
 	LPC_SC->PCONP |= (1 << Timer0PCONP);
 
 	/*2. Peripheral clock: In the PCLKSEL0 register (Table 40), select PCLK_TIMER0/1*/
+//	LPC_SC->PCLKSEL0 &= ~(3 << Timer0PCLK);
 	LPC_SC->PCLKSEL0 |= (3 << Timer0PCLK);
 
 	/*3. Pins: Select timer pins through the PINSEL registers. Select the pin modes for the
@@ -254,6 +256,10 @@ int main(void)
 			}
 			else
 			{
+#ifdef ScramblingAndDescrambling
+				printf("\nScrabmling order: ");
+				scanf("%s", &scrambleAndDescrambleOrder);
+#endif
 				// 2) T: Take data from user
 				printf("\nEnter the data to be transmitted: ");
 				scanf("%s", &TransmittedData);

@@ -11,13 +11,14 @@
 // This is for debug purposes
 #define Transmit
 #define Receive
-#define EncryptedCommunication
+//define EncryptedCommunication
+#define ScramblingAndDescrambling
 //#define TransmitDebug
 //#define ReceiveDebug
 
 // General defines
-#define true					1
-#define false					0
+#define true						1
+#define false						0
 
 typedef int bool;
 
