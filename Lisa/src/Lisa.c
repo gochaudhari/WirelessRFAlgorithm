@@ -19,6 +19,7 @@
 #include <TransmitterSource.h>
 #include <ReceiverSource.h>
 #include <stdio.h>
+#include <Common.h>
 
 // General Defs
 uint8_t TransmitBuffer[1024];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
@@ -26,14 +27,20 @@ char TransmittedData[30];
 int transmitBufferLength;
 uint8_t transmitDataLength;
 int sizeOfsyncField = 32;
-uint8_t scrambleAndDescrambleOrder;
+
+#ifdef ScramblingAndDescrambling
+uint8_t scrambleAndDescrambleOrder = 5;
+#endif
 
 //char ReceiveBuffer[] = {0xa0, 0xa2, 0xa4, 0xa6, 0xa8, 0xaa, 0xac, 0xae, 0xb0, 0xb2, 0xb4, 0xb6, 0xb8, 0xba, 0xbc, 0xbf, 0x41, 0x43, 0x45, 0x47, 0x49, 0x4b, 0x4d, 0x4f, 0x51, 0x53, 0x55, 0x57, 0x59, 0x5b, 0x5d, 0x5e, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0x00, 0x00};
-//char ReceiveBuffer[] = {"a0a2a4a6a8aaacaeb0b2b4b6b8babcbf41434547494b4d4f51535557595b5d5eaaaaaaaaaa0000000000000"};
-char ReceiveBuffer[1024];
+#ifdef ReceiveTest
+char ReceiveBuffer[] = {0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5a, 0x5b, 0x5c, 0x5d, 0x5e, 0x5f, 0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0x3, 0x5, 0x5, 0x5};
+#elif
+//char ReceiveBuffer[1024];
+#endif
 uint8_t Buffer[1024];
 char *ReceivedData;
-int receiveBufferLength = 1024, receivedDataLength;
+int receiveBufferLength = 1024, receivedDataLength, actualDataLength = 0;
 bool bitReceived = false, receiveBufferFull = false, bitReadyForTransmit = false, dataReceived = false;
 
 #ifdef EncryptedCommunication
@@ -129,31 +136,6 @@ void EINT3_IRQHandler(void)
 }
 #endif
 
-#if defined(Transmit) || defined(Receive)
-void PrintData(uint8_t *buffer, int length, int characterPosition)
-{
-	int counter;
-	int totalLengthOfData = characterPosition + buffer[characterPosition + 1] + 1;
-	printf("\n");
-	for(counter = 0; counter < totalLengthOfData; counter++)
-	{
-		if(characterPosition == 0)
-		{
-			printf("%x", buffer[counter]);
-		}
-
-		if(counter < characterPosition)
-		{
-			printf("%x", buffer[counter]);
-		}
-		else if((counter > characterPosition) && (counter < totalLengthOfData))
-		{
-			printf("%c", buffer[counter]);
-		}
-	}
-}
-#endif
-
 int main(void)
 {
 
@@ -161,6 +143,7 @@ int main(void)
 	char communicationSelect;
 	bool transmit = false, receive = false, sendAckowledgement = false, receiveAcknowledgement = false;
 	int* dataReceivedStatus;
+	int counter, byteCounter = 0, printLength = 0;
 
 	SetUpGPIOPins();
 
@@ -274,13 +257,16 @@ int main(void)
 
 			printf("\nData transmission: ");
 			// 3) T: Print the created final stream
-			PrintData(TransmitBuffer, transmitBufferLength, sizeOfsyncField);
+			// transmitBufferLength variable can also be used but needs to be edited to actual value.
+			printLength = sizeOfsyncField + TransmitBuffer[sizeOfsyncField + 1] + 1;
+			PrintData(TransmitBuffer, printLength, sizeOfsyncField);
 
 			#ifdef EncryptedCommunication
 				EncryptTransmitSyncField();
 				printf("\nEncrypted data transmission: ");
 				// 3) T: Print the created final stream
-				PrintData(TransmitBuffer, transmitBufferLength, sizeOfsyncField);
+				printLength = sizeOfsyncField + TransmitBuffer[sizeOfsyncField + 1] + 1;
+				PrintData(TransmitBuffer, printLength, sizeOfsyncField);
 			#endif
 		}
 #endif
@@ -315,37 +301,53 @@ int main(void)
 #ifdef Receive
 			if(receive)
 			{
+#ifdef ReceiveTest
+				receiverBufferCounter = 1024;
+#endif
 				// Checking for the data received flag and receive if the data is not received
 				if(receiveBufferFull)
 				{
-					dataReceivedStatus = ProcessLISAOnReceivedData();
+//					dataReceivedStatus = ProcessLISAOnReceivedData();
 					dataReceived = dataReceivedStatus[0];
+
+#ifdef ReceiveTest
+					dataReceived = true;
+#endif
 
 					if(dataReceived)
 					{
 						dataReceived = false;
-						receivedDataLength = sizeOfsyncField + 1 + Buffer[sizeOfsyncField];
-
-						static int counter, byteCounter = 0;
-						// Copy the received data
+						receivedDataLength = sizeOfsyncField + 1 + ReceiveBuffer[sizeOfsyncField];
+						byteCounter = 0;
 						
-						ReceivedData = (char *)malloc(sizeof(char) * Buffer[sizeOfsyncField]);
+						// Copy the received data
+//						ReceivedData = (char *)malloc(sizeof(char) * Buffer[sizeOfsyncField]);
+						ReceivedData = (char *)malloc(sizeof(char) * ReceiveBuffer[sizeOfsyncField]);
+						receivedDataLength = sizeOfsyncField + 1 + ReceiveBuffer[sizeOfsyncField];
+
 						for(counter = sizeOfsyncField + 1; counter < receivedDataLength; counter++)
 						{
-							ReceivedData[byteCounter] = Buffer[counter];
+							ReceivedData[byteCounter] = ReceiveBuffer[counter];
 							byteCounter++;
 						}
-						
+						counter = 0;				// Not needed, but useful
+						actualDataLength = byteCounter;
+
 						printf("\n\nData Reception Complete (Error Count = %d)\nReceived Data", dataReceivedStatus[1]);						
 #ifdef EncryptedCommunication
 						DecryptReceivedSyncField(dataReceivedStatus[2]);
 #endif					
-						PrintData(Buffer, receiveBufferLength, sizeOfsyncField);
+						PrintData((uint8_t *)ReceiveBuffer, receivedDataLength, sizeOfsyncField);
 
 #ifdef EncryptedCommunication
 						DecryptReceivedSyncField(dataReceivedStatus[2]);						
 						printf("\n Decrypted Data");
-						PrintData(Buffer, receiveBufferLength, sizeOfsyncField);
+						PrintData(Buffer, receivedDataLength, sizeOfsyncField);
+#endif
+
+						// Descramble and Print Received data
+#ifdef ScramblingAndDescrambling
+						DescrambleReceivedData();
 #endif
 
 						if(!receiveAcknowledgement)

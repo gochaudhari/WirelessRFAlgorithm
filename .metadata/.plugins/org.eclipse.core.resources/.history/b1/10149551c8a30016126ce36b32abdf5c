@@ -1,0 +1,23 @@
+/*
+ * Common.c
+ *
+ *  Created on: Nov 5, 2016
+ *      Author: Gaurao Chaudhari
+ */
+
+#include <Common.h>
+
+void ShiftRegister(uint8_t *ShiftBuffer, int lengthOfBuffer, ShiftDirection shiftDirection, int shiftCount)
+{
+	int counter = 0;
+	uint8_t copyHandle = 0, pasteHandle = 0;
+
+	for(counter = 0; counter < lengthOfBuffer; counter++)
+	{
+		copyHandle = ShiftBuffer[counter] << (8 - shiftCount);				// 8 for number of bits in a byte
+		ShiftBuffer[counter] = (ShiftBuffer[counter]  >> shiftCount);
+		ShiftBuffer[counter] |= (pasteHandle << (8 - shiftCount));
+		pasteHandle = copyHandle;
+	}
+}
+

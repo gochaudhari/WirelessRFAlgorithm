@@ -1,0 +1,19 @@
+/*
+ * Common.h
+ *
+ *  Created on: Nov 5, 2016
+ *      Author: gocha
+ */
+
+#ifndef COMMON_H_
+#define COMMON_H_
+
+typedef enum ShiftOrientation
+{
+	left,
+	right
+};
+
+char *ShiftRegister();
+
+#endif /* COMMON_H_ */

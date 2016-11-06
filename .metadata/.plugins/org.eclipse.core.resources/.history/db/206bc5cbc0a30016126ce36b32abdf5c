@@ -1,0 +1,13 @@
+/*
+ * Common.c
+ *
+ *  Created on: Nov 5, 2016
+ *      Author: Gaurao Chaudhari
+ */
+#include <Common.h>
+
+char *ShiftRegister(char *ShiftBuffer, int lengthOfBuffer, ShiftDirection shiftDirection)
+{
+
+}
+

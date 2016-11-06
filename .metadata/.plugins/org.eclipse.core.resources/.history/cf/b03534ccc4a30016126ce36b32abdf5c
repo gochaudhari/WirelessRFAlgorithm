@@ -1,0 +1,27 @@
+/*
+ * Common.c
+ *
+ *  Created on: Nov 5, 2016
+ *      Author: Gaurao Chaudhari
+ */
+
+#include <Common.h>
+
+char *ShiftRegister(uint8_t *ShiftBuffer, int lengthOfBuffer, ShiftDirection shiftDirection, int shiftCount)
+{
+	int counter = 0;
+	uint8_t localCharHandle;
+	uint8_t localBuffer[lengthOfBuffer];
+
+	for(counter = 0; counter < lengthOfBuffer; counter++)
+	{
+		localBuffer[counter] = 0;
+
+		if(counter != 0)
+		{
+			localCharHandle = ShiftBuffer[counter] << shiftCount;
+		}
+
+	}
+}
+
