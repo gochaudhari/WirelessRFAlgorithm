@@ -26,7 +26,7 @@
 uint8_t TransmitBuffer[1024];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
 char TransmittedData[30];
 int transmitBufferLength;
-uint8_t transmitDataLength;
+int transmitDataLength;
 int sizeOfsyncField = 32;
 
 #ifdef ScramblingAndDescrambling
@@ -247,12 +247,18 @@ int main(void)
 			{
 				// 2) T: Take data from user
 				printf("\nEnter the data to be transmitted: ");
+//				scanf("%s", &TransmittedData);
+				transmitDataLength = 30;						// Fixing the maximum buffer length
+//				TransmittedData = (char *)malloc(transmitDataLength);
+//				fgets(TransmittedData, transmitDataLength, stdin);
 				scanf("%s", &TransmittedData);
 				transmitDataLength = strlen(TransmittedData);
 
 				TransmitBuffer[transmitBufferLength] = transmitDataLength;
 				transmitBufferLength++;
-
+#ifdef ScramblingAndDescrambling
+				ScrambleData(scrambleAndDescrambleOrder);
+#endif
 				// 3) T: Combine the repeating pattern and the user input data
 				AppendUserData(TransmittedData);
 			}
@@ -260,7 +266,7 @@ int main(void)
 			printf("\nData transmission: ");
 			// 3) T: Print the created final stream
 			// transmitBufferLength variable can also be used but needs to be edited to actual value.
-			printLength = sizeOfsyncField + TransmitBuffer[sizeOfsyncField + 1] + 1;
+			printLength = sizeOfsyncField + TransmitBuffer[sizeOfsyncField] + 1;
 			PrintData(TransmitBuffer, printLength, sizeOfsyncField);
 
 			#ifdef EncryptedCommunication

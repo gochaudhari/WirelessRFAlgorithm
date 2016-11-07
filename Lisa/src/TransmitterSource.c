@@ -14,6 +14,7 @@
 #include <TransmitterSource.h>
 #include <AllDefs.h>
 #include <stdlib.h>
+#include <Common.h>
 
 // General Defs
 extern char TransmitBuffer[50];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
@@ -21,9 +22,10 @@ extern char TransmittedData[30];
 extern int transmitBufferLength, transmitDataLength;
 extern int sizeOfsyncField;
 extern int transmitBufferCounter, transmitBitCounter;
+extern int bitCount;
 
 #ifdef EncryptedCommunication
-	extern bool encryptEntireData;
+extern bool encryptEntireData;
 #endif
 
 // This function creates the initial sync stream (Size : 64 bytes)
@@ -100,3 +102,45 @@ void EncryptTransmitSyncField()
 	}
 }
 #endif
+
+#ifdef ScramblingAndDescrambling
+// This function scrambles data to a given order
+void ScrambleData(int scrambleAndDescrambleOrder){
+
+	int counter = 0;
+	int bitCounter = 0;
+	uint8_t *shiftByThree, *shiftByFive;
+	uint8_t *ScrambledData;
+
+	ScrambledData = (uint8_t *)malloc(sizeof(uint8_t) * transmitDataLength);
+	shiftByThree = (uint8_t *)malloc(sizeof(uint8_t) * transmitDataLength);
+	shiftByFive = (uint8_t *)malloc(sizeof(uint8_t) * transmitDataLength);
+
+	// Adding all these three data's and then getting the final buffer data
+
+	for(counter = 0; counter < transmitDataLength; counter++)
+	{
+		for(bitCounter = bitCount; bitCounter>0 ; bitCounter--)
+		{
+			ShiftRegister(ScrambledData, shiftByThree, transmitDataLength, right, 3);
+			ShiftRegister(ScrambledData, shiftByFive, transmitDataLength, right, 5);
+			ScrambledData[counter] = ((shiftByThree[counter] ^ shiftByFive[counter]) ^ TransmittedData[counter]);
+		}
+	}
+
+	for(counter = 0; counter < transmitDataLength; counter++)
+	{
+		TransmittedData[counter] = ScrambledData[counter];
+	}
+
+	free(ScrambledData);
+	ScrambledData = NULL;
+	free(shiftByThree);
+	shiftByThree = NULL;
+	free(shiftByThree);
+	shiftByThree = NULL;
+	//PrintData((uint8_t *)TransmittedData, transmitDataLength, 3);
+}
+#endif
+
+

@@ -13,5 +13,6 @@ void CreateSyncStream();
 void AppendUserData(char *transmitDataAppend);
 void TransmitData();
 void EncryptTransmitSyncField();
+void ScrambleData(int scrambleAndDescrambleOrder);
 
 #endif /* TRANSMITTERSOURCE_H_ */
