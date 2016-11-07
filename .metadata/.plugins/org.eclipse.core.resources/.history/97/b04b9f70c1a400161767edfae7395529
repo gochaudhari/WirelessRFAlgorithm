@@ -16,7 +16,7 @@
 //#define TransmitDebug
 //#define ReceiveDebug
 
-//#define TransmitTest
+#define TransmitTest
 //#define ReceiveTest
 // General defines
 #define true						1
