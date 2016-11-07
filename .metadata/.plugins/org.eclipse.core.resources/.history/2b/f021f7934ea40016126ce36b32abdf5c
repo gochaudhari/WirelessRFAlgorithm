@@ -307,7 +307,7 @@ int main(void)
 				// Checking for the data received flag and receive if the data is not received
 				if(receiveBufferFull)
 				{
-					dataReceivedStatus = ProcessLISAOnReceivedData();
+//					dataReceivedStatus = ProcessLISAOnReceivedData();
 					dataReceived = dataReceivedStatus[0];
 
 #ifdef ReceiveTest

@@ -16,7 +16,6 @@
 #include <stdint.h>
 #include <string.h>
 #include <Common.h>
-#include <stdlib.h>
 
 extern char ReceiveBuffer[1024];
 extern uint8_t Buffer[1024];
@@ -77,7 +76,7 @@ int * FindMessage()
 	bool startOfDataString = false;
 	int error_count = 0;
 	static int retValues[3] = {0, 0, 0};
-	int receiveBufferLength = 50;
+//	int receiveBufferLength = 50;
 	uint8_t key;
 	uint8_t key_arr[31];
 	bool keyFound=false;
@@ -389,8 +388,6 @@ void DescrambleReceivedData()
 		ReceivedData[counter] = ((shiftByThree[counter] ^ shiftByFive[counter]) ^ ReceivedData[counter]);
 	}
 	PrintData((uint8_t *)ReceivedData, actualDataLength, -1);
-	free(shiftByThree);
-	free(shiftByFive);
 }
 
 #endif

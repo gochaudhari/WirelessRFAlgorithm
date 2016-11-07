@@ -2053,3 +2053,130 @@ Contains: Target not available.
 !MESSAGE Target not available.
 !SUBENTRY 2 org.eclipse.cdt.dsf 4 10001 2016-11-05 17:32:11.802
 !MESSAGE Target not available.
+
+!ENTRY com.crt.dsfdebug 4 0 2016-11-06 09:32:41.386
+!MESSAGE 15: Target error from Read Memory
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-11-06 09:32:41.386
+!MESSAGE 15: Target error from Read Memory
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-11-06 09:32:41.386
+!MESSAGE Debug port inaccessible after access at location 0x10000474 - verify population of memory and peripherals
+
+!ENTRY com.crt.etmetb 1 0 2016-11-06 09:34:02.539
+!MESSAGE Exception when reading from client
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at com.crt.etmetb.redlink.RedlinkClient.fillArrayFromSocket(RedlinkClient.java:196)
+	at com.crt.etmetb.redlink.RedlinkClient$2.run(RedlinkClient.java:147)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2016-11-06 09:34:02.542
+!MESSAGE Request for monitor: 'RequestMonitor (com.crt.etmetb.redlink.RedlinkClient$3@9938ac): Status ERROR: com.crt.etmetb code=0 Problem obtaining SWO buffer content. java.io.IOException: Client unable to receive full packet from server' resulted in an error.
+!SUBENTRY 1 com.crt.etmetb 4 0 2016-11-06 09:34:02.542
+!MESSAGE Problem obtaining SWO buffer content.
+!STACK 0
+java.io.IOException: Client unable to receive full packet from server
+	at com.crt.etmetb.redlink.RedlinkClient$2.run(RedlinkClient.java:154)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.crt.log 1 0 2016-11-06 09:41:34.705
+!MESSAGE Drivers loaded in 1750 milliseconds
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2016-11-06 10:43:59.201
+!MESSAGE Error in final launch sequence
+!STACK 1
+org.eclipse.core.runtime.CoreException: Error: Error reported by server (redlinkserv.exe):
+Status fail
+LinkServer has been terminated and will be restarted.
+Please restart your debug session.
+If the problem recurs, please power cycle your debug probe and restart LPCXpresso.
+	at org.eclipse.cdt.dsf.concurrent.Query.get(Query.java:111)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugSession(GdbLaunchDelegate.java:235)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:109)
+	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:97)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:885)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.lang.Exception: Error: Error reported by server (redlinkserv.exe):
+Status fail
+LinkServer has been terminated and will be restarted.
+Please restart your debug session.
+If the problem recurs, please power cycle your debug probe and restart LPCXpresso.
+	at com.crt.dsfdebug.dsf.override.CRTTargetConnectionSequence.internalTargetSelect(CRTTargetConnectionSequence.java:492)
+	at com.crt.dsfdebug.dsf.override.CRTTargetConnectionSequence.internalCommonStep(CRTTargetConnectionSequence.java:305)
+	at com.crt.dsfdebug.dsf.override.CRTTargetConnectionSequence.stepInitScriptWithProgress(CRTTargetConnectionSequence.java:647)
+	at com.crt.dsfdebug.dsf.override.CRTTargetConnectionSequence.stepInitScript(CRTTargetConnectionSequence.java:631)
+	at sun.reflect.GeneratedMethodAccessor256.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at com.crt.dsfdebug.dsf.override.CRTReflectionSequence$ReflectionStep.execute(CRTReflectionSequence.java:97)
+	at org.eclipse.cdt.dsf.concurrent.Sequence.executeStep(Sequence.java:459)
+	at org.eclipse.cdt.dsf.concurrent.Sequence.access$2(Sequence.java:373)
+	at org.eclipse.cdt.dsf.concurrent.Sequence$2.handleSuccess(Sequence.java:420)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleCompleted(RequestMonitor.java:385)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor$2.run(RequestMonitor.java:312)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 -1 2016-11-06 10:43:59.202
+!MESSAGE Error: Error reported by server (redlinkserv.exe):
+Status fail
+LinkServer has been terminated and will be restarted.
+Please restart your debug session.
+If the problem recurs, please power cycle your debug probe and restart LPCXpresso.
+!STACK 0
+java.lang.Exception: Error: Error reported by server (redlinkserv.exe):
+Status fail
+LinkServer has been terminated and will be restarted.
+Please restart your debug session.
+If the problem recurs, please power cycle your debug probe and restart LPCXpresso.
+	at com.crt.dsfdebug.dsf.override.CRTTargetConnectionSequence.internalTargetSelect(CRTTargetConnectionSequence.java:492)
+	at com.crt.dsfdebug.dsf.override.CRTTargetConnectionSequence.internalCommonStep(CRTTargetConnectionSequence.java:305)
+	at com.crt.dsfdebug.dsf.override.CRTTargetConnectionSequence.stepInitScriptWithProgress(CRTTargetConnectionSequence.java:647)
+	at com.crt.dsfdebug.dsf.override.CRTTargetConnectionSequence.stepInitScript(CRTTargetConnectionSequence.java:631)
+	at sun.reflect.GeneratedMethodAccessor256.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at com.crt.dsfdebug.dsf.override.CRTReflectionSequence$ReflectionStep.execute(CRTReflectionSequence.java:97)
+	at org.eclipse.cdt.dsf.concurrent.Sequence.executeStep(Sequence.java:459)
+	at org.eclipse.cdt.dsf.concurrent.Sequence.access$2(Sequence.java:373)
+	at org.eclipse.cdt.dsf.concurrent.Sequence$2.handleSuccess(Sequence.java:420)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleCompleted(RequestMonitor.java:385)
+	at org.eclipse.cdt.dsf.concurrent.RequestMonitor$2.run(RequestMonitor.java:312)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.crt.log 1 0 2016-11-06 10:44:12.298
+!MESSAGE Drivers loaded in 1712 milliseconds
+!SESSION 2016-11-06 20:16:35.033 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_65
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=mr_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2016-11-06 20:16:58.846
+!MESSAGE Plugin org.eclipse.cdt.ui, extension org.eclipse.ui.decorators, id org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator: Duplicate id found: org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator
+
+!ENTRY org.eclipse.ui 4 4 2016-11-06 20:16:58.904
+!MESSAGE Plugin org.eclipse.cdt.ui, extension org.eclipse.ui.decorators, id org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator: Unknown extension tag found: decorator

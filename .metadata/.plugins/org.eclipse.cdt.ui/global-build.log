@@ -20409,3 +20409,844 @@ arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "
    text	   data	    bss	    dec	    hex	filename
   17400	     68	   1440	  18908	   49dc	Lisa.axf
  
+21:01:21 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+21:10:38 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:232:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:238:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:325:30: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+       ReceivedData = (char *)malloc(sizeof(char) * ReceiveBuffer[sizeOfsyncField]);
+                              ^
+../src/Lisa.c:364:7: warning: implicit declaration of function 'free' [-Wimplicit-function-declaration]
+       free(ReceivedData);
+       ^
+../src/Lisa.c:160:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+../src/Lisa.c:311:39: warning: 'dataReceivedStatus' is used uninitialized in this function [-Wuninitialized]
+      dataReceived = dataReceivedStatus[0];
+                                       ^
+Finished building: ../src/Lisa.c
+ 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:143:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:82:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:81:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:185:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:183:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'ProcessLISAOnReceivedData':
+../src/ReceiverSource.c:327:10: warning: unused variable 'i' [-Wunused-variable]
+      int i = 2;
+          ^
+../src/ReceiverSource.c:291:6: warning: unused variable 'dataReceivedStatus' [-Wunused-variable]
+  int dataReceivedStatus[2];
+      ^
+../src/ReceiverSource.c:290:6: warning: unused variable 'dataStartIndex' [-Wunused-variable]
+  int dataStartIndex = 0;
+      ^
+../src/ReceiverSource.c: In function 'DescrambleReceivedData':
+../src/ReceiverSource.c:378:28: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+  shiftByThree = (uint8_t *)malloc(actualDataLength);
+                            ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:152:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:148:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       17468 B       512 KB      3.33%
+        RamLoc32:        1508 B        32 KB      4.60%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  17400	     68	   1440	  18908	   49dc	Lisa.axf
+ 
+22:08:52 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:232:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:238:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:325:30: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+       ReceivedData = (char *)malloc(sizeof(char) * ReceiveBuffer[sizeOfsyncField]);
+                              ^
+../src/Lisa.c:364:7: warning: implicit declaration of function 'free' [-Wimplicit-function-declaration]
+       free(ReceivedData);
+       ^
+../src/Lisa.c:160:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+../src/Lisa.c:311:39: warning: 'dataReceivedStatus' is used uninitialized in this function [-Wuninitialized]
+      dataReceived = dataReceivedStatus[0];
+                                       ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       17468 B       512 KB      3.33%
+        RamLoc32:        1508 B        32 KB      4.60%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  17400	     68	   1440	  18908	   49dc	Lisa.axf
+ 
+22:09:22 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+22:09:37 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:143:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:82:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:81:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:185:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:183:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'ProcessLISAOnReceivedData':
+../src/ReceiverSource.c:327:10: warning: unused variable 'i' [-Wunused-variable]
+      int i = 2;
+          ^
+../src/ReceiverSource.c:291:6: warning: unused variable 'dataReceivedStatus' [-Wunused-variable]
+  int dataReceivedStatus[2];
+      ^
+../src/ReceiverSource.c:290:6: warning: unused variable 'dataStartIndex' [-Wunused-variable]
+  int dataStartIndex = 0;
+      ^
+../src/ReceiverSource.c: In function 'DescrambleReceivedData':
+../src/ReceiverSource.c:378:28: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+  shiftByThree = (uint8_t *)malloc(actualDataLength);
+                            ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:152:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:148:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       17468 B       512 KB      3.33%
+        RamLoc32:        1508 B        32 KB      4.60%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  17400	     68	   1440	  18908	   49dc	Lisa.axf
+ 
+22:10:26 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+22:11:37 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:232:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:238:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:325:30: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+       ReceivedData = (char *)malloc(sizeof(char) * ReceiveBuffer[sizeOfsyncField]);
+                              ^
+../src/Lisa.c:364:7: warning: implicit declaration of function 'free' [-Wimplicit-function-declaration]
+       free(ReceivedData);
+       ^
+../src/Lisa.c:160:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+../src/Lisa.c:311:39: warning: 'dataReceivedStatus' is used uninitialized in this function [-Wuninitialized]
+      dataReceived = dataReceivedStatus[0];
+                                       ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       17468 B       512 KB      3.33%
+        RamLoc32:        1508 B        32 KB      4.60%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  17400	     68	   1440	  18908	   49dc	Lisa.axf
+ 
+22:11:57 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+22:17:11 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:143:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:82:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:81:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:185:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:183:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'ProcessLISAOnReceivedData':
+../src/ReceiverSource.c:327:10: warning: unused variable 'i' [-Wunused-variable]
+      int i = 2;
+          ^
+../src/ReceiverSource.c:291:6: warning: unused variable 'dataReceivedStatus' [-Wunused-variable]
+  int dataReceivedStatus[2];
+      ^
+../src/ReceiverSource.c:290:6: warning: unused variable 'dataStartIndex' [-Wunused-variable]
+  int dataStartIndex = 0;
+      ^
+../src/ReceiverSource.c: In function 'DescrambleReceivedData':
+../src/ReceiverSource.c:378:28: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+  shiftByThree = (uint8_t *)malloc(actualDataLength);
+                            ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:152:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:148:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       17468 B       512 KB      3.33%
+        RamLoc32:        1508 B        32 KB      4.60%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  17400	     68	   1440	  18908	   49dc	Lisa.axf
+ 
+22:21:58 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:232:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:238:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:325:30: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+       ReceivedData = (char *)malloc(sizeof(char) * ReceiveBuffer[sizeOfsyncField]);
+                              ^
+../src/Lisa.c:364:7: warning: implicit declaration of function 'free' [-Wimplicit-function-declaration]
+       free(ReceivedData);
+       ^
+../src/Lisa.c:160:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+../src/Lisa.c:311:39: warning: 'dataReceivedStatus' is used uninitialized in this function [-Wuninitialized]
+      dataReceived = dataReceivedStatus[0];
+                                       ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       17468 B       512 KB      3.33%
+        RamLoc32:        1508 B        32 KB      4.60%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  17400	     68	   1440	  18908	   49dc	Lisa.axf
+ 
+09:41:25 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+10:04:16 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:232:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:238:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:325:30: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+       ReceivedData = (char *)malloc(sizeof(char) * ReceiveBuffer[sizeOfsyncField]);
+                              ^
+../src/Lisa.c:364:7: warning: implicit declaration of function 'free' [-Wimplicit-function-declaration]
+       free(ReceivedData);
+       ^
+../src/Lisa.c:160:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+../src/Lisa.c:311:39: warning: 'dataReceivedStatus' is used uninitialized in this function [-Wuninitialized]
+      dataReceived = dataReceivedStatus[0];
+                                       ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       17468 B       512 KB      3.33%
+        RamLoc32:        1508 B        32 KB      4.60%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  17400	     68	   1440	  18908	   49dc	Lisa.axf
+ 
+10:04:53 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:143:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:82:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:81:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:185:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:183:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'ProcessLISAOnReceivedData':
+../src/ReceiverSource.c:327:10: warning: unused variable 'i' [-Wunused-variable]
+      int i = 2;
+          ^
+../src/ReceiverSource.c:291:6: warning: unused variable 'dataReceivedStatus' [-Wunused-variable]
+  int dataReceivedStatus[2];
+      ^
+../src/ReceiverSource.c:290:6: warning: unused variable 'dataStartIndex' [-Wunused-variable]
+  int dataStartIndex = 0;
+      ^
+../src/ReceiverSource.c: In function 'DescrambleReceivedData':
+../src/ReceiverSource.c:378:28: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+  shiftByThree = (uint8_t *)malloc(actualDataLength);
+                            ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:152:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:148:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       17468 B       512 KB      3.33%
+        RamLoc32:        1508 B        32 KB      4.60%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  17400	     68	   1440	  18908	   49dc	Lisa.axf
+ 
+10:09:02 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:232:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:238:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:325:30: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+       ReceivedData = (char *)malloc(sizeof(char) * ReceiveBuffer[sizeOfsyncField]);
+                              ^
+../src/Lisa.c:364:7: warning: implicit declaration of function 'free' [-Wimplicit-function-declaration]
+       free(ReceivedData);
+       ^
+../src/Lisa.c:160:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+../src/Lisa.c:311:39: warning: 'dataReceivedStatus' is used uninitialized in this function [-Wuninitialized]
+      dataReceived = dataReceivedStatus[0];
+                                       ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       17468 B       512 KB      3.33%
+        RamLoc32:        1508 B        32 KB      4.60%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  17400	     68	   1440	  18908	   49dc	Lisa.axf
+ 
+10:25:06 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:232:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:238:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:325:30: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+       ReceivedData = (char *)malloc(sizeof(char) * ReceiveBuffer[sizeOfsyncField]);
+                              ^
+../src/Lisa.c:364:7: warning: implicit declaration of function 'free' [-Wimplicit-function-declaration]
+       free(ReceivedData);
+       ^
+../src/Lisa.c:160:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+../src/Lisa.c:311:39: warning: 'dataReceivedStatus' is used uninitialized in this function [-Wuninitialized]
+      dataReceived = dataReceivedStatus[0];
+                                       ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       17468 B       512 KB      3.33%
+        RamLoc32:        1508 B        32 KB      4.60%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  17400	     68	   1440	  18908	   49dc	Lisa.axf
+ 
+10:41:49 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+10:41:50 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:232:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:238:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:325:30: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+       ReceivedData = (char *)malloc(sizeof(char) * ReceiveBuffer[sizeOfsyncField]);
+                              ^
+../src/Lisa.c:364:7: warning: implicit declaration of function 'free' [-Wimplicit-function-declaration]
+       free(ReceivedData);
+       ^
+../src/Lisa.c:160:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:143:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:82:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:81:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:185:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:183:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'ProcessLISAOnReceivedData':
+../src/ReceiverSource.c:327:10: warning: unused variable 'i' [-Wunused-variable]
+      int i = 2;
+          ^
+../src/ReceiverSource.c:291:6: warning: unused variable 'dataReceivedStatus' [-Wunused-variable]
+  int dataReceivedStatus[2];
+      ^
+../src/ReceiverSource.c:290:6: warning: unused variable 'dataStartIndex' [-Wunused-variable]
+  int dataStartIndex = 0;
+      ^
+../src/ReceiverSource.c: In function 'DescrambleReceivedData':
+../src/ReceiverSource.c:378:28: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+  shiftByThree = (uint8_t *)malloc(actualDataLength);
+                            ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:152:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:148:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       18108 B       512 KB      3.45%
+        RamLoc32:        2548 B        32 KB      7.78%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  18040	     68	   2480	  20588	   506c	Lisa.axf
+ 
+10:43:43 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+10:43:44 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:143:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:82:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:81:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:185:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:183:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'ProcessLISAOnReceivedData':
+../src/ReceiverSource.c:327:10: warning: unused variable 'i' [-Wunused-variable]
+      int i = 2;
+          ^
+../src/ReceiverSource.c:291:6: warning: unused variable 'dataReceivedStatus' [-Wunused-variable]
+  int dataReceivedStatus[2];
+      ^
+../src/ReceiverSource.c:290:6: warning: unused variable 'dataStartIndex' [-Wunused-variable]
+  int dataStartIndex = 0;
+      ^
+../src/ReceiverSource.c: In function 'DescrambleReceivedData':
+../src/ReceiverSource.c:378:28: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+  shiftByThree = (uint8_t *)malloc(actualDataLength);
+                            ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:152:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:148:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       18108 B       512 KB      3.45%
+        RamLoc32:        2548 B        32 KB      7.78%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  18040	     68	   2480	  20588	   506c	Lisa.axf
+ 
+10:43:50 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+10:44:05 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+10:44:53 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+10:45:35 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+20:22:49 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+20:22:52 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:143:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:82:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:81:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:185:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:183:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'ProcessLISAOnReceivedData':
+../src/ReceiverSource.c:327:10: warning: unused variable 'i' [-Wunused-variable]
+      int i = 2;
+          ^
+../src/ReceiverSource.c:291:6: warning: unused variable 'dataReceivedStatus' [-Wunused-variable]
+  int dataReceivedStatus[2];
+      ^
+../src/ReceiverSource.c:290:6: warning: unused variable 'dataStartIndex' [-Wunused-variable]
+  int dataStartIndex = 0;
+      ^
+../src/ReceiverSource.c: In function 'DescrambleReceivedData':
+../src/ReceiverSource.c:378:28: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+  shiftByThree = (uint8_t *)malloc(actualDataLength);
+                            ^
+../src/ReceiverSource.c:391:2: warning: implicit declaration of function 'free' [-Wimplicit-function-declaration]
+  free(shiftByThree);
+  ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:152:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:148:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       18116 B       512 KB      3.46%
+        RamLoc32:        2548 B        32 KB      7.78%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  18048	     68	   2480	  20596	   5074	Lisa.axf
+ 
+20:23:17 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+20:23:17 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:144:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:83:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:82:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:186:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:184:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'ProcessLISAOnReceivedData':
+../src/ReceiverSource.c:328:10: warning: unused variable 'i' [-Wunused-variable]
+      int i = 2;
+          ^
+../src/ReceiverSource.c:292:6: warning: unused variable 'dataReceivedStatus' [-Wunused-variable]
+  int dataReceivedStatus[2];
+      ^
+../src/ReceiverSource.c:291:6: warning: unused variable 'dataStartIndex' [-Wunused-variable]
+  int dataStartIndex = 0;
+      ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:153:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:149:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       18116 B       512 KB      3.46%
+        RamLoc32:        2548 B        32 KB      7.78%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  18048	     68	   2480	  20596	   5074	Lisa.axf
+ 

@@ -16,7 +16,6 @@
 #include <stdint.h>
 #include <string.h>
 #include <Common.h>
-#include <stdlib.h>
 
 extern char ReceiveBuffer[1024];
 extern uint8_t Buffer[1024];
@@ -388,9 +387,7 @@ void DescrambleReceivedData()
 	{
 		ReceivedData[counter] = ((shiftByThree[counter] ^ shiftByFive[counter]) ^ ReceivedData[counter]);
 	}
-	PrintData((uint8_t *)ReceivedData, actualDataLength, -1);
-	free(shiftByThree);
-	free(shiftByFive);
+	PrintData((uint8_t *)ReceivedData, actualDataLength, actualDataLength);
 }
 
 #endif
