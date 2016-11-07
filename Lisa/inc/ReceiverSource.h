@@ -14,7 +14,7 @@ int* ProcessLISAOnReceivedData();
 void SetUpReceiveInterrupt();
 int* FindMessage();
 void DecryptReceivedSyncField(uint8_t key);
-void DescrambleReceivedData();
+void DescrambleReceivedData(int descramblingOrder);
 uint8_t FindMostOccuringElement(uint8_t key_arr[]);
 
 #endif /* RECEIVERSOURCE_H_ */

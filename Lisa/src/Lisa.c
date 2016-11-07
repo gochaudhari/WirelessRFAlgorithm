@@ -29,7 +29,7 @@ uint8_t transmitDataLength;
 int sizeOfsyncField = 32;
 
 #ifdef ScramblingAndDescrambling
-uint8_t scrambleAndDescrambleOrder = 5;
+uint8_t scrambleAndDescrambleOrder;
 #endif
 
 //char ReceiveBuffer[] = {0xa0, 0xa2, 0xa4, 0xa6, 0xa8, 0xaa, 0xac, 0xae, 0xb0, 0xb2, 0xb4, 0xb6, 0xb8, 0xba, 0xbc, 0xbf, 0x41, 0x43, 0x45, 0x47, 0x49, 0x4b, 0x4d, 0x4f, 0x51, 0x53, 0x55, 0x57, 0x59, 0x5b, 0x5d, 0x5e, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0x00, 0x00};
@@ -204,6 +204,11 @@ int main(void)
 			printf("\n Want to Transmit or Receive (T or R): ");
 			scanf("%c", &communicationSelect);
 
+#ifdef ScramblingAndDescrambling
+				printf("\nScrabmling order: ");
+				scanf("%d", &scrambleAndDescrambleOrder);
+#endif
+
 			if(communicationSelect == 'T')
 			{
 				transmit = true;
@@ -239,10 +244,6 @@ int main(void)
 			}
 			else
 			{
-#ifdef ScramblingAndDescrambling
-				printf("\nScrabmling order: ");
-				scanf("%s", &scrambleAndDescrambleOrder);
-#endif
 				// 2) T: Take data from user
 				printf("\nEnter the data to be transmitted: ");
 				scanf("%s", &TransmittedData);
@@ -347,7 +348,7 @@ int main(void)
 
 						// Descramble and Print Received data
 #ifdef ScramblingAndDescrambling
-						DescrambleReceivedData();
+						DescrambleReceivedData(scrambleAndDescrambleOrder);
 #endif
 
 						if(!receiveAcknowledgement)

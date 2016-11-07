@@ -21,19 +21,10 @@
 extern char ReceiveBuffer[1024];
 extern uint8_t Buffer[1024];
 extern char *ReceivedData;
-#ifdef ScramblingAndDescrambling
-extern char *delayThreeData;
-extern char *delayFiveData;
-#endif
 extern int receiveBufferLength, receivedDataLength, actualDataLength;
 extern bool bitReceived, dataReceived;
 extern int receiverBufferCounter, bitCount, receiverBitCounter;
 extern char TransmitBuffer[50]; // 8 bytes of initial sync and then next is the data. Assume 8 + 8
-
-#ifdef ScramblingAndDescrambling
-extern uint8_t scrambleAndDescrambleOrder;
-
-#endif
 
 extern int sizeOfsyncField;
 #ifdef EncryptedCommunication
@@ -288,8 +279,6 @@ int* ProcessLISAOnReceivedData()
 	int mainByteCount = 0, internalBufferCount = 0, firstBitIndex = 0, secondBitIndex = 0;
 	uint8_t firstByte = 0x00, secondByte = 0x00;
 	uint8_t localByte = 0x00;
-	int dataStartIndex = 0;
-	int dataReceivedStatus[2];
 	int* dataStatus;
 
 	while(mainByteCount < 1024)
@@ -323,10 +312,6 @@ int* ProcessLISAOnReceivedData()
 				localByte |= (secondByte >> (7 - secondBitIndex));
 
 				Buffer[internalBufferCount] = localByte;
-				if(localByte == 0x50)
-				{
-					int i = 2;
-				}
 //				printf("%x", Buffer[internalBufferCount]);
 			}
 //			printf("\n");
@@ -371,28 +356,32 @@ void DecryptReceivedSyncField(uint8_t key)
 #endif
 
 #ifdef ScramblingAndDescrambling
-void DescrambleReceivedData()
+// descramblingOrder should strictly be odd. Even descramblingOrder would give irregular results.
+// Would be making this more flexible for even order in future.
+void DescrambleReceivedData(int descramblingOrder)
 {
 	int counter = 0;
-	uint8_t *shiftByThree, *shiftByFive;
+	uint8_t lowerStageCount = (descramblingOrder + 1)/2;
+	uint8_t *shiftByLowerStage, *shiftByFullStages;
 
-	shiftByThree = (uint8_t *)malloc(actualDataLength);
-	shiftByFive = (uint8_t *)malloc(actualDataLength);
+	shiftByLowerStage = (uint8_t *)malloc(actualDataLength);
+	shiftByFullStages = (uint8_t *)malloc(actualDataLength);
 
-	ShiftRegister((uint8_t *)ReceivedData, shiftByThree, actualDataLength, right, 3);
-	ShiftRegister((uint8_t *)ReceivedData, shiftByFive, actualDataLength, right, 5);
+	ShiftRegister((uint8_t *)ReceivedData, shiftByLowerStage, actualDataLength, right, lowerStageCount);
+	ShiftRegister((uint8_t *)ReceivedData, shiftByFullStages, actualDataLength, right, descramblingOrder);
 
 	PrintData((uint8_t *)ReceivedData, actualDataLength, actualDataLength);
+//	PrintData(shiftByFive, actualDataLength, actualDataLength);
 	// Adding all these three data's and then getting the final buffer data
 	for(counter = 0; counter < actualDataLength; counter++)
 	{
-		ReceivedData[counter] = ((shiftByThree[counter] ^ shiftByFive[counter]) ^ ReceivedData[counter]);
+		ReceivedData[counter] = ((shiftByLowerStage[counter] ^ shiftByFullStages[counter]) ^ ReceivedData[counter]);
 	}
 	PrintData((uint8_t *)ReceivedData, actualDataLength, -1);
-	free(shiftByThree);
-	shiftByThree = NULL;
-	free(shiftByFive);
-	shiftByFive = NULL;
+	free(shiftByLowerStage);
+	shiftByLowerStage = NULL;				// Making this NULL to handle the dangling pointers
+	free(shiftByFullStages);
+	shiftByFullStages = NULL;					// Making this NULL to handle the dangling pointers
 }
 
 #endif
