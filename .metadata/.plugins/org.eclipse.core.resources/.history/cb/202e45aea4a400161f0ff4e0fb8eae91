@@ -390,9 +390,7 @@ void DescrambleReceivedData()
 	}
 	PrintData((uint8_t *)ReceivedData, actualDataLength, -1);
 	free(shiftByThree);
-	shiftByThree = NULL;
 	free(shiftByFive);
-	shiftByFive = NULL;
 }
 
 #endif
