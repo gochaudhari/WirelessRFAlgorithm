@@ -109,12 +109,14 @@ void ScrambleData(int scrambleAndDescrambleOrder){
 
 	int counter = 0;
 	int bitCounter = 0;
-	uint8_t *shiftByThree, *shiftByFive;
+	uint8_t *shiftByFirstPos, *shiftBySecondPos;
 	uint8_t *ScrambledData;
+	int scramblePos = scrambleAndDescrambleOrder/2;
+	scramblePos = scramblePos + 1;
 
 	ScrambledData = (uint8_t *)malloc(sizeof(uint8_t) * transmitDataLength);
-	shiftByThree = (uint8_t *)malloc(sizeof(uint8_t) * transmitDataLength);
-	shiftByFive = (uint8_t *)malloc(sizeof(uint8_t) * transmitDataLength);
+	shiftByFirstPos = (uint8_t *)malloc(sizeof(uint8_t) * transmitDataLength);
+	shiftBySecondPos = (uint8_t *)malloc(sizeof(uint8_t) * transmitDataLength);
 
 	// Adding all these three data's and then getting the final buffer data
 
@@ -122,9 +124,9 @@ void ScrambleData(int scrambleAndDescrambleOrder){
 	{
 		for(bitCounter = bitCount; bitCounter>0 ; bitCounter--)
 		{
-			ShiftRegister(ScrambledData, shiftByThree, transmitDataLength, right, 3);
-			ShiftRegister(ScrambledData, shiftByFive, transmitDataLength, right, 5);
-			ScrambledData[counter] = ((shiftByThree[counter] ^ shiftByFive[counter]) ^ TransmittedData[counter]);
+			ShiftRegister(ScrambledData, shiftByFirstPos, transmitDataLength, right, scramblePos);
+			ShiftRegister(ScrambledData, shiftBySecondPos, transmitDataLength, right, scrambleAndDescrambleOrder);
+			ScrambledData[counter] = ((shiftByFirstPos[counter] ^ shiftBySecondPos[counter]) ^ TransmittedData[counter]);
 		}
 	}
 
@@ -135,10 +137,10 @@ void ScrambleData(int scrambleAndDescrambleOrder){
 
 	free(ScrambledData);
 	ScrambledData = NULL;
-	free(shiftByThree);
-	shiftByThree = NULL;
-	free(shiftByThree);
-	shiftByThree = NULL;
+	free(shiftByFirstPos);
+	shiftByFirstPos = NULL;
+	free(shiftBySecondPos);
+	shiftBySecondPos = NULL;
 	//PrintData((uint8_t *)TransmittedData, transmitDataLength, 3);
 }
 #endif
