@@ -23,6 +23,8 @@ extern int transmitBufferLength, transmitDataLength;
 extern int sizeOfsyncField;
 extern int transmitBufferCounter, transmitBitCounter;
 extern int bitCount;
+extern int dataLengthByte;
+extern bool binaryDataFormat, characterDataFormat;
 
 #ifdef EncryptedCommunication
 extern bool encryptEntireData;
@@ -68,15 +70,39 @@ void TransmitData()
 {
 	uint8_t pinValue;
 
-	pinValue = (TransmitBuffer[transmitBufferCounter] >> transmitBitCounter) & 0x01;
-	TransmitPinValue = (pinValue << 6);
-	transmitBitCounter--;
-
-
-	if(transmitBitCounter == -1)
+	if(characterDataFormat)
 	{
-		transmitBufferCounter++;
-		transmitBitCounter = 7;
+		pinValue = (TransmitBuffer[transmitBufferCounter] >> transmitBitCounter) & 0x01;
+		TransmitPinValue = (pinValue << 6);
+		transmitBitCounter--;
+
+
+		if(transmitBitCounter == -1)
+		{
+			transmitBufferCounter++;
+			transmitBitCounter = 7;
+		}
+	}
+	else if(binaryDataFormat)
+	{
+		if(transmitBufferCounter <= dataLengthByte)
+		{
+			pinValue = (TransmitBuffer[transmitBufferCounter] >> transmitBitCounter) & 0x01;
+			TransmitPinValue = (pinValue << 6);
+			transmitBitCounter--;
+
+			if(transmitBitCounter == -1)
+			{
+				transmitBufferCounter++;
+				transmitBitCounter = 7;
+			}
+		}
+		else
+		{
+			pinValue = TransmitBuffer[transmitBufferCounter] & 0x01;
+			TransmitPinValue = (pinValue << 6);
+			transmitBufferCounter++;
+		}
 	}
 }
 
@@ -142,5 +168,4 @@ void ScrambleData(int scrambleAndDescrambleOrder){
 	//PrintData((uint8_t *)TransmittedData, transmitDataLength, 3);
 }
 #endif
-
 

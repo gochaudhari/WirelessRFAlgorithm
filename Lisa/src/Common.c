@@ -39,7 +39,7 @@ void ShiftRegister(uint8_t *ShiftBuffer, uint8_t *ShiftedBuffer, int lengthOfBuf
 	int counter = 0;
 	uint8_t copyHandle = 0, pasteHandle = 0;
 	uint8_t localCharHandle = 0;
-	int8_t setZeroCount = 0;
+	int setZeroCount = 0;
 
 	// Setting the zero indexes for shift more than 7 bits
 	if(shiftCount/8 > 0)

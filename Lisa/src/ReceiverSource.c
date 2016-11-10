@@ -370,13 +370,14 @@ void DescrambleReceivedData(int descramblingOrder)
 	ShiftRegister((uint8_t *)ReceivedData, shiftByLowerStage, actualDataLength, right, lowerStageCount);
 	ShiftRegister((uint8_t *)ReceivedData, shiftByFullStages, actualDataLength, right, descramblingOrder);
 
-	PrintData((uint8_t *)ReceivedData, actualDataLength, actualDataLength);
+//	PrintData((uint8_t *)ReceivedData, actualDataLength, actualDataLength);
 //	PrintData(shiftByFive, actualDataLength, actualDataLength);
 	// Adding all these three data's and then getting the final buffer data
 	for(counter = 0; counter < actualDataLength; counter++)
 	{
 		ReceivedData[counter] = ((shiftByLowerStage[counter] ^ shiftByFullStages[counter]) ^ ReceivedData[counter]);
 	}
+	printf("Received Data: ");
 	PrintData((uint8_t *)ReceivedData, actualDataLength, -1);
 	free(shiftByLowerStage);
 	shiftByLowerStage = NULL;				// Making this NULL to handle the dangling pointers

@@ -27,7 +27,9 @@ uint8_t TransmitBuffer[1024];				// 8 bytes of initial sync and then next is the
 char TransmittedData[30];
 int transmitBufferLength;
 int transmitDataLength;
-int sizeOfsyncField = 32;
+int transmitBufferCounter, transmitBitCounter = 7;
+
+int sizeOfsyncField = 32, dataLengthAdditions = 3, dataLengthByte = 34;
 
 #ifdef ScramblingAndDescrambling
 uint8_t scrambleAndDescrambleOrder;
@@ -47,10 +49,10 @@ bool bitReceived = false, receiveBufferFull = false, bitReadyForTransmit = false
 #ifdef EncryptedCommunication
 	bool encryptEntireData = false;
 #endif
-
 int receiverBufferCounter, bitCount = 8, receiverBitCounter = 7;
-int transmitBufferCounter, transmitBitCounter = 7;
 const char *acknowledgement = "ACKSENT";
+
+bool binaryDataFormat = false, characterDataFormat = true;
 
 void SetUpGPIOPins()
 {
@@ -141,7 +143,7 @@ int main(void)
 {
 
 	// Setup the GPIO Ports here at this position
-	char communicationSelect;
+	char communicationSelect, dataFormat;
 	bool transmit = false, receive = false, sendAckowledgement = false, receiveAcknowledgement = false;
 	int* dataReceivedStatus;
 	int counter, byteCounter = 0, printLength = 0;
@@ -202,13 +204,29 @@ int main(void)
 		}
 		else
 		{
-			printf("\n Want to Transmit or Receive (T or R): ");
+			printf("\nWant to Transmit or Receive (T or R): ");
 			scanf("%c", &communicationSelect);
+			fflush(stdin);
+
+			printf("Enter the data format (B: Binary, C: Character): ");
+			scanf("%c", &dataFormat);
+			fflush(stdin);
 
 #ifdef ScramblingAndDescrambling
-				printf("\nScrabmling order: ");
-				scanf("%d", &scrambleAndDescrambleOrder);
+			printf("\nScrabmling order: ");
+			scanf("%d", &scrambleAndDescrambleOrder);
 #endif
+
+			if(dataFormat == 'B')
+			{
+				binaryDataFormat = true;
+				characterDataFormat = false;
+			}
+			else if(dataFormat == 'C')
+			{
+				characterDataFormat = true;
+				binaryDataFormat = false;
+			}
 
 			if(communicationSelect == 'T')
 			{
@@ -245,15 +263,26 @@ int main(void)
 			}
 			else
 			{
-				// 2) T: Take data from user
-				printf("\nEnter the data to be transmitted: ");
-//				scanf("%s", &TransmittedData);
-				transmitDataLength = 30;						// Fixing the maximum buffer length
-//				TransmittedData = (char *)malloc(transmitDataLength);
-//				fgets(TransmittedData, transmitDataLength, stdin);
-				scanf("%s", &TransmittedData);
-				transmitDataLength = strlen(TransmittedData);
+				if(characterDataFormat)
+				{
+					// 2) T: Take data from user
+					printf("\nEnter the data to be transmitted (Characters): ");
+					transmitDataLength = 30;						// Fixing the maximum buffer length
+					scanf("%s", &TransmittedData);
+					transmitDataLength = strlen(TransmittedData);
+				}
+				else if(binaryDataFormat)
+				{
+					printf("\nEnter the data to be transmitted (in Binary): ");
+					transmitDataLength = 30;						// Fixing the maximum buffer length
+					scanf("%s", &TransmittedData);
+					transmitDataLength = strlen(TransmittedData);
+				}
 
+				TransmitBuffer[transmitBufferLength] = 0x03;
+				transmitBufferLength++;
+				TransmitBuffer[transmitBufferLength] = 0x04;
+				transmitBufferLength++;
 				TransmitBuffer[transmitBufferLength] = transmitDataLength;
 				transmitBufferLength++;
 #ifdef ScramblingAndDescrambling
@@ -266,15 +295,15 @@ int main(void)
 			printf("\nData transmission: ");
 			// 3) T: Print the created final stream
 			// transmitBufferLength variable can also be used but needs to be edited to actual value.
-			printLength = sizeOfsyncField + TransmitBuffer[sizeOfsyncField] + 1;
-			PrintData(TransmitBuffer, printLength, sizeOfsyncField);
+			printLength = sizeOfsyncField + TransmitBuffer[dataLengthByte] + dataLengthAdditions;
+			PrintData(TransmitBuffer, printLength, dataLengthByte);
 
 			#ifdef EncryptedCommunication
 				EncryptTransmitSyncField();
 				printf("\nEncrypted data transmission: ");
 				// 3) T: Print the created final stream
-				printLength = sizeOfsyncField + TransmitBuffer[sizeOfsyncField + 1] + 1;
-				PrintData(TransmitBuffer, printLength, sizeOfsyncField);
+				printLength = sizeOfsyncField + TransmitBuffer[dataLengthByte] + dataLengthAdditions;
+				PrintData(TransmitBuffer, printLength, dataLengthByte);
 			#endif
 		}
 #endif
@@ -328,10 +357,8 @@ int main(void)
 						byteCounter = 0;
 						
 						// Copy the received data
-						ReceivedData = (char *)malloc(sizeof(char) * Buffer[sizeOfsyncField]);
-						receivedDataLength = sizeOfsyncField + 1 + Buffer[sizeOfsyncField];
-//						ReceivedData = (char *)malloc(sizeof(char) * ReceiveBuffer[sizeOfsyncField]);
-//						receivedDataLength = sizeOfsyncField + 1 + ReceiveBuffer[sizeOfsyncField];
+						ReceivedData = (char *)malloc(sizeof(char) * Buffer[dataLengthByte]);
+						receivedDataLength = sizeOfsyncField + Buffer[dataLengthByte] + dataLengthAdditions;
 
 						for(counter = sizeOfsyncField + 1; counter < receivedDataLength; counter++)
 						{
@@ -345,12 +372,12 @@ int main(void)
 #ifdef EncryptedCommunication
 						DecryptReceivedSyncField(dataReceivedStatus[2]);
 #endif					
-						PrintData((uint8_t *)Buffer, receivedDataLength, sizeOfsyncField);
+						PrintData((uint8_t *)Buffer, receivedDataLength, dataLengthByte);
 
 #ifdef EncryptedCommunication
 						DecryptReceivedSyncField(dataReceivedStatus[2]);						
 						printf("\n Decrypted Data");
-						PrintData(Buffer, receivedDataLength, sizeOfsyncField);
+						PrintData(Buffer, receivedDataLength, dataLengthByte);
 #endif
 
 						// Descramble and Print Received data
@@ -364,8 +391,8 @@ int main(void)
 						}
 						else
 						{
-								printf("\nAcknowledgement Received.Transmission Successful.");
-								receiveAcknowledgement = false;
+							printf("\nAcknowledgement Received.Transmission Successful.");
+							receiveAcknowledgement = false;
 						}
 						transmit = false;
 						receive = false;
