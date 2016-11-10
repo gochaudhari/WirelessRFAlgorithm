@@ -2266,3 +2266,125 @@ Command-line arguments:  -os win32 -ws win32 -arch x86
 !MESSAGE 15: Target error from Write register
 !SUBENTRY 1 com.crt.dsfdebug 4 0 2016-11-09 23:40:16.359
 !MESSAGE Invalid register index for read/write.
+
+!ENTRY org.eclipse.core.resources 4 2 2016-11-09 23:47:12.050
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/Lisa/Debug/sources.mk' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:334)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:208)
+	at org.eclipse.core.internal.resources.File.setContents(File.java:328)
+	at org.eclipse.core.internal.resources.File.setContents(File.java:426)
+	at org.eclipse.cdt.managedbuilder.makegen.gnu.GnuMakefileGenerator.save(GnuMakefileGenerator.java:838)
+	at org.eclipse.cdt.managedbuilder.makegen.gnu.GnuMakefileGenerator.populateSourcesMakefile(GnuMakefileGenerator.java:1167)
+	at org.eclipse.cdt.managedbuilder.makegen.gnu.GnuMakefileGenerator.generateMakefiles(GnuMakefileGenerator.java:676)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.performMakefileGeneration(CommonBuilder.java:1008)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.performPrebuildGeneration(CommonBuilder.java:873)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:748)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:329)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:404)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:556)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:534)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:119)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2$1.run(AbstractCLaunchDelegate2.java:359)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2225)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildProject(AbstractCLaunchDelegate2.java:374)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildForLaunch(AbstractCLaunchDelegate2.java:291)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2016-11-09 23:47:12.068
+!MESSAGE Resource '/Lisa/Debug/sources.mk' does not exist.
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2016-11-09 23:47:12.068
+!MESSAGE Resource '/Lisa/Debug/sources.mk' does not exist.
+
+!ENTRY org.eclipse.core.resources 4 2 2016-11-09 23:47:16.072
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/Lisa/Debug/makefile' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:334)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:208)
+	at org.eclipse.core.internal.resources.File.setContents(File.java:328)
+	at org.eclipse.core.internal.resources.File.setContents(File.java:426)
+	at org.eclipse.cdt.managedbuilder.makegen.gnu.GnuMakefileGenerator.save(GnuMakefileGenerator.java:838)
+	at org.eclipse.cdt.managedbuilder.makegen.gnu.GnuMakefileGenerator.populateTopMakefile(GnuMakefileGenerator.java:1198)
+	at org.eclipse.cdt.managedbuilder.makegen.gnu.GnuMakefileGenerator.generateMakefiles(GnuMakefileGenerator.java:741)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.performMakefileGeneration(CommonBuilder.java:1008)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.performPrebuildGeneration(CommonBuilder.java:873)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:748)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:486)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:398)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:182)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2016-11-09 23:47:16.072
+!MESSAGE Resource '/Lisa/Debug/makefile' does not exist.
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2016-11-09 23:47:16.072
+!MESSAGE Resource '/Lisa/Debug/makefile' does not exist.
+
+!ENTRY org.eclipse.core.resources 4 75 2016-11-09 23:47:16.333
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 org.eclipse.cdt.managedbuilder.core 4 75 2016-11-09 23:47:16.333
+!MESSAGE Errors running builder 'CDT Builder' on project 'Lisa'.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Resource '/Lisa/Debug/makefile' does not exist.
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:334)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:208)
+	at org.eclipse.core.internal.resources.File.setContents(File.java:328)
+	at org.eclipse.core.internal.resources.File.setContents(File.java:426)
+	at org.eclipse.cdt.managedbuilder.makegen.gnu.GnuMakefileGenerator.save(GnuMakefileGenerator.java:838)
+	at org.eclipse.cdt.managedbuilder.makegen.gnu.GnuMakefileGenerator.populateTopMakefile(GnuMakefileGenerator.java:1198)
+	at org.eclipse.cdt.managedbuilder.makegen.gnu.GnuMakefileGenerator.generateMakefiles(GnuMakefileGenerator.java:741)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.performMakefileGeneration(CommonBuilder.java:1008)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.performPrebuildGeneration(CommonBuilder.java:873)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:748)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:486)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:398)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:182)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SUBENTRY 2 org.eclipse.core.resources 4 368 2016-11-09 23:47:16.333
+!MESSAGE Resource '/Lisa/Debug/makefile' does not exist.
+!SUBENTRY 1 org.eclipse.core.resources 4 368 2016-11-09 23:47:16.333
+!MESSAGE Resource '/Lisa/Debug/makefile' does not exist.
+!SESSION 2016-11-09 23:47:50.644 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_65
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2016-11-09 23:47:56.988
+!MESSAGE Plugin org.eclipse.cdt.ui, extension org.eclipse.ui.decorators, id org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator: Duplicate id found: org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator
+
+!ENTRY org.eclipse.ui 4 4 2016-11-09 23:47:56.988
+!MESSAGE Plugin org.eclipse.cdt.ui, extension org.eclipse.ui.decorators, id org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator: Unknown extension tag found: decorator

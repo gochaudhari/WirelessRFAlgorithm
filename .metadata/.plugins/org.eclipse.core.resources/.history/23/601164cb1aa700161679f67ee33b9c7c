@@ -206,10 +206,11 @@ int main(void)
 		{
 			printf("\nWant to Transmit or Receive (T or R): ");
 			scanf("%c", &communicationSelect);
+			fflush(stdin);
 
-//			printf("Enter the data format (B: Binary, C: Character): ");
-//			scanf("%c", &dataFormat);
-			dataFormat = 'B';
+			printf("Enter the data format (B: Binary, C: Character): ");
+			scanf("%c", &dataFormat);
+			fflush(stdin);
 
 #ifdef ScramblingAndDescrambling
 			printf("\nScrabmling order: ");
