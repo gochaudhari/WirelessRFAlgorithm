@@ -23,8 +23,10 @@
 #include <stdlib.h>
 
 // General Defs
+int maxTransmitData = 30;
 uint8_t TransmitBuffer[1024];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
 char TransmittedData[30];
+char BinaryData[30];
 int transmitBufferLength;
 int transmitDataLength;
 int transmitBufferCounter, transmitBitCounter = 7;
@@ -273,15 +275,22 @@ int main(void)
 				else if(binaryDataFormat)
 				{
 					printf("\nEnter the data to be transmitted (in Binary): ");
-					transmitDataLength = 30;						// Fixing the maximum buffer length
-					scanf("%s", &TransmittedData);
-					transmitDataLength = strlen(TransmittedData);
+//					transmitDataLength = 30;						// Fixing the maximum data buffer length
+					scanf("%s", &BinaryData);
+
+					// Should return transmitDataLength
+					transmitDataLength = BinaryDataFormatConversion((int8_t *)TransmittedData, transmitDataLength, (int8_t *)BinaryData, strlen(BinaryData), "BtoC");
 				}
 
+				// Storing Source ID
 				TransmitBuffer[transmitBufferLength] = 0x03;
 				transmitBufferLength++;
+
+				// Storing Destination ID
 				TransmitBuffer[transmitBufferLength] = 0x04;
 				transmitBufferLength++;
+
+				// Storing Data Length
 				TransmitBuffer[transmitBufferLength] = transmitDataLength;
 				transmitBufferLength++;
 #ifdef ScramblingAndDescrambling

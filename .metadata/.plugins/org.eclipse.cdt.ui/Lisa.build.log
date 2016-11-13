@@ -1,6 +1,35 @@
-00:03:51 **** Incremental Build of configuration Debug for project Lisa ****
+00:24:02 **** Incremental Build of configuration Debug for project Lisa ****
 make -r all 
-make: Nothing to be done for `all'.
+Building file: ../src/TransmitterSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/TransmitterSource.d" -MT"src/TransmitterSource.o" -MT"src/TransmitterSource.d" -o "src/TransmitterSource.o" "../src/TransmitterSource.c"
+../src/TransmitterSource.c: In function 'BinaryDataFormatConversion':
+../src/TransmitterSource.c:186:39: warning: unused variable 'maximumLengthOfConvertedData' [-Wunused-variable]
+  int byteCounter = 0, bitCounter = 0, maximumLengthOfConvertedData;
+                                       ^
+../src/TransmitterSource.c:186:6: warning: unused variable 'byteCounter' [-Wunused-variable]
+  int byteCounter = 0, bitCounter = 0, maximumLengthOfConvertedData;
+      ^
+../src/TransmitterSource.c:222:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../src/TransmitterSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       18408 B       512 KB      3.51%
+        RamLoc32:        3580 B        32 KB     10.93%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  18368	     40	   3540	  21948	   55bc	Lisa.axf
+ 
 
-00:03:51 Build Finished (took 97ms)
+00:24:03 Build Finished (took 883ms)
 

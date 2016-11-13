@@ -14,6 +14,6 @@ void AppendUserData(char *transmitDataAppend);
 void TransmitData();
 void EncryptTransmitSyncField();
 void ScrambleData(int scrambleAndDescrambleOrder);
-void ConsolidateBinaryData();
+int BinaryDataFormatConversion(int8_t *ConsolidatedData, int lengthOfConsolidatedData, int8_t *BinaryData, int lengthOfBinaryData, char *conversionType);
 
 #endif /* TRANSMITTERSOURCE_H_ */
