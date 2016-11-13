@@ -18,5 +18,6 @@ typedef enum
 
 void PrintData(uint8_t *buffer, int length, int characterPosition);
 void ShiftRegister(uint8_t *ShiftBuffer, uint8_t *ShiftedBuffer, int lengthOfBuffer, ShiftDirection shiftDirection, int shiftCount);
+int BinaryDataFormatConversion(int8_t *ConsolidatedData, int lengthOfConsolidatedData, int8_t *BinaryData, int lengthOfBinaryData, char *conversionType);
 
 #endif /* COMMON_H_ */

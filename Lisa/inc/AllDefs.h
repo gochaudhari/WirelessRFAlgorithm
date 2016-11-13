@@ -12,7 +12,7 @@
 #define Transmit
 #define Receive
 //define EncryptedCommunication
-//#define ScramblingAndDescrambling
+#define ScramblingAndDescrambling
 //#define TransmitDebug
 //#define ReceiveDebug
 

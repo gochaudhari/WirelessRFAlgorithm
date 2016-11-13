@@ -72,39 +72,15 @@ void TransmitData()
 {
 	uint8_t pinValue;
 
-	if(characterDataFormat)
+	pinValue = (TransmitBuffer[transmitBufferCounter] >> transmitBitCounter) & 0x01;
+	TransmitPinValue = (pinValue << 6);
+	transmitBitCounter--;
+
+
+	if(transmitBitCounter == -1)
 	{
-		pinValue = (TransmitBuffer[transmitBufferCounter] >> transmitBitCounter) & 0x01;
-		TransmitPinValue = (pinValue << 6);
-		transmitBitCounter--;
-
-
-		if(transmitBitCounter == -1)
-		{
-			transmitBufferCounter++;
-			transmitBitCounter = 7;
-		}
-	}
-	else if(binaryDataFormat)
-	{
-		if(transmitBufferCounter <= dataLengthByte)
-		{
-			pinValue = (TransmitBuffer[transmitBufferCounter] >> transmitBitCounter) & 0x01;
-			TransmitPinValue = (pinValue << 6);
-			transmitBitCounter--;
-
-			if(transmitBitCounter == -1)
-			{
-				transmitBufferCounter++;
-				transmitBitCounter = 7;
-			}
-		}
-		else
-		{
-			pinValue = TransmitBuffer[transmitBufferCounter] & 0x01;
-			TransmitPinValue = (pinValue << 6);
-			transmitBufferCounter++;
-		}
+		transmitBufferCounter++;
+		transmitBitCounter = 7;
 	}
 }
 
@@ -172,51 +148,3 @@ void ScrambleData(int scrambleAndDescrambleOrder){
 	//PrintData((uint8_t *)TransmittedData, transmitDataLength, 3);
 }
 #endif
-
-// This function converts the separated binary data to consolidated bits into one single bytes or converts
-// consolidated bits to separated binary data.
-// If Separate Binary -> Consolidated: 		BtoC
-// If Consolidated    -> Separate Binary:   CtoB
-// Returns the value of the end converted data length
-// If converted to consolidated -> gives length of consolidated data
-// If converted to separate binary -> gives length of separate binary data
-//
-int BinaryDataFormatConversion(int8_t *ConsolidatedData, int lengthOfConsolidatedData, int8_t *BinaryData, int lengthOfBinaryData, char *conversionType)
-{
-	int byteCounter = 0, bitCounter = 0, maximumLengthOfConvertedData;
-	char *binaryToConsolidated = "BtoC";
-	char *consolidatedToBinary = "CtoB";
-
-	if(!strcmp(conversionType, binaryToConsolidated))
-	{
-		if(lengthOfBinaryData % 8 == 0)
-		{
-			lengthOfConsolidatedData = lengthOfBinaryData / 8;
-		}
-		else
-		{
-			lengthOfConsolidatedData = (lengthOfBinaryData / 8) + 1;
-		}
-
-		// To convert separate binary bits into one
-		// Unknown lengthOfConsolidatedData
-		for (bitCounter = 0; bitCounter < lengthOfBinaryData; bitCounter++)
-		{
-			if(BinaryData[bitCounter] == '1')
-			{
-				ConsolidatedData[(bitCounter+1)/8] |= (1 << (8 - ((bitCounter%8)+1)));
-			}
-			else
-			{
-				ConsolidatedData[(bitCounter+1)/8] |= (0 << (8 - ((bitCounter%8)+1)));
-			}
-		}
-	}
-	else if(!strcmp(conversionType, consolidatedToBinary))
-	{
-		// To convert consolidated bits into separate bits
-		// Unknown lengthOfBinaryData
-	}
-
-
-}

@@ -45,7 +45,7 @@ char ReceiveBuffer[1024];
 #endif
 uint8_t Buffer[1024];
 char *ReceivedData;
-int receiveBufferLength = 1024, receivedDataLength, actualDataLength = 0;
+int receiveBufferLength = 1024, receivedDataLength, actualDataLength = 0, receivedBinaryDataLength;
 bool bitReceived = false, receiveBufferFull = false, bitReadyForTransmit = false, dataReceived = false;
 
 #ifdef EncryptedCommunication
@@ -275,11 +275,11 @@ int main(void)
 				else if(binaryDataFormat)
 				{
 					printf("\nEnter the data to be transmitted (in Binary): ");
-//					transmitDataLength = 30;						// Fixing the maximum data buffer length
 					scanf("%s", &BinaryData);
 
-					// Should return transmitDataLength
+					// Should return transmitDataLength and it would be number of bits not bytes
 					transmitDataLength = BinaryDataFormatConversion((int8_t *)TransmittedData, transmitDataLength, (int8_t *)BinaryData, strlen(BinaryData), "BtoC");
+					transmitDataLength = strlen(BinaryData);
 				}
 
 				// Storing Source ID
@@ -365,6 +365,16 @@ int main(void)
 						byteCounter = 0;
 						
 						// Copy the received data
+						if(binaryDataFormat)
+						{
+							receivedBinaryDataLength = Buffer[dataLengthByte];				// Store the incoming number of bits
+							Buffer[dataLengthByte] = (receivedBinaryDataLength % 8) + 1;	// Store the number of bytes in the received Buffer
+						}
+						else
+						{
+							receivedBinaryDataLength = Buffer[dataLengthByte];				// Does not matter
+						}
+
 						ReceivedData = (char *)malloc(sizeof(char) * Buffer[dataLengthByte]);
 						receivedDataLength = sizeOfsyncField + Buffer[dataLengthByte] + dataLengthAdditions;
 
@@ -380,6 +390,7 @@ int main(void)
 #ifdef EncryptedCommunication
 						DecryptReceivedSyncField(dataReceivedStatus[2]);
 #endif					
+						// Displaying all Sync Field + Data
 						PrintData((uint8_t *)Buffer, receivedDataLength, dataLengthByte);
 
 #ifdef EncryptedCommunication
@@ -391,6 +402,18 @@ int main(void)
 						// Descramble and Print Received data
 #ifdef ScramblingAndDescrambling
 						DescrambleReceivedData(scrambleAndDescrambleOrder);
+						printf("\nReceived Scrambled Data: ");
+						PrintData((uint8_t *)ReceivedData, actualDataLength, -1);
+
+						if(binaryDataFormat)
+						{
+							receivedBinaryDataLength = BinaryDataFormatConversion((int8_t *)ReceivedData, actualDataLength, (int8_t *)BinaryData, receivedBinaryDataLength, "CtoB");
+						}
+						printf("\nReceived Descrambled Data: ");
+						PrintData((uint8_t *)ReceivedData, receivedBinaryDataLength, -1);
+#else
+						printf("\nReceived Data: ");
+						PrintData((uint8_t *)ReceivedData, actualDataLength, -1);
 #endif
 
 						if(!receiveAcknowledgement)
