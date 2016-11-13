@@ -377,7 +377,6 @@ void DescrambleReceivedData(int descramblingOrder)
 	{
 		ReceivedData[counter] = ((shiftByLowerStage[counter] ^ shiftByFullStages[counter]) ^ ReceivedData[counter]);
 	}
-	printf("Received Data: ");
 	free(shiftByLowerStage);
 	shiftByLowerStage = NULL;				// Making this NULL to handle the dangling pointers
 	free(shiftByFullStages);

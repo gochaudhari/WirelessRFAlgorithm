@@ -130,7 +130,7 @@ int BinaryDataFormatConversion(int8_t *ConsolidatedData, int lengthOfConsolidate
 		{
 			for(bitCounter = 0; bitCounter < 8; bitCounter++)
 			{
-				if(ConsolidatedData[byteCounter] && (0x01 << (7 - bitCounter)))
+				if(ConsolidatedData[byteCounter] & (0x01 << (7 - bitCounter)))
 				{
 					BinaryData[(8*byteCounter) + bitCounter] = '1';
 				}

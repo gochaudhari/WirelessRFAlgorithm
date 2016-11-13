@@ -34,7 +34,7 @@ int transmitBufferCounter, transmitBitCounter = 7;
 int sizeOfsyncField = 32, dataLengthAdditions = 3, dataLengthByte = 34;
 
 #ifdef ScramblingAndDescrambling
-uint8_t scrambleAndDescrambleOrder;
+int scrambleAndDescrambleOrder;
 #endif
 
 //char ReceiveBuffer[] = {0xa0, 0xa2, 0xa4, 0xa6, 0xa8, 0xaa, 0xac, 0xae, 0xb0, 0xb2, 0xb4, 0xb6, 0xb8, 0xba, 0xbc, 0xbf, 0x41, 0x43, 0x45, 0x47, 0x49, 0x4b, 0x4d, 0x4f, 0x51, 0x53, 0x55, 0x57, 0x59, 0x5b, 0x5d, 0x5e, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0x00, 0x00};
@@ -368,7 +368,7 @@ int main(void)
 						if(binaryDataFormat)
 						{
 							receivedBinaryDataLength = Buffer[dataLengthByte];				// Store the incoming number of bits
-							Buffer[dataLengthByte] = (receivedBinaryDataLength % 8) + 1;	// Store the number of bytes in the received Buffer
+							Buffer[dataLengthByte] = (receivedBinaryDataLength / 8) + 1;	// Store the number of bytes in the received Buffer
 						}
 						else
 						{
@@ -378,7 +378,7 @@ int main(void)
 						ReceivedData = (char *)malloc(sizeof(char) * Buffer[dataLengthByte]);
 						receivedDataLength = sizeOfsyncField + Buffer[dataLengthByte] + dataLengthAdditions;
 
-						for(counter = sizeOfsyncField + 1; counter < receivedDataLength; counter++)
+						for(counter = dataLengthByte + 1; counter < receivedDataLength; counter++)
 						{
 							ReceivedData[byteCounter] = Buffer[counter];
 							byteCounter++;
@@ -407,10 +407,10 @@ int main(void)
 
 						if(binaryDataFormat)
 						{
-							receivedBinaryDataLength = BinaryDataFormatConversion((int8_t *)ReceivedData, actualDataLength, (int8_t *)BinaryData, receivedBinaryDataLength, "CtoB");
+							BinaryDataFormatConversion((int8_t *)ReceivedData, actualDataLength, (int8_t *)BinaryData, receivedBinaryDataLength, "CtoB");
 						}
 						printf("\nReceived Descrambled Data: ");
-						PrintData((uint8_t *)ReceivedData, receivedBinaryDataLength, -1);
+						PrintData((uint8_t *)BinaryData, receivedBinaryDataLength, -1);
 #else
 						printf("\nReceived Data: ");
 						PrintData((uint8_t *)ReceivedData, actualDataLength, -1);
