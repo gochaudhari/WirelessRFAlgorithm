@@ -2976,3 +2976,6 @@ java.lang.Exception: Remote communication error.  Target disconnected.: No error
 !MESSAGE 15: Target error from Write register
 !SUBENTRY 1 com.crt.dsfdebug 4 0 2016-11-14 12:21:27.287
 !MESSAGE Invalid register index for read/write.
+
+!ENTRY com.crt.log 1 0 2016-11-14 13:47:35.120
+!MESSAGE Drivers loaded in 1573 milliseconds

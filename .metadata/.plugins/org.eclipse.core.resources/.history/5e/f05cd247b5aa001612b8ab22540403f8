@@ -257,21 +257,8 @@ int main(void)
 			{
 				transmitDataLength = strlen(acknowledgement);
 
-				// Storing Source ID
-				TransmitBuffer[transmitBufferLength] = 0x03;
-				transmitBufferLength++;
-
-				// Storing Destination ID
-				TransmitBuffer[transmitBufferLength] = 0x04;
-				transmitBufferLength++;
-
-				// Storing Data Length
 				TransmitBuffer[transmitBufferLength] = transmitDataLength;
 				transmitBufferLength++;
-
-#ifdef ScramblingAndDescrambling
-				ScrambleData(scrambleAndDescrambleOrder);
-#endif
 
 				// 3) T: Combine the repeating pattern and the user input data
 				AppendUserData(acknowledgement);

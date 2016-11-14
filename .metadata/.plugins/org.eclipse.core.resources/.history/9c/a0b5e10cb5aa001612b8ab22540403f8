@@ -257,21 +257,8 @@ int main(void)
 			{
 				transmitDataLength = strlen(acknowledgement);
 
-				// Storing Source ID
-				TransmitBuffer[transmitBufferLength] = 0x03;
-				transmitBufferLength++;
-
-				// Storing Destination ID
-				TransmitBuffer[transmitBufferLength] = 0x04;
-				transmitBufferLength++;
-
-				// Storing Data Length
 				TransmitBuffer[transmitBufferLength] = transmitDataLength;
 				transmitBufferLength++;
-
-#ifdef ScramblingAndDescrambling
-				ScrambleData(scrambleAndDescrambleOrder);
-#endif
 
 				// 3) T: Combine the repeating pattern and the user input data
 				AppendUserData(acknowledgement);
@@ -416,19 +403,15 @@ int main(void)
 						// Descramble and Print Received data
 #ifdef ScramblingAndDescrambling
 						printf("\nReceived Scrambled Data: ");
-						PrintData((uint8_t *)ReceivedData, actualDataLength, -1);
+												PrintData((uint8_t *)ReceivedData, actualDataLength, -1);
 						DescrambleReceivedData(scrambleAndDescrambleOrder);
 
-						printf("\nReceived Descrambled Data: ");
 						if(binaryDataFormat)
 						{
 							BinaryDataFormatConversion((int8_t *)ReceivedData, actualDataLength, (int8_t *)BinaryData, receivedBinaryDataLength, "CtoB");
-							PrintData((uint8_t *)BinaryData, receivedBinaryDataLength, -1);
 						}
-						else
-						{
-							PrintData((uint8_t *)ReceivedData, actualDataLength, -1);
-						}
+						printf("\nReceived Descrambled Data: ");
+						PrintData((uint8_t *)BinaryData, receivedBinaryDataLength, -1);
 #else
 						printf("\nReceived Data: ");
 						PrintData((uint8_t *)ReceivedData, actualDataLength, -1);
