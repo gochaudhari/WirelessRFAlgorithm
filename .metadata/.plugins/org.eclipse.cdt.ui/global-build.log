@@ -30078,3 +30078,407 @@ arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "
    text	   data	    bss	    dec	    hex	filename
   19328	     44	   3548	  22920	   5988	Lisa.axf
  
+11:57:13 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       19372 B       512 KB      3.69%
+        RamLoc32:        3592 B        32 KB     10.96%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  19328	     44	   3548	  22920	   5988	Lisa.axf
+ 
+12:08:18 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:259:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:265:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:165:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       19452 B       512 KB      3.71%
+        RamLoc32:        3592 B        32 KB     10.96%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  19408	     44	   3548	  23000	   59d8	Lisa.axf
+ 
+12:12:13 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+12:12:41 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+12:12:53 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+12:13:56 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:259:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:265:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:165:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       19452 B       512 KB      3.71%
+        RamLoc32:        3592 B        32 KB     10.96%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  19408	     44	   3548	  23000	   59d8	Lisa.axf
+ 
+12:16:05 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+12:16:06 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:213:10: warning: passing argument 1 of 'scanf' from incompatible pointer type [-Wincompatible-pointer-types]
+    scanf(stdin, "%c", &dataFormat);
+          ^
+In file included from ../src/Lisa.c:21:0:
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:136:12: note: expected 'const char * restrict' but argument is of type 'FILE * {aka struct __FILE_struct *}'
+ extern int scanf(const char * restrict format, ...);
+            ^
+../src/Lisa.c:258:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:264:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:165:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       19444 B       512 KB      3.71%
+        RamLoc32:        3592 B        32 KB     10.96%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  19400	     44	   3548	  22992	   59d0	Lisa.axf
+ 
+12:16:09 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+12:16:10 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:258:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:264:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:165:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       19468 B       512 KB      3.71%
+        RamLoc32:        3592 B        32 KB     10.96%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  19424	     44	   3548	  23016	   59e8	Lisa.axf
+ 
+12:16:15 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+12:16:37 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+12:16:38 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:248:2: error: #endif without #if
+ #endif
+  ^
+../src/Lisa.c:256:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:262:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:165:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+make: *** [src/Lisa.o] Error 1
+12:16:47 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+12:16:48 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:257:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:263:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:165:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       19468 B       512 KB      3.71%
+        RamLoc32:        3592 B        32 KB     10.96%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  19424	     44	   3548	  23016	   59e8	Lisa.axf
+ 
+12:18:23 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+12:18:24 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:258:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:264:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:166:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       19444 B       512 KB      3.71%
+        RamLoc32:        3592 B        32 KB     10.96%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  19400	     44	   3548	  22992	   59d0	Lisa.axf
+ 
+12:18:31 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+12:21:03 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:258:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:264:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:166:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       19476 B       512 KB      3.71%
+        RamLoc32:        3592 B        32 KB     10.96%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  19432	     44	   3548	  23024	   59f0	Lisa.axf
+ 
+12:21:55 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:258:26: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+     transmitDataLength = strlen(acknowledgement);
+                          ^
+../src/Lisa.c:264:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:166:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       19476 B       512 KB      3.71%
+        RamLoc32:        3592 B        32 KB     10.96%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  19432	     44	   3548	  23024	   59f0	Lisa.axf
+ 
+12:24:14 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+12:24:15 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:264:20: warning: passing argument 1 of 'AppendUserData' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+     AppendUserData(acknowledgement);
+                    ^
+In file included from ../src/Lisa.c:19:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/TransmitterSource.h:13:6: note: expected 'char *' but argument is of type 'const char *'
+ void AppendUserData(char *transmitDataAppend);
+      ^
+../src/Lisa.c:167:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       19484 B       512 KB      3.72%
+        RamLoc32:        3592 B        32 KB     10.96%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  19440	     44	   3548	  23032	   59f8	Lisa.axf
+ 
+12:24:58 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.

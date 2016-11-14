@@ -21,7 +21,6 @@
 #include <stdio.h>
 #include <Common.h>
 #include <stdlib.h>
-#include <string.h>
 
 // General Defs
 int maxTransmitData = 30;
@@ -146,8 +145,7 @@ int main(void)
 {
 
 	// Setup the GPIO Ports here at this position
-	char communicationSelect;
-	char dataFormat;
+	char communicationSelect, dataFormat;
 	bool transmit = false, receive = false, sendAckowledgement = false, receiveAcknowledgement = false;
 	int* dataReceivedStatus;
 	int counter, byteCounter = 0, printLength = 0;
@@ -210,12 +208,13 @@ int main(void)
 		{
 			printf("\nWant to Transmit or Receive (T or R): ");
 			scanf("%c", &communicationSelect);
-			getchar();
-			printf("Enter the data format (B: Binary, C: Character): ");
-			scanf("%c", &dataFormat);
+
+//			printf("Enter the data format (B: Binary, C: Character): ");
+//			scanf("%c", &dataFormat);
+			dataFormat = 'B';
 
 #ifdef ScramblingAndDescrambling
-			printf("Scrabmling order: ");
+			printf("\nScrabmling order: ");
 			scanf("%d", &scrambleAndDescrambleOrder);
 #endif
 
@@ -268,14 +267,14 @@ int main(void)
 				if(characterDataFormat)
 				{
 					// 2) T: Take data from user
-					printf("Enter the data to be transmitted (Characters): ");
+					printf("\nEnter the data to be transmitted (Characters): ");
 					transmitDataLength = 30;						// Fixing the maximum buffer length
 					scanf("%s", &TransmittedData);
 					transmitDataLength = strlen(TransmittedData);
 				}
 				else if(binaryDataFormat)
 				{
-					printf("Enter the data to be transmitted (in Binary): ");
+					printf("\nEnter the data to be transmitted (in Binary): ");
 					scanf("%s", &BinaryData);
 
 					// Should return transmitDataLength and it would be number of bits not bytes

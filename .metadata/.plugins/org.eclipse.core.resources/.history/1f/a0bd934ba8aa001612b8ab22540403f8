@@ -21,7 +21,6 @@
 #include <stdio.h>
 #include <Common.h>
 #include <stdlib.h>
-#include <string.h>
 
 // General Defs
 int maxTransmitData = 30;
@@ -268,14 +267,14 @@ int main(void)
 				if(characterDataFormat)
 				{
 					// 2) T: Take data from user
-					printf("Enter the data to be transmitted (Characters): ");
+					printf("\nEnter the data to be transmitted (Characters): ");
 					transmitDataLength = 30;						// Fixing the maximum buffer length
 					scanf("%s", &TransmittedData);
 					transmitDataLength = strlen(TransmittedData);
 				}
 				else if(binaryDataFormat)
 				{
-					printf("Enter the data to be transmitted (in Binary): ");
+					printf("\nEnter the data to be transmitted (in Binary): ");
 					scanf("%s", &BinaryData);
 
 					// Should return transmitDataLength and it would be number of bits not bytes

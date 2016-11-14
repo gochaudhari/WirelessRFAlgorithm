@@ -309,7 +309,7 @@ int main(void)
 
 			#ifdef EncryptedCommunication
 				EncryptTransmitSyncField();
-				printf("\nEncrypted data transmission: ");
+				printf("Encrypted data transmission: ");
 				// 3) T: Print the created final stream
 				printLength = sizeOfsyncField + TransmitBuffer[dataLengthByte] + dataLengthAdditions;
 				PrintData(TransmitBuffer, printLength, dataLengthByte);
