@@ -18,6 +18,7 @@
 #include <AllDefs.h>
 #include <TransmitterSource.h>
 #include <ReceiverSource.h>
+#include <GHmatrix.h>
 #include <stdio.h>
 #include <Common.h>
 #include <stdlib.h>
@@ -33,6 +34,9 @@ int transmitDataLength;
 int transmitBufferCounter, transmitBitCounter = 7;
 
 int sizeOfsyncField = 32, dataLengthAdditions = 3, dataLengthByte = 34;
+int k=8, n=12;
+int generatorMatrix[8][12];
+int transposeMatrix[12][4];
 
 #ifdef ScramblingAndDescrambling
 int scrambleAndDescrambleOrder;
@@ -311,6 +315,9 @@ int main(void)
 #ifdef ScramblingAndDescrambling
 				ScrambleData(scrambleAndDescrambleOrder);
 #endif
+				GenerateMatrix(k,n);
+
+				//TransposeMatrix(k,n,transposeMatrix);
 				// 3) T: Combine the repeating pattern and the user input data
 				AppendUserData(TransmittedData);
 			}
