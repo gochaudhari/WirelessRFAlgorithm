@@ -14,5 +14,6 @@ void AppendUserData(char *transmitDataAppend);
 void TransmitData();
 void EncryptTransmitSyncField();
 void ScrambleData(int scrambleAndDescrambleOrder);
+void EncodeUsingLinearBlockCoding();
 
 #endif /* TRANSMITTERSOURCE_H_ */

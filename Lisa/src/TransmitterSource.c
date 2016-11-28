@@ -148,3 +148,58 @@ void ScrambleData(int scrambleAndDescrambleOrder){
 	//PrintData((uint8_t *)TransmittedData, transmitDataLength, 3);
 }
 #endif
+
+#ifdef LinearBlockCoding
+// Considering fixed value of n and k
+void EncodeUsingLinearBlockCoding()
+{
+	int G[8][12], nVal = 12, kVal = 8;
+	uint8_t LBCEncodedBytes[45];				// Size is 45 since the max size of input data is 30 bytes. Should be 1.5 times of input data
+	int nCount, kCount, byteCount, encodedFirstByteCount, encodedSecondByteCount, middleVarSum;
+
+	for(byteCount = 0; byteCount < transmitDataLength; byteCount++)
+	{
+		// Encoding using generator matrix
+		for(nCount = 0; nCount < nVal; nCount++)
+		{
+			middleVarSum = 0;
+			for(kCount = 0; kCount < kVal; kCount++)
+			{
+				// Performing matrix multiplication of input and Generator matrix bits
+				middleVarSum = middleVarSum ^ ((TransmittedData[byteCount] >> (7 - kCount)) & 0x01) * G[kCount][nCount];
+			}
+			encodedFirstByteCount = byteCount + (byteCount/2);
+			encodedSecondByteCount = byteCount + (byteCount/2) + 1;
+
+			if(byteCount % 2 == 0)
+			{
+				if(nCount >= 0 && nCount < 8)
+				{
+					LBCEncodedBytes[encodedFirstByteCount] |= middleVarSum << (7 - nCount);
+				}
+				else
+				{
+					LBCEncodedBytes[encodedSecondByteCount] |= middleVarSum << (15 - nCount);
+				}
+			}
+			else
+			{
+				if(nCount >= 0 && nCount < 4)
+				{
+					LBCEncodedBytes[encodedFirstByteCount] |= middleVarSum << (3 - nCount);
+				}
+				else
+				{
+					LBCEncodedBytes[encodedSecondByteCount] |= middleVarSum << (11 - nCount);
+				}
+			}
+		}
+	}
+
+	// Finally, dumping all the data in Transmitted data again
+	for(byteCount = 0; byteCount < transmitDataLength; byteCount++)
+	{
+		TransmittedData[byteCount] = LBCEncodedBytes[byteCount];
+	}
+}
+#endif

@@ -2979,3 +2979,18 @@ java.lang.Exception: Remote communication error.  Target disconnected.: No error
 
 !ENTRY com.crt.log 1 0 2016-11-14 13:47:35.120
 !MESSAGE Drivers loaded in 1573 milliseconds
+
+!ENTRY com.crt.log 1 0 2016-11-14 15:15:01.938
+!MESSAGE Drivers loaded in 1941 milliseconds
+!SESSION 2016-11-27 23:51:02.840 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_65
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2016-11-27 23:52:29.736
+!MESSAGE Plugin org.eclipse.cdt.ui, extension org.eclipse.ui.decorators, id org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator: Duplicate id found: org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator
+
+!ENTRY org.eclipse.ui 4 4 2016-11-27 23:52:29.886
+!MESSAGE Plugin org.eclipse.cdt.ui, extension org.eclipse.ui.decorators, id org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator: Unknown extension tag found: decorator

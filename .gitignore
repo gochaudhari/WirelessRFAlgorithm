@@ -1,3 +1,5 @@
 *.ld
 *.ini
 .metadata/
+*.exe
+Lisa/Debug/

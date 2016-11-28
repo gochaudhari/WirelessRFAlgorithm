@@ -13,6 +13,7 @@
 #define Receive
 //define EncryptedCommunication
 #define ScramblingAndDescrambling
+#define LinearBlockCoding
 //#define TransmitDebug
 //#define ReceiveDebug
 
@@ -21,6 +22,11 @@
 // General defines
 #define true						1
 #define false						0
+
+#if defined(ScramblingAndDescrambling) || defined(LinearBlockCoding)
+#define ScramblingAndDescrambling
+#define LinearBlockCoding
+#endif
 
 typedef int bool;
 

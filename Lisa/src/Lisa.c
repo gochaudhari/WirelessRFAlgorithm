@@ -266,12 +266,16 @@ int main(void)
 				TransmitBuffer[transmitBufferLength] = 0x04;
 				transmitBufferLength++;
 
-				// Storing Data Length
+				// Storing Data Length: Before scrambling and LBC Encoding
 				TransmitBuffer[transmitBufferLength] = transmitDataLength;
 				transmitBufferLength++;
 
 #ifdef ScramblingAndDescrambling
 				ScrambleData(scrambleAndDescrambleOrder);
+#endif
+
+#ifdef LinearBlockCoding
+				EncodeUsingLinearBlockCoding();
 #endif
 
 				// 3) T: Combine the repeating pattern and the user input data
@@ -305,11 +309,16 @@ int main(void)
 				TransmitBuffer[transmitBufferLength] = 0x04;
 				transmitBufferLength++;
 
-				// Storing Data Length
+				// Storing Data Length: Before scrambling and LBC Encoding
 				TransmitBuffer[transmitBufferLength] = transmitDataLength;
 				transmitBufferLength++;
+
 #ifdef ScramblingAndDescrambling
 				ScrambleData(scrambleAndDescrambleOrder);
+#endif
+
+#ifdef LinearBlockCoding
+				EncodeUsingLinearBlockCoding();
 #endif
 				// 3) T: Combine the repeating pattern and the user input data
 				AppendUserData(TransmittedData);
