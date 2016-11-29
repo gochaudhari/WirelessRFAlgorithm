@@ -16,5 +16,6 @@ int* FindMessage();
 void DecryptReceivedSyncField(uint8_t key);
 void DescrambleReceivedData(int descramblingOrder);
 uint8_t FindMostOccuringElement(uint8_t key_arr[]);
+bool IsSyndromeZero(int k, int n);
 
 #endif /* RECEIVERSOURCE_H_ */

@@ -25,6 +25,8 @@ extern int receiveBufferLength, receivedDataLength, actualDataLength;
 extern bool bitReceived, dataReceived;
 extern int receiverBufferCounter, bitCount, receiverBitCounter;
 extern char TransmitBuffer[50]; // 8 bytes of initial sync and then next is the data. Assume 8 + 8
+extern int transposeMatrix[12][4];
+
 
 extern int sizeOfsyncField;
 #ifdef EncryptedCommunication
@@ -383,6 +385,47 @@ void DescrambleReceivedData(int descramblingOrder)
 	shiftByFullStages = NULL;					// Making this NULL to handle the dangling pointers
 }
 
+#endif
+
+#ifdef LinearBlockCoding
+bool IsSyndromeZero(int k,int n)
+{
+	bool syndromeResult = false;
+	int syndromeMatrix[n-k];
+	int receivedMatrix[n];
+	int rowCounter,columnCounter;
+	int rowLimit = n;
+	int columnLimit=n-k;
+
+	//Function call to computer H_transpose matrix
+	TransposeMatrix(8,12);
+
+	//Loops to computer Syndrome word
+			for(columnCounter =0; columnCounter<columnLimit;columnCounter++)
+			{
+				for(rowCounter=0;rowCounter<rowLimit;rowCounter++)
+				{
+					syndromeMatrix[columnCounter] =   syndromeMatrix[columnCounter]
+												    + receivedMatrix[rowCounter]*transposeMatrix[rowCounter][columnCounter];
+				}
+			}
+
+	//Check if computed syndrome word is zero
+			for(columnCounter=0;columnCounter<columnLimit;columnCounter++)
+			{
+				if(syndromeMatrix[columnCounter]==0){
+					syndromeResult=true;
+				}
+				else
+				{
+					syndromeResult=false;
+					return syndromeResult;
+				}
+
+			}
+
+	return syndromeResult;
+}
 #endif
 
 #ifdef ReceiveDebug
