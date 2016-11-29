@@ -28,6 +28,9 @@ extern int bitCount;
 extern int dataLengthByte;
 extern bool binaryDataFormat, characterDataFormat;
 
+extern int generatorMatrix[8][12];
+extern int transposeMatrix[12][4];
+
 #ifdef EncryptedCommunication
 extern bool encryptEntireData;
 #endif
@@ -153,7 +156,7 @@ void ScrambleData(int scrambleAndDescrambleOrder){
 // Considering fixed value of n and k
 void EncodeUsingLinearBlockCoding()
 {
-	int G[8][12], nVal = 12, kVal = 8;
+	int nVal = 12, kVal = 8;
 	uint8_t LBCEncodedBytes[45];				// Size is 45 since the max size of input data is 30 bytes. Should be 1.5 times of input data
 	int nCount, kCount, byteCount, encodedFirstByteCount, encodedSecondByteCount, middleVarSum;
 
@@ -166,7 +169,7 @@ void EncodeUsingLinearBlockCoding()
 			for(kCount = 0; kCount < kVal; kCount++)
 			{
 				// Performing matrix multiplication of input and Generator matrix bits
-				middleVarSum = middleVarSum ^ ((TransmittedData[byteCount] >> (7 - kCount)) & 0x01) * G[kCount][nCount];
+				middleVarSum = middleVarSum ^ ((TransmittedData[byteCount] >> (7 - kCount)) & 0x01) * generatorMatrix[kCount][nCount];
 			}
 			encodedFirstByteCount = byteCount + (byteCount/2);
 			encodedSecondByteCount = byteCount + (byteCount/2) + 1;

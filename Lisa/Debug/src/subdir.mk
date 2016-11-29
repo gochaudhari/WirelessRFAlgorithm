@@ -5,6 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/Common.c \
+../src/GHmatrix.c \
 ../src/Lisa.c \
 ../src/ReceiverSource.c \
 ../src/TransmitterSource.c \
@@ -13,6 +14,7 @@ C_SRCS += \
 
 OBJS += \
 ./src/Common.o \
+./src/GHmatrix.o \
 ./src/Lisa.o \
 ./src/ReceiverSource.o \
 ./src/TransmitterSource.o \
@@ -21,6 +23,7 @@ OBJS += \
 
 C_DEPS += \
 ./src/Common.d \
+./src/GHmatrix.d \
 ./src/Lisa.d \
 ./src/ReceiverSource.d \
 ./src/TransmitterSource.d \
