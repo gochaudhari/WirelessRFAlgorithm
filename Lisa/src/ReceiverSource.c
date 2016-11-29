@@ -25,8 +25,12 @@ extern int receiveBufferLength, receivedDataLength, actualDataLength;
 extern bool bitReceived, dataReceived;
 extern int receiverBufferCounter, bitCount, receiverBitCounter;
 extern char TransmitBuffer[50]; // 8 bytes of initial sync and then next is the data. Assume 8 + 8
-
 extern int sizeOfsyncField;
+
+// For LBC Coding
+extern uint16_t CMatrix[256];			// This matrix is used for caculation of distances
+extern int generatorMatrix[8][12];
+
 #ifdef EncryptedCommunication
 	extern bool encryptEntireData;
 #endif
@@ -381,6 +385,102 @@ void DescrambleReceivedData(int descramblingOrder)
 	shiftByLowerStage = NULL;				// Making this NULL to handle the dangling pointers
 	free(shiftByFullStages);
 	shiftByFullStages = NULL;					// Making this NULL to handle the dangling pointers
+}
+
+#endif
+
+#ifdef LinearBlockCoding
+void CreationOfCMatrices()
+{
+	int counter;
+	int totalCount = 256;
+	for(counter = 0; counter < totalCount; counter++)
+	{
+		CMatrix[counter] = counter;
+	}
+}
+
+inline int min(int num1, int num2) {
+  return num1 < num2 ? num1 : num2;
+}
+
+// Returns the index of minimum distance found
+int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
+{
+	int counter = 0, similarCount, prevSimilarCount, minVal = CMatrix[0], minIndex = 0;
+	uint16_t xoredNumber = 0;
+
+	// The input length would be the length of
+	for(counter = 0; counter < 256; counter++)
+	{
+		xoredNumber = 0;
+		xoredNumber = (receivedEncodedBytes^CMatrix[counter]);
+
+		xoredNumber = xoredNumber - ((xoredNumber >> 1) & 0x5555);
+		xoredNumber = (xoredNumber & 0x3333) + ((xoredNumber >> 2) & 0x3333);
+		similarCount = (((xoredNumber + (xoredNumber >> 4)) & 0x0F0F) * 0x0101) >> 8;
+
+		if(number == 0)
+		{
+			minIndex = counter;
+			break;
+		}
+		else if(counter > 0)
+		{
+			minVal = min(similarCount, minVal);
+			if(similarCount == minVal)
+			{
+				minIndex = counter;
+			}
+		}
+	}
+	return minIndex;
+}
+
+// This function realizes Linear Block Decoding. It calls the syndrome function.
+// Extract bytes from the main data length and then feed it to syndrome and
+void LinearBlockDecoding()
+{
+	int nVal = 12, kVal = 8, minDistanceIndex;
+	uint16_t encodedBytes;
+	int encodedBytesSeparately[12];
+	int firstByteCount, secondByteCount = 0, encodedByteCount, nCount;
+	bool ifError = false;
+
+	for(secondByteCount = 1; secondByteCount < receivedDataLength; secondByteCount++)
+	{
+		firstByteCount = secondByteCount - 1;
+
+		encodedBytes = 0;
+		// This is the first byte full and second byte half
+		if(firstByteCount % 2 == 0)
+		{
+			encodedBytes |= (ReceivedData[firstByteCount] << 11);
+			encodedBytes |= (ReceivedData[secondByteCount] >> 4);
+		}
+		// This is second byte full and first byte half
+		else
+		{
+			encodedBytes |= (ReceivedData[firstByteCount] << 15);
+			encodedBytes |= (ReceivedData[secondByteCount] << 7);
+		}
+
+		for(nCount = 0; nCount < nVal; nCount++)
+		{
+			encodedBytesSeparately[nCount] = ((encodedBytes >> (11 - nCount)) & 0x01);
+		}
+
+		// Akshay to call the Syndrome function
+		//-------------------------------------------------------------------
+		//-------------------------------------------------------------------
+
+		if(ifError)
+		{
+			DistanceCalculationAndDetectionOfData(encodedBytes);
+		}
+	}
+
+
 }
 
 #endif

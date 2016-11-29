@@ -198,7 +198,7 @@ void EncodeUsingLinearBlockCoding()
 			}
 		}
 	}
-
+	transmitDataLength = encodedSecondByteCount + 1;
 	// Finally, dumping all the data in Transmitted data again
 	for(byteCount = 0; byteCount < transmitDataLength; byteCount++)
 	{

@@ -31513,3 +31513,1793 @@ make: Nothing to be done for `all'.
 23:27:52 **** Incremental Build of configuration Debug for project Lisa ****
 make -r all 
 make: Nothing to be done for `all'.
+18:41:32 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+18:41:35 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:438:7: error: unknown type name 'CreationOf'
+       CreationOf
+       ^
+../src/Lisa.c:443:7: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'printf'
+       printf("\nReceived Scrambled Data: ");
+       ^
+../src/Lisa.c:172:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+make: *** [src/Lisa.o] Error 1
+18:46:23 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+18:46:24 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:438:7: warning: implicit declaration of function 'CreationOfCMatrices' [-Wimplicit-function-declaration]
+       CreationOfCMatrices();
+       ^
+../src/Lisa.c:439:7: warning: implicit declaration of function 'DistanceCalculationAndDetectionOfData' [-Wimplicit-function-declaration]
+       DistanceCalculationAndDetectionOfData();
+       ^
+../src/Lisa.c:172:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:136:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:75:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:74:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:178:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:176:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:145:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:141:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       20428 B       512 KB      3.90%
+./src/ReceiverSource.o:(.bss.CMatrix+0x0): multiple definition of `CMatrix'
+        RamLoc32:        4112 B        32 KB     12.55%
+./src/Lisa.o:(.bss.CMatrix+0x0): first defined here
+./src/Lisa.o: In function `main':
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\Debug/../src/Lisa.c:438: undefined reference to `CreationOfCMatrices'
+        RamAHB32:          0 GB        32 KB      0.00%
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\Debug/../src/Lisa.c:439: undefined reference to `DistanceCalculationAndDetectionOfData'
+collect2.exe: error: ld returned 1 exit status
+make: *** [Lisa.axf] Error 1
+19:08:46 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+19:08:47 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:172:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:139:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:78:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:77:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:181:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:179:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:148:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:144:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       20500 B       512 KB      3.91%
+        RamLoc32:        4624 B        32 KB     14.11%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  20320	    180	   4444	  24944	   6170	Lisa.axf
+ 
+19:09:16 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+19:09:51 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Common.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Common.d" -MT"src/Common.o" -MT"src/Common.d" -o "src/Common.o" "../src/Common.c"
+../src/Common.c: In function 'PrintData':
+../src/Common.c:16:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("\n");
+  ^
+../src/Common.c: In function 'BinaryDataFormatConversion':
+../src/Common.c:100:6: warning: implicit declaration of function 'strcmp' [-Wimplicit-function-declaration]
+  if(!strcmp(conversionType, binaryToConsolidated))
+      ^
+Finished building: ../src/Common.c
+ 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:172:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:139:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:78:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:77:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:181:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:179:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:148:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:144:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building file: ../src/TransmitterSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/TransmitterSource.d" -MT"src/TransmitterSource.o" -MT"src/TransmitterSource.d" -o "src/TransmitterSource.o" "../src/TransmitterSource.c"
+Finished building: ../src/TransmitterSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       20500 B       512 KB      3.91%
+        RamLoc32:        4624 B        32 KB     14.11%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  20320	    180	   4444	  24944	   6170	Lisa.axf
+ 
+19:28:45 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:172:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:139:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:78:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:77:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:181:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:179:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'LinearBlockDecoding':
+../src/ReceiverSource.c:407:11: warning: unused variable 'encodedBytes' [-Wunused-variable]
+  uint16_t encodedBytes;
+           ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:148:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:144:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building file: ../src/TransmitterSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/TransmitterSource.d" -MT"src/TransmitterSource.o" -MT"src/TransmitterSource.d" -o "src/TransmitterSource.o" "../src/TransmitterSource.c"
+Finished building: ../src/TransmitterSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       20500 B       512 KB      3.91%
+        RamLoc32:        4624 B        32 KB     14.11%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  20320	    180	   4444	  24944	   6170	Lisa.axf
+ 
+19:30:20 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/TransmitterSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/TransmitterSource.d" -MT"src/TransmitterSource.o" -MT"src/TransmitterSource.d" -o "src/TransmitterSource.o" "../src/TransmitterSource.c"
+Finished building: ../src/TransmitterSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       20508 B       512 KB      3.91%
+        RamLoc32:        4624 B        32 KB     14.11%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  20328	    180	   4444	  24952	   6178	Lisa.axf
+ 
+20:46:11 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+20:46:14 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:172:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:139:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:78:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:77:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:181:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:179:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: At top level:
+../src/ReceiverSource.c:404:5: error: conflicting types for 'DistanceCalculationAndDetectionOfData'
+ int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
+     ^
+../src/ReceiverSource.c:405:1: note: an argument type that has a default promotion can't match an empty parameter name list declaration
+ {
+ ^
+In file included from ../src/ReceiverSource.c:15:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/ReceiverSource.h:22:5: note: previous declaration of 'DistanceCalculationAndDetectionOfData' was here
+ int DistanceCalculationAndDetectionOfData();
+     ^
+../src/ReceiverSource.c: In function 'DistanceCalculationAndDetectionOfData':
+../src/ReceiverSource.c:415:33: error: 'i' undeclared (first use in this function)
+   xoredNumber = xoredNumber - ((i >> 1) & 0x5555);
+                                 ^
+../src/ReceiverSource.c:415:33: note: each undeclared identifier is reported only once for each function it appears in
+../src/ReceiverSource.c: In function 'LinearBlockDecoding':
+../src/ReceiverSource.c:466:1: error: expected declaration or statement at end of input
+ }
+ ^
+../src/ReceiverSource.c:429:43: warning: unused variable 'encodedByteCount' [-Wunused-variable]
+  int firstByteCount, secondByteCount = 0, encodedByteCount, nCount;
+                                           ^
+../src/ReceiverSource.c:428:6: warning: variable 'encodedBytesSeparately' set but not used [-Wunused-but-set-variable]
+  int encodedBytesSeparately[12];
+      ^
+../src/ReceiverSource.c:426:27: warning: unused variable 'minDistanceIndex' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                           ^
+../src/ReceiverSource.c:426:17: warning: unused variable 'kVal' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                 ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:148:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c: In function 'DistanceCalculationAndDetectionOfData':
+../src/ReceiverSource.c:420:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/ReceiverSource.o] Error 1
+20:46:38 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+20:46:39 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:139:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:78:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:77:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:181:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:179:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: At top level:
+../src/ReceiverSource.c:404:5: error: conflicting types for 'DistanceCalculationAndDetectionOfData'
+ int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
+     ^
+../src/ReceiverSource.c:405:1: note: an argument type that has a default promotion can't match an empty parameter name list declaration
+ {
+ ^
+In file included from ../src/ReceiverSource.c:15:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/ReceiverSource.h:22:5: note: previous declaration of 'DistanceCalculationAndDetectionOfData' was here
+ int DistanceCalculationAndDetectionOfData();
+     ^
+../src/ReceiverSource.c: In function 'DistanceCalculationAndDetectionOfData':
+../src/ReceiverSource.c:416:44: error: 'i' undeclared (first use in this function)
+   xoredNumber = (xoredNumber & 0x3333) + ((i >> 2) & 0x3333);
+                                            ^
+../src/ReceiverSource.c:416:44: note: each undeclared identifier is reported only once for each function it appears in
+../src/ReceiverSource.c:417:7: warning: unused variable 'number' [-Wunused-variable]
+   int number = (((xoredNumber + (xoredNumber >> 4)) & 0x0F0F) * 0x0101) >> 8;
+       ^
+../src/ReceiverSource.c: In function 'LinearBlockDecoding':
+../src/ReceiverSource.c:465:1: error: expected declaration or statement at end of input
+ }
+ ^
+../src/ReceiverSource.c:428:43: warning: unused variable 'encodedByteCount' [-Wunused-variable]
+  int firstByteCount, secondByteCount = 0, encodedByteCount, nCount;
+                                           ^
+../src/ReceiverSource.c:427:6: warning: variable 'encodedBytesSeparately' set but not used [-Wunused-but-set-variable]
+  int encodedBytesSeparately[12];
+      ^
+../src/ReceiverSource.c:425:27: warning: unused variable 'minDistanceIndex' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                           ^
+../src/ReceiverSource.c:425:17: warning: unused variable 'kVal' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                 ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:148:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c: In function 'DistanceCalculationAndDetectionOfData':
+../src/ReceiverSource.c:419:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/ReceiverSource.o] Error 1
+20:46:50 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+20:46:51 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:139:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:78:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:77:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:181:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:179:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: At top level:
+../src/ReceiverSource.c:404:5: error: conflicting types for 'DistanceCalculationAndDetectionOfData'
+ int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
+     ^
+../src/ReceiverSource.c:405:1: note: an argument type that has a default promotion can't match an empty parameter name list declaration
+ {
+ ^
+In file included from ../src/ReceiverSource.c:15:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/ReceiverSource.h:22:5: note: previous declaration of 'DistanceCalculationAndDetectionOfData' was here
+ int DistanceCalculationAndDetectionOfData();
+     ^
+../src/ReceiverSource.c: In function 'DistanceCalculationAndDetectionOfData':
+../src/ReceiverSource.c:417:7: warning: unused variable 'number' [-Wunused-variable]
+   int number = (((xoredNumber + (xoredNumber >> 4)) & 0x0F0F) * 0x0101) >> 8;
+       ^
+../src/ReceiverSource.c:419:9: error: 'number' undeclared (first use in this function)
+  return number;
+         ^
+../src/ReceiverSource.c:419:9: note: each undeclared identifier is reported only once for each function it appears in
+../src/ReceiverSource.c: In function 'LinearBlockDecoding':
+../src/ReceiverSource.c:466:1: error: expected declaration or statement at end of input
+ }
+ ^
+../src/ReceiverSource.c:429:43: warning: unused variable 'encodedByteCount' [-Wunused-variable]
+  int firstByteCount, secondByteCount = 0, encodedByteCount, nCount;
+                                           ^
+../src/ReceiverSource.c:428:6: warning: variable 'encodedBytesSeparately' set but not used [-Wunused-but-set-variable]
+  int encodedBytesSeparately[12];
+      ^
+../src/ReceiverSource.c:426:27: warning: unused variable 'minDistanceIndex' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                           ^
+../src/ReceiverSource.c:426:17: warning: unused variable 'kVal' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                 ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:148:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c: In function 'DistanceCalculationAndDetectionOfData':
+../src/ReceiverSource.c:420:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/ReceiverSource.o] Error 1
+20:47:04 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+20:47:05 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:139:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:78:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:77:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:181:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:179:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: At top level:
+../src/ReceiverSource.c:404:5: error: conflicting types for 'DistanceCalculationAndDetectionOfData'
+ int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
+     ^
+../src/ReceiverSource.c:405:1: note: an argument type that has a default promotion can't match an empty parameter name list declaration
+ {
+ ^
+In file included from ../src/ReceiverSource.c:15:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/ReceiverSource.h:22:5: note: previous declaration of 'DistanceCalculationAndDetectionOfData' was here
+ int DistanceCalculationAndDetectionOfData();
+     ^
+../src/ReceiverSource.c: In function 'LinearBlockDecoding':
+../src/ReceiverSource.c:466:1: error: expected declaration or statement at end of input
+ }
+ ^
+../src/ReceiverSource.c:429:43: warning: unused variable 'encodedByteCount' [-Wunused-variable]
+  int firstByteCount, secondByteCount = 0, encodedByteCount, nCount;
+                                           ^
+../src/ReceiverSource.c:428:6: warning: variable 'encodedBytesSeparately' set but not used [-Wunused-but-set-variable]
+  int encodedBytesSeparately[12];
+      ^
+../src/ReceiverSource.c:426:27: warning: unused variable 'minDistanceIndex' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                           ^
+../src/ReceiverSource.c:426:17: warning: unused variable 'kVal' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                 ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:148:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/ReceiverSource.o] Error 1
+20:47:19 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+20:47:20 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+In file included from ../src/Lisa.c:22:0:
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h: In function 'DistanceCalculationAndDetectionOfData':
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:23:27: error: storage class specified for parameter '___gnuc_va_list'
+ typedef __builtin_va_list ___gnuc_va_list;
+                           ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:24:25: error: expected '=', ',', ';', 'asm' or '__attribute__' before '__va_list'
+ typedef ___gnuc_va_list __va_list;
+                         ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:31:30: error: storage class specified for parameter 'FILE'
+ typedef struct __FILE_struct FILE;
+                              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:41:3: error: storage class specified for parameter 'fpos_t'
+ } fpos_t;
+   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:105:22: error: expected '=', ',', ';', 'asm' or '__attribute__' before '__Ciob'
+ extern __THREAD FILE __Ciob[];
+                      ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:115:12: error: storage class specified for parameter 'remove'
+ extern int remove(const char *filename);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:116:12: error: storage class specified for parameter 'rename'
+ extern int rename(const char *old, const char *new);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:117:13: error: expected '=', ',', ';', 'asm' or '__attribute__' before '*' token
+ extern FILE *tmpfile(void);
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:118:14: error: storage class specified for parameter 'tmpnam'
+ extern char *tmpnam(char *s);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:119:19: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fclose(FILE *stream);
+                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:120:19: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fflush(FILE *stream);
+                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:121:13: error: expected '=', ',', ';', 'asm' or '__attribute__' before '*' token
+ extern FILE *fopen(const char * restrict filename,
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:123:13: error: expected '=', ',', ';', 'asm' or '__attribute__' before '*' token
+ extern FILE *freopen(const char * restrict filename,
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:126:20: error: expected declaration specifiers or '...' before 'FILE'
+ extern void setbuf(FILE * restrict stream,
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:128:20: error: expected declaration specifiers or '...' before 'FILE'
+ extern int setvbuf(FILE * restrict stream,
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:131:20: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fprintf(FILE * restrict stream,
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:133:19: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fscanf(FILE * restrict stream,
+                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:135:12: error: storage class specified for parameter 'printf'
+ extern int printf(const char * restrict format, ...);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:136:12: error: storage class specified for parameter 'scanf'
+ extern int scanf(const char * restrict format, ...);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:137:12: error: storage class specified for parameter 'snprintf'
+ extern int snprintf(char * restrict s, size_t n,
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:139:12: error: storage class specified for parameter 'sprintf'
+ extern int sprintf(char * restrict s,
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:141:12: error: storage class specified for parameter 'sscanf'
+ extern int sscanf(const char * restrict s,
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:143:21: error: expected declaration specifiers or '...' before 'FILE'
+ extern int vfprintf(FILE * restrict stream,
+                     ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:144:51: error: unknown type name '__va_list'
+                     const char * restrict format, __va_list arg);
+                                                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:145:20: error: expected declaration specifiers or '...' before 'FILE'
+ extern int vfscanf(FILE * restrict stream,
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:146:50: error: unknown type name '__va_list'
+                    const char * restrict format, __va_list arg);
+                                                  ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:147:50: error: unknown type name '__va_list'
+ extern int vprintf(const char * restrict format, __va_list arg);
+                                                  ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:150:52: error: unknown type name '__va_list'
+                      const char * restrict format, __va_list arg);
+                                                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:152:51: error: unknown type name '__va_list'
+                     const char * restrict format, __va_list arg);
+                                                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:153:18: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fgetc(FILE *stream);
+                  ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:155:20: error: expected declaration specifiers or '...' before 'FILE'
+                    FILE * restrict stream);
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:156:25: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fputc(int c, FILE *stream);
+                         ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:158:18: error: expected declaration specifiers or '...' before 'FILE'
+                  FILE * restrict stream);
+                  ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:159:21: error: expected declaration specifiers or '...' before 'FILE'
+ extern int __filbuf(FILE *);
+                     ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:160:17: error: expected declaration specifiers or '...' before 'FILE'
+ extern int getc(FILE *stream);
+                 ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:163:12: error: storage class specified for parameter 'getchar'
+ extern int getchar(void);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:165:14: error: storage class specified for parameter 'gets'
+ extern char *gets(char *s);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:166:24: error: expected declaration specifiers or '...' before 'FILE'
+ extern int putc(int c, FILE *stream);
+                        ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:167:32: error: expected declaration specifiers or '...' before 'FILE'
+ extern int __flsbuf(int /*c*/, FILE * /*stream*/);
+                                ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:174:12: error: storage class specified for parameter 'putchar'
+ extern int putchar(int c);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:176:12: error: storage class specified for parameter 'puts'
+ extern int puts(const char *s);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:177:26: error: expected declaration specifiers or '...' before 'FILE'
+ extern int ungetc(int c, FILE *stream);
+                          ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:180:21: error: expected declaration specifiers or '...' before 'FILE'
+                     FILE * restrict stream);
+                     ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:183:22: error: expected declaration specifiers or '...' before 'FILE'
+                      FILE * restrict stream);
+                      ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:184:20: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fgetpos(FILE * restrict stream,
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:185:20: error: expected declaration specifiers or '...' before 'fpos_t'
+                    fpos_t * restrict pos);
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:186:18: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fseek(FILE *stream, long int offset, int whence);
+                  ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:187:20: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fsetpos(FILE *stream, const fpos_t *pos);
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:187:47: error: expected ';', ',' or ')' before '*' token
+ extern int fsetpos(FILE *stream, const fpos_t *pos);
+                                               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:188:23: error: expected declaration specifiers or '...' before 'FILE'
+ extern long int ftell(FILE *stream);
+                       ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:189:20: error: expected declaration specifiers or '...' before 'FILE'
+ extern void rewind(FILE *stream);
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:190:22: error: expected declaration specifiers or '...' before 'FILE'
+ extern void clearerr(FILE *stream);
+                      ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:191:17: error: expected declaration specifiers or '...' before 'FILE'
+ extern int feof(FILE *stream);
+                 ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:193:19: error: expected declaration specifiers or '...' before 'FILE'
+ extern int ferror(FILE *stream);
+                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:195:13: error: storage class specified for parameter 'perror'
+ extern void perror(const char *s);
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:198:21: error: expected declaration specifiers or '...' before 'FILE'
+ extern int _fprintf(FILE *fp, const char *fmt, ...);
+                     ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:199:12: error: storage class specified for parameter '_printf'
+ extern int _printf(const char *fmt, ...);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:200:12: error: storage class specified for parameter '_sprintf'
+ extern int _sprintf(char *buff, const char *fmt, ...);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:201:51: error: unknown type name '__va_list'
+ extern int _vprintf(const char * restrict format, __va_list arg);
+                                                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:202:22: error: expected declaration specifiers or '...' before 'FILE'
+ extern int _vfprintf(FILE *p, const char *fmt, __va_list args);
+                      ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:202:48: error: unknown type name '__va_list'
+ extern int _vfprintf(FILE *p, const char *fmt, __va_list args);
+                                                ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:203:51: error: unknown type name '__va_list'
+ extern int _vsprintf(char *buff, const char *fmt, __va_list args);
+                                                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:204:12: error: storage class specified for parameter '_snprintf'
+ extern int _snprintf(char *buff, size_t limit, const char *fmt, ...);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:205:66: error: unknown type name '__va_list'
+ extern int _vsnprintf(char *buff, size_t limit, const char *fmt, __va_list args);
+                                                                  ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:208:12: error: storage class specified for parameter '_printf_char'
+ extern int _printf_char(const char *fmt, ...);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:209:12: error: storage class specified for parameter 'printf_char'
+ extern int printf_char(const char *fmt, ...);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:211:12: error: storage class specified for parameter 'puts_char'
+ extern int puts_char(const char *s);
+            ^
+In file included from ../src/Lisa.c:23:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/Common.h:17:3: error: storage class specified for parameter 'ShiftDirection'
+ } ShiftDirection;
+   ^
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/Common.h:20:86: error: expected declaration specifiers or '...' before 'ShiftDirection'
+ void ShiftRegister(uint8_t *ShiftBuffer, uint8_t *ShiftedBuffer, int lengthOfBuffer, ShiftDirection shiftDirection, int shiftCount);
+                                                                                      ^
+In file included from ../src/Lisa.c:24:0:
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:22:24: error: storage class specified for parameter 'wchar_t'
+ typedef __WCHAR_TYPE__ wchar_t;
+                        ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:29:41: error: storage class specified for parameter 'div_t'
+ typedef struct div_t { int quot, rem; } div_t;
+                                         ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:31:47: error: storage class specified for parameter 'ldiv_t'
+ typedef struct ldiv_t { long int quot, rem; } ldiv_t;
+                                               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:33:53: error: storage class specified for parameter 'lldiv_t'
+ typedef struct lldiv_t { long long int quot, rem; } lldiv_t;
+                                                     ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:51:15: error: storage class specified for parameter 'atof'
+ extern double atof(const char *nptr);
+               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:52:12: error: storage class specified for parameter 'atoi'
+ extern int atoi(const char *nptr);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:53:17: error: storage class specified for parameter 'atol'
+ extern long int atol(const char *nptr);
+                 ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:55:15: error: storage class specified for parameter 'strtod'
+ extern double strtod(const char * restrict nptr,
+               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:57:14: error: storage class specified for parameter 'strtof'
+ extern float strtof(const char * restrict nptr,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:60:17: error: storage class specified for parameter 'strtol'
+ extern long int strtol(const char * restrict nptr,
+                 ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:63:26: error: storage class specified for parameter 'strtoul'
+ extern unsigned long int strtoul(const char * restrict nptr,
+                          ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:66:12: error: storage class specified for parameter 'rand'
+ extern int rand(void);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:67:13: error: storage class specified for parameter 'srand'
+ extern void srand(unsigned int seed);
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:68:14: error: storage class specified for parameter 'calloc'
+ extern void *calloc(size_t nmemb, size_t size);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:69:13: error: storage class specified for parameter 'free'
+ extern void free(void *ptr);
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:70:14: error: storage class specified for parameter 'malloc'
+ extern void *malloc(size_t size);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:71:14: error: storage class specified for parameter 'realloc'
+ extern void *realloc(void *ptr, size_t size);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:72:13: error: storage class specified for parameter 'abort'
+ extern void abort(void);
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:73:12: error: storage class specified for parameter 'atexit'
+ extern int atexit(void (*func)(void));
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:74:13: error: storage class specified for parameter 'exit'
+ extern void exit(int status);
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:76:14: error: storage class specified for parameter 'getenv'
+ extern char *getenv(const char *name);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:77:12: error: storage class specified for parameter 'system'
+ extern int system(const char *string);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:78:14: error: storage class specified for parameter 'bsearch'
+ extern void *bsearch(const void *key, const void *base,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:81:13: error: storage class specified for parameter 'qsort'
+ extern void qsort(void *base, size_t nmemb, size_t size,
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:83:12: error: storage class specified for parameter 'abs'
+ extern int abs(int j);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:84:17: error: storage class specified for parameter 'labs'
+ extern long int labs(long int j);
+                 ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:86:14: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'div'
+ extern div_t div(int numer, int denom);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:87:15: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ldiv'
+ extern ldiv_t ldiv(long int numer, long int denom);
+               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:89:12: error: storage class specified for parameter 'mblen'
+ extern int mblen(const char *s, size_t n);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:90:19: error: expected declaration specifiers or '...' before 'wchar_t'
+ extern int mbtowc(wchar_t * restrict pwc,
+                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:92:28: error: expected declaration specifiers or '...' before 'wchar_t'
+ extern int wctomb(char *s, wchar_t wchar);
+                            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:93:24: error: expected declaration specifiers or '...' before 'wchar_t'
+ extern size_t mbstowcs(wchar_t * restrict pwcs,
+                        ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:96:38: error: expected ';', ',' or ')' before '*' token
+                        const wchar_t * restrict pwcs, size_t n);
+                                      ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:101:15: error: storage class specified for parameter 'uitoa'
+ extern char * uitoa(unsigned int value, char *vstring, unsigned int base);
+               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:102:15: error: storage class specified for parameter 'itoa'
+ extern char * itoa(int value, char *vstring, unsigned int base);
+               ^
+In file included from ../src/Lisa.c:25:0:
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:33:14: error: storage class specified for parameter 'memcpy'
+ extern void *memcpy(void * restrict __s1,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:35:14: error: storage class specified for parameter 'memmove'
+ extern void *memmove(void *__s1, const void *__s2, size_t __n);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:36:14: error: storage class specified for parameter 'strcpy'
+ extern char *strcpy(char * restrict __s1,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:38:14: error: storage class specified for parameter 'strncpy'
+ extern char *strncpy(char * restrict __s1,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:40:14: error: storage class specified for parameter 'strcat'
+ extern char *strcat(char * restrict __s1,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:42:14: error: storage class specified for parameter 'strncat'
+ extern char *strncat(char * restrict __s1,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:44:12: error: storage class specified for parameter 'memcmp'
+ extern int memcmp(const void *__s1, const void *__s2, size_t __n);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:45:12: error: storage class specified for parameter 'strcmp'
+ extern int strcmp(const char *__s1, const char *__s2);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:46:12: error: storage class specified for parameter 'strcoll'
+ extern int strcoll(const char *__s1, const char *__s2);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:47:12: error: storage class specified for parameter 'strncmp'
+ extern int strncmp(const char *__s1, const char *__s2, size_t __n);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:50:14: error: storage class specified for parameter 'memchr'
+ extern void *memchr(const void *__s, int __c, size_t ____n);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:51:14: error: storage class specified for parameter 'strchr'
+ extern char *strchr(const char *__s, int __c);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:52:15: error: storage class specified for parameter 'strcspn'
+ extern size_t strcspn(const char *__s1, const char *__s2);
+               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:53:14: error: storage class specified for parameter 'strpbrk'
+ extern char *strpbrk(const char *__s1, const char *__s2);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:54:14: error: storage class specified for parameter 'strrchr'
+ extern char *strrchr(const char *s, int c);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:55:15: error: storage class specified for parameter 'strspn'
+ extern size_t strspn(const char *__s1, const char *__s2);
+               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:56:14: error: storage class specified for parameter 'strstr'
+ extern char *strstr(const char *__s1, const char *__s2);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:57:14: error: storage class specified for parameter 'strtok'
+ extern char *strtok(char * restrict __s1,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:59:14: error: storage class specified for parameter 'memset'
+ extern void *memset(void *__s, int __c, size_t __n);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:60:14: error: storage class specified for parameter 'strerror'
+ extern char *strerror(int __errnum);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:61:15: error: storage class specified for parameter 'strlen'
+ extern size_t strlen(const char *__s);
+               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:66:12: error: storage class specified for parameter 'strncasecmp'
+ extern int strncasecmp(char const *s1, char const *s2, size_t n) ;
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:67:12: error: storage class specified for parameter 'strcasecmp'
+ extern int strcasecmp(const char * s1, const char * s2);
+            ^
+../src/Lisa.c:28:1: error: parameter 'maxTransmitData' is initialized
+ int maxTransmitData = 30;
+ ^
+../src/Lisa.c:34:1: error: parameter 'transmitBitCounter' is initialized
+ int transmitBufferCounter, transmitBitCounter = 7;
+ ^
+../src/Lisa.c:36:1: error: parameter 'sizeOfsyncField' is initialized
+ int sizeOfsyncField = 32, dataLengthAdditions = 3, dataLengthByte = 34;
+ ^
+../src/Lisa.c:36:1: error: parameter 'dataLengthAdditions' is initialized
+../src/Lisa.c:36:1: error: parameter 'dataLengthByte' is initialized
+../src/Lisa.c:37:1: error: parameter 'k' is initialized
+ int k=8, n=12;
+ ^
+../src/Lisa.c:37:1: error: parameter 'n' is initialized
+../src/Lisa.c:54:1: error: parameter 'receiveBufferLength' is initialized
+ int receiveBufferLength = 1024, receivedDataLength, actualDataLength = 0, receivedBinaryDataLength;
+ ^
+../src/Lisa.c:54:1: error: parameter 'actualDataLength' is initialized
+../src/Lisa.c:55:1: error: parameter 'bitReceived' is initialized
+ bool bitReceived = false, receiveBufferFull = false, bitReadyForTransmit = false, dataReceived = false;
+ ^
+../src/Lisa.c:55:1: error: parameter 'receiveBufferFull' is initialized
+../src/Lisa.c:55:1: error: parameter 'bitReadyForTransmit' is initialized
+../src/Lisa.c:55:1: error: parameter 'dataReceived' is initialized
+../src/Lisa.c:60:1: error: parameter 'bitCount' is initialized
+ int receiverBufferCounter, bitCount = 8, receiverBitCounter = 7;
+ ^
+../src/Lisa.c:60:1: error: parameter 'receiverBitCounter' is initialized
+../src/Lisa.c:61:1: error: parameter 'acknowledgement' is initialized
+ const char *acknowledgement = "ACKSENT";
+ ^
+../src/Lisa.c:63:1: error: parameter 'binaryDataFormat' is initialized
+ bool binaryDataFormat = false, characterDataFormat = true;
+ ^
+../src/Lisa.c:63:1: error: parameter 'characterDataFormat' is initialized
+../src/Lisa.c:66:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+../src/Lisa.c:93:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+../src/Lisa.c:126:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+../src/Lisa.c:151:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+In file included from ../src/Lisa.c:20:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/ReceiverSource.h:22:5: error: old-style parameter declarations in prototyped function definition
+ int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
+     ^
+../src/Lisa.c:514:1: error: expected '{' at end of input
+ }
+ ^
+../src/Lisa.c:514:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/Lisa.o] Error 1
+20:47:47 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+20:47:48 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+In file included from ../src/Lisa.c:22:0:
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h: In function 'DistanceCalculationAndDetectionOfData':
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:23:27: error: storage class specified for parameter '___gnuc_va_list'
+ typedef __builtin_va_list ___gnuc_va_list;
+                           ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:24:25: error: expected '=', ',', ';', 'asm' or '__attribute__' before '__va_list'
+ typedef ___gnuc_va_list __va_list;
+                         ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:31:30: error: storage class specified for parameter 'FILE'
+ typedef struct __FILE_struct FILE;
+                              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:41:3: error: storage class specified for parameter 'fpos_t'
+ } fpos_t;
+   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:105:22: error: expected '=', ',', ';', 'asm' or '__attribute__' before '__Ciob'
+ extern __THREAD FILE __Ciob[];
+                      ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:115:12: error: storage class specified for parameter 'remove'
+ extern int remove(const char *filename);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:116:12: error: storage class specified for parameter 'rename'
+ extern int rename(const char *old, const char *new);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:117:13: error: expected '=', ',', ';', 'asm' or '__attribute__' before '*' token
+ extern FILE *tmpfile(void);
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:118:14: error: storage class specified for parameter 'tmpnam'
+ extern char *tmpnam(char *s);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:119:19: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fclose(FILE *stream);
+                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:120:19: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fflush(FILE *stream);
+                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:121:13: error: expected '=', ',', ';', 'asm' or '__attribute__' before '*' token
+ extern FILE *fopen(const char * restrict filename,
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:123:13: error: expected '=', ',', ';', 'asm' or '__attribute__' before '*' token
+ extern FILE *freopen(const char * restrict filename,
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:126:20: error: expected declaration specifiers or '...' before 'FILE'
+ extern void setbuf(FILE * restrict stream,
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:128:20: error: expected declaration specifiers or '...' before 'FILE'
+ extern int setvbuf(FILE * restrict stream,
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:131:20: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fprintf(FILE * restrict stream,
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:133:19: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fscanf(FILE * restrict stream,
+                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:135:12: error: storage class specified for parameter 'printf'
+ extern int printf(const char * restrict format, ...);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:136:12: error: storage class specified for parameter 'scanf'
+ extern int scanf(const char * restrict format, ...);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:137:12: error: storage class specified for parameter 'snprintf'
+ extern int snprintf(char * restrict s, size_t n,
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:139:12: error: storage class specified for parameter 'sprintf'
+ extern int sprintf(char * restrict s,
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:141:12: error: storage class specified for parameter 'sscanf'
+ extern int sscanf(const char * restrict s,
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:143:21: error: expected declaration specifiers or '...' before 'FILE'
+ extern int vfprintf(FILE * restrict stream,
+                     ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:144:51: error: unknown type name '__va_list'
+                     const char * restrict format, __va_list arg);
+                                                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:145:20: error: expected declaration specifiers or '...' before 'FILE'
+ extern int vfscanf(FILE * restrict stream,
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:146:50: error: unknown type name '__va_list'
+                    const char * restrict format, __va_list arg);
+                                                  ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:147:50: error: unknown type name '__va_list'
+ extern int vprintf(const char * restrict format, __va_list arg);
+                                                  ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:150:52: error: unknown type name '__va_list'
+                      const char * restrict format, __va_list arg);
+                                                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:152:51: error: unknown type name '__va_list'
+                     const char * restrict format, __va_list arg);
+                                                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:153:18: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fgetc(FILE *stream);
+                  ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:155:20: error: expected declaration specifiers or '...' before 'FILE'
+                    FILE * restrict stream);
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:156:25: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fputc(int c, FILE *stream);
+                         ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:158:18: error: expected declaration specifiers or '...' before 'FILE'
+                  FILE * restrict stream);
+                  ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:159:21: error: expected declaration specifiers or '...' before 'FILE'
+ extern int __filbuf(FILE *);
+                     ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:160:17: error: expected declaration specifiers or '...' before 'FILE'
+ extern int getc(FILE *stream);
+                 ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:163:12: error: storage class specified for parameter 'getchar'
+ extern int getchar(void);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:165:14: error: storage class specified for parameter 'gets'
+ extern char *gets(char *s);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:166:24: error: expected declaration specifiers or '...' before 'FILE'
+ extern int putc(int c, FILE *stream);
+                        ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:167:32: error: expected declaration specifiers or '...' before 'FILE'
+ extern int __flsbuf(int /*c*/, FILE * /*stream*/);
+                                ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:174:12: error: storage class specified for parameter 'putchar'
+ extern int putchar(int c);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:176:12: error: storage class specified for parameter 'puts'
+ extern int puts(const char *s);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:177:26: error: expected declaration specifiers or '...' before 'FILE'
+ extern int ungetc(int c, FILE *stream);
+                          ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:180:21: error: expected declaration specifiers or '...' before 'FILE'
+                     FILE * restrict stream);
+                     ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:183:22: error: expected declaration specifiers or '...' before 'FILE'
+                      FILE * restrict stream);
+                      ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:184:20: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fgetpos(FILE * restrict stream,
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:185:20: error: expected declaration specifiers or '...' before 'fpos_t'
+                    fpos_t * restrict pos);
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:186:18: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fseek(FILE *stream, long int offset, int whence);
+                  ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:187:20: error: expected declaration specifiers or '...' before 'FILE'
+ extern int fsetpos(FILE *stream, const fpos_t *pos);
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:187:47: error: expected ';', ',' or ')' before '*' token
+ extern int fsetpos(FILE *stream, const fpos_t *pos);
+                                               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:188:23: error: expected declaration specifiers or '...' before 'FILE'
+ extern long int ftell(FILE *stream);
+                       ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:189:20: error: expected declaration specifiers or '...' before 'FILE'
+ extern void rewind(FILE *stream);
+                    ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:190:22: error: expected declaration specifiers or '...' before 'FILE'
+ extern void clearerr(FILE *stream);
+                      ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:191:17: error: expected declaration specifiers or '...' before 'FILE'
+ extern int feof(FILE *stream);
+                 ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:193:19: error: expected declaration specifiers or '...' before 'FILE'
+ extern int ferror(FILE *stream);
+                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:195:13: error: storage class specified for parameter 'perror'
+ extern void perror(const char *s);
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:198:21: error: expected declaration specifiers or '...' before 'FILE'
+ extern int _fprintf(FILE *fp, const char *fmt, ...);
+                     ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:199:12: error: storage class specified for parameter '_printf'
+ extern int _printf(const char *fmt, ...);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:200:12: error: storage class specified for parameter '_sprintf'
+ extern int _sprintf(char *buff, const char *fmt, ...);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:201:51: error: unknown type name '__va_list'
+ extern int _vprintf(const char * restrict format, __va_list arg);
+                                                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:202:22: error: expected declaration specifiers or '...' before 'FILE'
+ extern int _vfprintf(FILE *p, const char *fmt, __va_list args);
+                      ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:202:48: error: unknown type name '__va_list'
+ extern int _vfprintf(FILE *p, const char *fmt, __va_list args);
+                                                ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:203:51: error: unknown type name '__va_list'
+ extern int _vsprintf(char *buff, const char *fmt, __va_list args);
+                                                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:204:12: error: storage class specified for parameter '_snprintf'
+ extern int _snprintf(char *buff, size_t limit, const char *fmt, ...);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:205:66: error: unknown type name '__va_list'
+ extern int _vsnprintf(char *buff, size_t limit, const char *fmt, __va_list args);
+                                                                  ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:208:12: error: storage class specified for parameter '_printf_char'
+ extern int _printf_char(const char *fmt, ...);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:209:12: error: storage class specified for parameter 'printf_char'
+ extern int printf_char(const char *fmt, ...);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdio.h:211:12: error: storage class specified for parameter 'puts_char'
+ extern int puts_char(const char *s);
+            ^
+In file included from ../src/Lisa.c:23:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/Common.h:17:3: error: storage class specified for parameter 'ShiftDirection'
+ } ShiftDirection;
+   ^
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/Common.h:20:86: error: expected declaration specifiers or '...' before 'ShiftDirection'
+ void ShiftRegister(uint8_t *ShiftBuffer, uint8_t *ShiftedBuffer, int lengthOfBuffer, ShiftDirection shiftDirection, int shiftCount);
+                                                                                      ^
+In file included from ../src/Lisa.c:24:0:
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:22:24: error: storage class specified for parameter 'wchar_t'
+ typedef __WCHAR_TYPE__ wchar_t;
+                        ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:29:41: error: storage class specified for parameter 'div_t'
+ typedef struct div_t { int quot, rem; } div_t;
+                                         ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:31:47: error: storage class specified for parameter 'ldiv_t'
+ typedef struct ldiv_t { long int quot, rem; } ldiv_t;
+                                               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:33:53: error: storage class specified for parameter 'lldiv_t'
+ typedef struct lldiv_t { long long int quot, rem; } lldiv_t;
+                                                     ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:51:15: error: storage class specified for parameter 'atof'
+ extern double atof(const char *nptr);
+               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:52:12: error: storage class specified for parameter 'atoi'
+ extern int atoi(const char *nptr);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:53:17: error: storage class specified for parameter 'atol'
+ extern long int atol(const char *nptr);
+                 ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:55:15: error: storage class specified for parameter 'strtod'
+ extern double strtod(const char * restrict nptr,
+               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:57:14: error: storage class specified for parameter 'strtof'
+ extern float strtof(const char * restrict nptr,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:60:17: error: storage class specified for parameter 'strtol'
+ extern long int strtol(const char * restrict nptr,
+                 ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:63:26: error: storage class specified for parameter 'strtoul'
+ extern unsigned long int strtoul(const char * restrict nptr,
+                          ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:66:12: error: storage class specified for parameter 'rand'
+ extern int rand(void);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:67:13: error: storage class specified for parameter 'srand'
+ extern void srand(unsigned int seed);
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:68:14: error: storage class specified for parameter 'calloc'
+ extern void *calloc(size_t nmemb, size_t size);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:69:13: error: storage class specified for parameter 'free'
+ extern void free(void *ptr);
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:70:14: error: storage class specified for parameter 'malloc'
+ extern void *malloc(size_t size);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:71:14: error: storage class specified for parameter 'realloc'
+ extern void *realloc(void *ptr, size_t size);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:72:13: error: storage class specified for parameter 'abort'
+ extern void abort(void);
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:73:12: error: storage class specified for parameter 'atexit'
+ extern int atexit(void (*func)(void));
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:74:13: error: storage class specified for parameter 'exit'
+ extern void exit(int status);
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:76:14: error: storage class specified for parameter 'getenv'
+ extern char *getenv(const char *name);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:77:12: error: storage class specified for parameter 'system'
+ extern int system(const char *string);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:78:14: error: storage class specified for parameter 'bsearch'
+ extern void *bsearch(const void *key, const void *base,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:81:13: error: storage class specified for parameter 'qsort'
+ extern void qsort(void *base, size_t nmemb, size_t size,
+             ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:83:12: error: storage class specified for parameter 'abs'
+ extern int abs(int j);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:84:17: error: storage class specified for parameter 'labs'
+ extern long int labs(long int j);
+                 ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:86:14: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'div'
+ extern div_t div(int numer, int denom);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:87:15: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'ldiv'
+ extern ldiv_t ldiv(long int numer, long int denom);
+               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:89:12: error: storage class specified for parameter 'mblen'
+ extern int mblen(const char *s, size_t n);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:90:19: error: expected declaration specifiers or '...' before 'wchar_t'
+ extern int mbtowc(wchar_t * restrict pwc,
+                   ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:92:28: error: expected declaration specifiers or '...' before 'wchar_t'
+ extern int wctomb(char *s, wchar_t wchar);
+                            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:93:24: error: expected declaration specifiers or '...' before 'wchar_t'
+ extern size_t mbstowcs(wchar_t * restrict pwcs,
+                        ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:96:38: error: expected ';', ',' or ')' before '*' token
+                        const wchar_t * restrict pwcs, size_t n);
+                                      ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:101:15: error: storage class specified for parameter 'uitoa'
+ extern char * uitoa(unsigned int value, char *vstring, unsigned int base);
+               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\stdlib.h:102:15: error: storage class specified for parameter 'itoa'
+ extern char * itoa(int value, char *vstring, unsigned int base);
+               ^
+In file included from ../src/Lisa.c:25:0:
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:33:14: error: storage class specified for parameter 'memcpy'
+ extern void *memcpy(void * restrict __s1,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:35:14: error: storage class specified for parameter 'memmove'
+ extern void *memmove(void *__s1, const void *__s2, size_t __n);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:36:14: error: storage class specified for parameter 'strcpy'
+ extern char *strcpy(char * restrict __s1,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:38:14: error: storage class specified for parameter 'strncpy'
+ extern char *strncpy(char * restrict __s1,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:40:14: error: storage class specified for parameter 'strcat'
+ extern char *strcat(char * restrict __s1,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:42:14: error: storage class specified for parameter 'strncat'
+ extern char *strncat(char * restrict __s1,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:44:12: error: storage class specified for parameter 'memcmp'
+ extern int memcmp(const void *__s1, const void *__s2, size_t __n);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:45:12: error: storage class specified for parameter 'strcmp'
+ extern int strcmp(const char *__s1, const char *__s2);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:46:12: error: storage class specified for parameter 'strcoll'
+ extern int strcoll(const char *__s1, const char *__s2);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:47:12: error: storage class specified for parameter 'strncmp'
+ extern int strncmp(const char *__s1, const char *__s2, size_t __n);
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:50:14: error: storage class specified for parameter 'memchr'
+ extern void *memchr(const void *__s, int __c, size_t ____n);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:51:14: error: storage class specified for parameter 'strchr'
+ extern char *strchr(const char *__s, int __c);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:52:15: error: storage class specified for parameter 'strcspn'
+ extern size_t strcspn(const char *__s1, const char *__s2);
+               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:53:14: error: storage class specified for parameter 'strpbrk'
+ extern char *strpbrk(const char *__s1, const char *__s2);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:54:14: error: storage class specified for parameter 'strrchr'
+ extern char *strrchr(const char *s, int c);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:55:15: error: storage class specified for parameter 'strspn'
+ extern size_t strspn(const char *__s1, const char *__s2);
+               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:56:14: error: storage class specified for parameter 'strstr'
+ extern char *strstr(const char *__s1, const char *__s2);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:57:14: error: storage class specified for parameter 'strtok'
+ extern char *strtok(char * restrict __s1,
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:59:14: error: storage class specified for parameter 'memset'
+ extern void *memset(void *__s, int __c, size_t __n);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:60:14: error: storage class specified for parameter 'strerror'
+ extern char *strerror(int __errnum);
+              ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:61:15: error: storage class specified for parameter 'strlen'
+ extern size_t strlen(const char *__s);
+               ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:66:12: error: storage class specified for parameter 'strncasecmp'
+ extern int strncasecmp(char const *s1, char const *s2, size_t n) ;
+            ^
+c:\nxp\lpcxpresso_8.2.2_650\lpcxpresso\tools\redlib\include\string.h:67:12: error: storage class specified for parameter 'strcasecmp'
+ extern int strcasecmp(const char * s1, const char * s2);
+            ^
+../src/Lisa.c:28:1: error: parameter 'maxTransmitData' is initialized
+ int maxTransmitData = 30;
+ ^
+../src/Lisa.c:34:1: error: parameter 'transmitBitCounter' is initialized
+ int transmitBufferCounter, transmitBitCounter = 7;
+ ^
+../src/Lisa.c:36:1: error: parameter 'sizeOfsyncField' is initialized
+ int sizeOfsyncField = 32, dataLengthAdditions = 3, dataLengthByte = 34;
+ ^
+../src/Lisa.c:36:1: error: parameter 'dataLengthAdditions' is initialized
+../src/Lisa.c:36:1: error: parameter 'dataLengthByte' is initialized
+../src/Lisa.c:37:1: error: parameter 'k' is initialized
+ int k=8, n=12;
+ ^
+../src/Lisa.c:37:1: error: parameter 'n' is initialized
+../src/Lisa.c:54:1: error: parameter 'receiveBufferLength' is initialized
+ int receiveBufferLength = 1024, receivedDataLength, actualDataLength = 0, receivedBinaryDataLength;
+ ^
+../src/Lisa.c:54:1: error: parameter 'actualDataLength' is initialized
+../src/Lisa.c:55:1: error: parameter 'bitReceived' is initialized
+ bool bitReceived = false, receiveBufferFull = false, bitReadyForTransmit = false, dataReceived = false;
+ ^
+../src/Lisa.c:55:1: error: parameter 'receiveBufferFull' is initialized
+../src/Lisa.c:55:1: error: parameter 'bitReadyForTransmit' is initialized
+../src/Lisa.c:55:1: error: parameter 'dataReceived' is initialized
+../src/Lisa.c:60:1: error: parameter 'bitCount' is initialized
+ int receiverBufferCounter, bitCount = 8, receiverBitCounter = 7;
+ ^
+../src/Lisa.c:60:1: error: parameter 'receiverBitCounter' is initialized
+../src/Lisa.c:61:1: error: parameter 'acknowledgement' is initialized
+ const char *acknowledgement = "ACKSENT";
+ ^
+../src/Lisa.c:63:1: error: parameter 'binaryDataFormat' is initialized
+ bool binaryDataFormat = false, characterDataFormat = true;
+ ^
+../src/Lisa.c:63:1: error: parameter 'characterDataFormat' is initialized
+../src/Lisa.c:66:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+../src/Lisa.c:93:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+../src/Lisa.c:126:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+../src/Lisa.c:151:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+In file included from ../src/Lisa.c:20:0:
+D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc/ReceiverSource.h:22:5: error: old-style parameter declarations in prototyped function definition
+ int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
+     ^
+../src/Lisa.c:514:1: error: expected '{' at end of input
+ }
+ ^
+../src/Lisa.c:514:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/Lisa.o] Error 1
+20:48:13 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+20:48:14 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:172:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:139:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:78:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:77:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:181:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:179:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'LinearBlockDecoding':
+../src/ReceiverSource.c:466:1: error: expected declaration or statement at end of input
+ }
+ ^
+../src/ReceiverSource.c:429:43: warning: unused variable 'encodedByteCount' [-Wunused-variable]
+  int firstByteCount, secondByteCount = 0, encodedByteCount, nCount;
+                                           ^
+../src/ReceiverSource.c:428:6: warning: variable 'encodedBytesSeparately' set but not used [-Wunused-but-set-variable]
+  int encodedBytesSeparately[12];
+      ^
+../src/ReceiverSource.c:426:27: warning: unused variable 'minDistanceIndex' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                           ^
+../src/ReceiverSource.c:426:17: warning: unused variable 'kVal' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                 ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:148:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/ReceiverSource.o] Error 1
+20:48:26 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+20:48:27 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:139:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:78:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:77:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:181:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:179:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'LinearBlockDecoding':
+../src/ReceiverSource.c:429:43: warning: unused variable 'encodedByteCount' [-Wunused-variable]
+  int firstByteCount, secondByteCount = 0, encodedByteCount, nCount;
+                                           ^
+../src/ReceiverSource.c:428:6: warning: variable 'encodedBytesSeparately' set but not used [-Wunused-but-set-variable]
+  int encodedBytesSeparately[12];
+      ^
+../src/ReceiverSource.c:426:27: warning: unused variable 'minDistanceIndex' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                           ^
+../src/ReceiverSource.c:426:17: warning: unused variable 'kVal' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                 ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:148:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:144:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       20900 B       512 KB      3.99%
+        RamLoc32:        4624 B        32 KB     14.11%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  20720	    180	   4444	  25344	   6300	Lisa.axf
+ 
+20:49:11 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:139:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:78:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:77:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:181:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:179:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'LinearBlockDecoding':
+../src/ReceiverSource.c:429:43: warning: unused variable 'encodedByteCount' [-Wunused-variable]
+  int firstByteCount, secondByteCount = 0, encodedByteCount, nCount;
+                                           ^
+../src/ReceiverSource.c:428:6: warning: variable 'encodedBytesSeparately' set but not used [-Wunused-but-set-variable]
+  int encodedBytesSeparately[12];
+      ^
+../src/ReceiverSource.c:426:27: warning: unused variable 'minDistanceIndex' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                           ^
+../src/ReceiverSource.c:426:17: warning: unused variable 'kVal' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                 ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:148:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:144:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+../src/ReceiverSource.c: In function 'LinearBlockDecoding':
+../src/ReceiverSource.c:432:2: warning: 'encodedBytes' is used uninitialized in this function [-Wuninitialized]
+  DistanceCalculationAndDetectionOfData(encodedBytes);
+  ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       20916 B       512 KB      3.99%
+        RamLoc32:        4624 B        32 KB     14.11%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  20736	    180	   4444	  25360	   6310	Lisa.axf
+ 
+20:49:50 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+20:49:51 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:172:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building file: ../src/ReceiverSource.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/ReceiverSource.d" -MT"src/ReceiverSource.o" -MT"src/ReceiverSource.d" -o "src/ReceiverSource.o" "../src/ReceiverSource.c"
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:139:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("error count %d\n", error_count);
+     ^
+../src/ReceiverSource.c:78:7: warning: unused variable 'keyFound' [-Wunused-variable]
+  bool keyFound=false;
+       ^
+../src/ReceiverSource.c:77:10: warning: unused variable 'key_arr' [-Wunused-variable]
+  uint8_t key_arr[31];
+          ^
+../src/ReceiverSource.c: In function 'LISAProcessingReceivedData':
+../src/ReceiverSource.c:181:6: warning: unused variable 'bitCounter' [-Wunused-variable]
+  int bitCounter = 0;
+      ^
+../src/ReceiverSource.c:179:61: warning: variable 'secondHalfDetected' set but not used [-Wunused-but-set-variable]
+  bool syncFieldDetected = false, firstHalfDetected = false, secondHalfDetected = false, ignoreFourBits = false;
+                                                             ^
+../src/ReceiverSource.c: In function 'LinearBlockDecoding':
+../src/ReceiverSource.c:429:43: warning: unused variable 'encodedByteCount' [-Wunused-variable]
+  int firstByteCount, secondByteCount = 0, encodedByteCount, nCount;
+                                           ^
+../src/ReceiverSource.c:428:6: warning: variable 'encodedBytesSeparately' set but not used [-Wunused-but-set-variable]
+  int encodedBytesSeparately[12];
+      ^
+../src/ReceiverSource.c:426:27: warning: unused variable 'minDistanceIndex' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                           ^
+../src/ReceiverSource.c:426:17: warning: unused variable 'kVal' [-Wunused-variable]
+  int nVal = 12, kVal = 8, minDistanceIndex;
+                 ^
+../src/ReceiverSource.c: In function 'FindMessage':
+../src/ReceiverSource.c:148:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/ReceiverSource.c:144:17: warning: 'key' may be used uninitialized in this function [-Wmaybe-uninitialized]
+    retValues[2] = key;
+                 ^
+Finished building: ../src/ReceiverSource.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       20908 B       512 KB      3.99%
+        RamLoc32:        4624 B        32 KB     14.11%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  20728	    180	   4444	  25352	   6308	Lisa.axf
+ 
+20:50:25 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+20:52:27 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+20:52:28 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:174:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       20908 B       512 KB      3.99%
+        RamLoc32:        4624 B        32 KB     14.11%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  20728	    180	   4444	  25352	   6308	Lisa.axf
+ 
+20:52:33 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+20:55:48 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:174:22: warning: unused variable 'i' [-Wunused-variable]
+  volatile static int i = 0 ;
+                      ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       20900 B       512 KB      3.99%
+        RamLoc32:        4624 B        32 KB     14.11%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  20720	    180	   4444	  25344	   6300	Lisa.axf
+ 

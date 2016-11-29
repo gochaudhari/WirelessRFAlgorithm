@@ -37,6 +37,7 @@ int sizeOfsyncField = 32, dataLengthAdditions = 3, dataLengthByte = 34;
 int k=8, n=12;
 int generatorMatrix[8][12];
 int transposeMatrix[12][4];
+uint16_t CMatrix[256];
 
 #ifdef ScramblingAndDescrambling
 int scrambleAndDescrambleOrder;
@@ -158,6 +159,8 @@ int main(void)
 
 	SetUpGPIOPins();
 
+//	CreationOfCMatrices();
+//	DistanceCalculationAndDetectionOfData(12);
 #ifdef TransmitDebug
 	// There won't be anything done by the controller in the transmit mode since the button does everything.
 #endif
@@ -433,6 +436,10 @@ int main(void)
 						PrintData(Buffer, receivedDataLength, dataLengthByte);
 #endif
 
+#ifdef LinearBlockCoding
+						CreationOfCMatrices();
+						LinearBlockDecoding();
+#endif
 						// Descramble and Print Received data
 #ifdef ScramblingAndDescrambling
 						printf("\nReceived Scrambled Data: ");
