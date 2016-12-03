@@ -228,6 +228,7 @@ int main(void)
 
 #ifdef LinearBlockCoding
 			GenerateMatrix(k,n);
+			TransposeMatrix(8,12);
 #endif
 
 			if(dataFormat == 'B')

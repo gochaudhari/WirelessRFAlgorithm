@@ -25,6 +25,8 @@ extern int receiveBufferLength, receivedDataLength, actualDataLength;
 extern bool bitReceived, dataReceived;
 extern int receiverBufferCounter, bitCount, receiverBitCounter;
 extern char TransmitBuffer[50]; // 8 bytes of initial sync and then next is the data. Assume 8 + 8
+extern int transposeMatrix[12][4];
+
 extern int sizeOfsyncField;
 
 // For LBC Coding
@@ -32,7 +34,7 @@ extern uint16_t CMatrix[256];			// This matrix is used for caculation of distanc
 extern int generatorMatrix[8][12];
 
 #ifdef EncryptedCommunication
-	extern bool encryptEntireData;
+extern bool encryptEntireData;
 #endif
 int sync_field_count;
 
@@ -84,34 +86,34 @@ int * FindMessage()
 
 #if defined(EncryptedCommunication)
 
-		for(dataCounter = 0; dataCounter < receiveBufferLength; dataCounter++)
+	for(dataCounter = 0; dataCounter < receiveBufferLength; dataCounter++)
+	{
+		if(sync_field_count < no_of_sync_bytes)
 		{
-			if(sync_field_count < no_of_sync_bytes)
-			{
-				dataByte = Buffer[dataCounter];
+			dataByte = Buffer[dataCounter];
 
-				key_arr[dataCounter] = dataByte ^ Kernel[dataCounter];
-				sync_field_count++;
-			}
-			else if(!keyFound)
-			{
-				key = FindMostOccuringElement(key_arr);
-				keyFound =true;
-			}
+			key_arr[dataCounter] = dataByte ^ Kernel[dataCounter];
+			sync_field_count++;
 		}
-
-		sync_field_count=0;
-
-		for(dataCounter = 0; dataCounter<receiveBufferLength;dataCounter++)
+		else if(!keyFound)
 		{
-			if(sync_field_count < no_of_sync_bytes)
-			{
-				Buffer[dataCounter] = Buffer[dataCounter] ^ key;
-				sync_field_count++;
-			}
+			key = FindMostOccuringElement(key_arr);
+			keyFound =true;
 		}
+	}
 
-		sync_field_count=0;
+	sync_field_count=0;
+
+	for(dataCounter = 0; dataCounter<receiveBufferLength;dataCounter++)
+	{
+		if(sync_field_count < no_of_sync_bytes)
+		{
+			Buffer[dataCounter] = Buffer[dataCounter] ^ key;
+			sync_field_count++;
+		}
+	}
+
+	sync_field_count=0;
 #endif
 
 	for(dataCounter = 0; dataCounter < receiveBufferLength; dataCounter++)
@@ -294,9 +296,9 @@ int* ProcessLISAOnReceivedData()
 			for(internalBufferCount = 0; internalBufferCount < 50/*receiveBufferLength*/; internalBufferCount++)
 			{
 				Buffer[internalBufferCount] = ReceiveBuffer[mainByteCount + internalBufferCount];
-//				printf("%x", Buffer[internalBufferCount]);
+				//				printf("%x", Buffer[internalBufferCount]);
 			}
-//			printf("\n");
+			//			printf("\n");
 			firstBitIndex = 1;
 			secondBitIndex = 0;
 			firstByte = ReceiveBuffer[mainByteCount];
@@ -316,9 +318,9 @@ int* ProcessLISAOnReceivedData()
 				localByte |= (secondByte >> (7 - secondBitIndex));
 
 				Buffer[internalBufferCount] = localByte;
-//				printf("%x", Buffer[internalBufferCount]);
+				//				printf("%x", Buffer[internalBufferCount]);
 			}
-//			printf("\n");
+			//			printf("\n");
 			firstBitIndex++;
 			secondBitIndex++;
 
@@ -374,8 +376,8 @@ void DescrambleReceivedData(int descramblingOrder)
 	ShiftRegister((uint8_t *)ReceivedData, shiftByLowerStage, actualDataLength, right, lowerStageCount);
 	ShiftRegister((uint8_t *)ReceivedData, shiftByFullStages, actualDataLength, right, descramblingOrder);
 
-//	PrintData((uint8_t *)ReceivedData, actualDataLength, actualDataLength);
-//	PrintData(shiftByFive, actualDataLength, actualDataLength);
+	//	PrintData((uint8_t *)ReceivedData, actualDataLength, actualDataLength);
+	//	PrintData(shiftByFive, actualDataLength, actualDataLength);
 	// Adding all these three data's and then getting the final buffer data
 	for(counter = 0; counter < actualDataLength; counter++)
 	{
@@ -400,14 +402,14 @@ void CreationOfCMatrices()
 	}
 }
 
-inline int min(int num1, int num2) {
-  return num1 < num2 ? num1 : num2;
+int min(int num1, int num2) {
+	return num1 < num2 ? num1 : num2;
 }
 
 // Returns the index of minimum distance found
 int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
 {
-	int counter = 0, similarCount, prevSimilarCount, minVal = CMatrix[0], minIndex = 0;
+	int counter = 0, similarCount, minVal = CMatrix[0], minIndex = 0;
 	uint16_t xoredNumber = 0;
 
 	// The input length would be the length of
@@ -420,7 +422,7 @@ int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
 		xoredNumber = (xoredNumber & 0x3333) + ((xoredNumber >> 2) & 0x3333);
 		similarCount = (((xoredNumber + (xoredNumber >> 4)) & 0x0F0F) * 0x0101) >> 8;
 
-		if(number == 0)
+		if(similarCount == 0)
 		{
 			minIndex = counter;
 			break;
@@ -441,11 +443,11 @@ int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
 // Extract bytes from the main data length and then feed it to syndrome and
 void LinearBlockDecoding()
 {
-	int nVal = 12, kVal = 8, minDistanceIndex;
+	int nVal = 12, minDistanceIndex;
 	uint16_t encodedBytes;
 	int encodedBytesSeparately[12];
 	int firstByteCount, secondByteCount = 0, encodedByteCount, nCount;
-	bool ifError = false;
+	bool isError = false;
 
 	for(secondByteCount = 1; secondByteCount < receivedDataLength; secondByteCount++)
 	{
@@ -471,18 +473,53 @@ void LinearBlockDecoding()
 		}
 
 		// Akshay to call the Syndrome function
-		//-------------------------------------------------------------------
-		//-------------------------------------------------------------------
+		isError = IsSyndromeZero(encodedBytesSeparately);
 
-		if(ifError)
+		if(isError)
 		{
-			DistanceCalculationAndDetectionOfData(encodedBytes);
+			minDistanceIndex = DistanceCalculationAndDetectionOfData(encodedBytes);
 		}
+
+
 	}
 
 
 }
 
+bool IsSyndromeZero(int *receivedMatrix)
+{
+	bool syndromeResult = false;
+	int syndromeMatrix[12 - 8];
+	int rowCounter,columnCounter;
+	int rowLimit = 12;
+	int columnLimit = 12 - 8;
+
+	//Loops to computer Syndrome word
+	for(columnCounter = 0; columnCounter < columnLimit; columnCounter++)
+	{
+		for(rowCounter = 0;rowCounter < rowLimit; rowCounter++)
+		{
+			syndromeMatrix[columnCounter] =   syndromeMatrix[columnCounter]
+															 + receivedMatrix[rowCounter]*transposeMatrix[rowCounter][columnCounter];
+		}
+	}
+
+	//Check if computed syndrome word is zero
+	for(columnCounter=0;columnCounter<columnLimit;columnCounter++)
+	{
+		if(syndromeMatrix[columnCounter]==0){
+			syndromeResult=true;
+		}
+		else
+		{
+			syndromeResult=false;
+			return syndromeResult;
+		}
+
+	}
+
+	return syndromeResult;
+}
 #endif
 
 #ifdef ReceiveDebug
