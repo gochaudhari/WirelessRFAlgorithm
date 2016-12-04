@@ -443,28 +443,32 @@ int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
 // Extract bytes from the main data length and then feed it to syndrome and
 void LinearBlockDecoding()
 {
-	int nVal = 12, minDistanceIndex;
+	int nVal = 12, minDistanceIndex, finalDataIndex = 0;
 	uint16_t encodedBytes;
 	int encodedBytesSeparately[12];
 	int firstByteCount, secondByteCount = 0, encodedByteCount, nCount;
 	bool isError = false;
+	uint8_t dataExtracted;
 
-	for(secondByteCount = 1; secondByteCount < receivedDataLength; secondByteCount++)
+	for(secondByteCount = 1; secondByteCount < actualDataLength;)
 	{
 		firstByteCount = secondByteCount - 1;
 
+		finalDataIndex = (firstByteCount - (firstByteCount/3));
 		encodedBytes = 0;
 		// This is the first byte full and second byte half
-		if(firstByteCount % 2 == 0)
+		if(finalDataIndex % 2 == 0)
 		{
-			encodedBytes |= (ReceivedData[firstByteCount] << 11);
+			encodedBytes |= (ReceivedData[firstByteCount] << 4);
 			encodedBytes |= (ReceivedData[secondByteCount] >> 4);
+			secondByteCount++;
 		}
 		// This is second byte full and first byte half
 		else
 		{
-			encodedBytes |= (ReceivedData[firstByteCount] << 15);
-			encodedBytes |= (ReceivedData[secondByteCount] << 7);
+			encodedBytes |= ((ReceivedData[firstByteCount] & 0x0F) << 8);
+			encodedBytes |= (ReceivedData[secondByteCount] << 0);
+			secondByteCount = secondByteCount + 2;
 		}
 
 		for(nCount = 0; nCount < nVal; nCount++)
@@ -478,12 +482,15 @@ void LinearBlockDecoding()
 		if(isError)
 		{
 			minDistanceIndex = DistanceCalculationAndDetectionOfData(encodedBytes);
+			dataExtracted = (CMatrix[minDistanceIndex] >> 4);
 		}
-
-
+		else
+		{
+			dataExtracted = (encodedBytes >> 4);
+		}
+		ReceivedData[finalDataIndex] = dataExtracted;
 	}
-
-
+	actualDataLength = finalDataIndex + 1;
 }
 
 bool IsSyndromeZero(int *receivedMatrix)

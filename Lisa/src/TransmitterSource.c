@@ -162,6 +162,14 @@ void EncodeUsingLinearBlockCoding()
 
 	for(byteCount = 0; byteCount < transmitDataLength; byteCount++)
 	{
+		LBCEncodedBytes[byteCount] = 0;
+	}
+
+	for(byteCount = 0; byteCount < transmitDataLength; byteCount++)
+	{
+		encodedFirstByteCount = byteCount + (byteCount/2);
+		encodedSecondByteCount = byteCount + (byteCount/2) + 1;
+
 		// Encoding using generator matrix
 		for(nCount = 0; nCount < nVal; nCount++)
 		{
@@ -169,10 +177,8 @@ void EncodeUsingLinearBlockCoding()
 			for(kCount = 0; kCount < kVal; kCount++)
 			{
 				// Performing matrix multiplication of input and Generator matrix bits
-				middleVarSum = middleVarSum ^ ((TransmittedData[byteCount] >> (7 - kCount)) & 0x01) * generatorMatrix[kCount][nCount];
+				middleVarSum = middleVarSum ^ (((TransmittedData[byteCount] >> (7 - kCount)) & 0x01) * generatorMatrix[kCount][nCount]);
 			}
-			encodedFirstByteCount = byteCount + (byteCount/2);
-			encodedSecondByteCount = byteCount + (byteCount/2) + 1;
 
 			if(byteCount % 2 == 0)
 			{
