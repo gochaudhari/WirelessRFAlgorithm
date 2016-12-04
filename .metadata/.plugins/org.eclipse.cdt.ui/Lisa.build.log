@@ -1,6 +1,6 @@
-19:18:15 **** Incremental Build of configuration Debug for project Lisa ****
+22:44:47 **** Incremental Build of configuration Debug for project Lisa ****
 make -r all 
 make: Nothing to be done for `all'.
 
-19:18:15 Build Finished (took 95ms)
+22:44:47 Build Finished (took 90ms)
 

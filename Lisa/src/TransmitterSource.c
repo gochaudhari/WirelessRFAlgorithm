@@ -160,7 +160,7 @@ void EncodeUsingLinearBlockCoding()
 	uint8_t LBCEncodedBytes[45];				// Size is 45 since the max size of input data is 30 bytes. Should be 1.5 times of input data
 	int nCount, kCount, byteCount, encodedFirstByteCount, encodedSecondByteCount, middleVarSum;
 
-	for(byteCount = 0; byteCount < transmitDataLength; byteCount++)
+	for(byteCount = 0; byteCount < (transmitDataLength + transmitDataLength/2); byteCount++)
 	{
 		LBCEncodedBytes[byteCount] = 0;
 	}

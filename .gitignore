@@ -1,5 +1,5 @@
 *.ld
 *.ini
-.metadata/
+*.metadata/
 *.exe
 Lisa/Debug/
