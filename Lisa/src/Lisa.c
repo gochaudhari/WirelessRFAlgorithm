@@ -38,6 +38,7 @@ int k=8, n=12;
 int generatorMatrix[8][12];
 int transposeMatrix[12][4];
 uint16_t CMatrix[256];
+uint16_t receivedCMatrix[265];
 
 #ifdef ScramblingAndDescrambling
 int scrambleAndDescrambleOrder;
@@ -439,6 +440,7 @@ int main(void)
 
 #ifdef LinearBlockCoding
 						CreationOfCMatrices();
+						IntroduceErrorBit();
 						LinearBlockDecoding();
 #endif
 						// Descramble and Print Received data

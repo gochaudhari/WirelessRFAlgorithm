@@ -16,9 +16,10 @@ int* FindMessage();
 void DecryptReceivedSyncField(uint8_t key);
 void DescrambleReceivedData(int descramblingOrder);
 uint8_t FindMostOccuringElement(uint8_t key_arr[]);
-bool IsSyndromeZero(int *receivedMatrix);
+bool IsSyndromeNonZero(int *receivedMatrix);
 
 void CreationOfCMatrices();
+void IntroduceErrorBit();
 void LinearBlockDecoding();
 int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes);
 

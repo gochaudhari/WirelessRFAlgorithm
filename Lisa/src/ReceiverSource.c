@@ -293,7 +293,7 @@ int* ProcessLISAOnReceivedData()
 		{
 			// This is new 8 byte data frame start.
 			// So copy this data in the new Buffer
-			for(internalBufferCount = 0; internalBufferCount < 50/*receiveBufferLength*/; internalBufferCount++)
+			for(internalBufferCount = 0; internalBufferCount < 65/*receiveBufferLength*/; internalBufferCount++)
 			{
 				Buffer[internalBufferCount] = ReceiveBuffer[mainByteCount + internalBufferCount];
 				//				printf("%x", Buffer[internalBufferCount]);
@@ -307,7 +307,7 @@ int* ProcessLISAOnReceivedData()
 		else
 		{
 			// Start storing bytes in  new Buffer for the firstBit and lastBit
-			for(internalBufferCount = 0; internalBufferCount < 50/*receiveBufferLength*/; internalBufferCount++)
+			for(internalBufferCount = 0; internalBufferCount < 65/*receiveBufferLength*/; internalBufferCount++)
 			{
 				Buffer[internalBufferCount] = 0;
 				localByte = 0x00;
@@ -416,7 +416,7 @@ int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
 	for(counter = 0; counter < 256; counter++)
 	{
 		xoredNumber = 0;
-		xoredNumber = (receivedEncodedBytes^CMatrix[counter]);
+		xoredNumber = (receivedEncodedBytes^counter);
 
 		xoredNumber = xoredNumber - ((xoredNumber >> 1) & 0x5555);
 		xoredNumber = (xoredNumber & 0x3333) + ((xoredNumber >> 2) & 0x3333);
@@ -437,6 +437,12 @@ int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
 		}
 	}
 	return minIndex;
+}
+
+void IntroduceErrorBit()
+{
+	uint8_t errorByte = 0x10;
+	ReceivedData[0] = ReceivedData[0] | errorByte;
 }
 
 // This function realizes Linear Block Decoding. It calls the syndrome function.
@@ -477,7 +483,7 @@ void LinearBlockDecoding()
 		}
 
 		// Akshay to call the Syndrome function
-		isError = IsSyndromeZero(encodedBytesSeparately);
+		isError = IsSyndromeNonZero(encodedBytesSeparately);
 
 		if(isError)
 		{
@@ -493,7 +499,7 @@ void LinearBlockDecoding()
 	actualDataLength = finalDataIndex + 1;
 }
 
-bool IsSyndromeZero(int *receivedMatrix)
+bool IsSyndromeNonZero(int *receivedMatrix)
 {
 	bool syndromeResult = false;
 	int syndromeMatrix[12 - 8];
@@ -514,12 +520,12 @@ bool IsSyndromeZero(int *receivedMatrix)
 	//Check if computed syndrome word is zero
 	for(columnCounter=0;columnCounter<columnLimit;columnCounter++)
 	{
-		if(syndromeMatrix[columnCounter]==0){
-			syndromeResult=true;
+		if(syndromeMatrix[columnCounter] == 0){
+			syndromeResult = false;
 		}
 		else
 		{
-			syndromeResult=false;
+			syndromeResult = true;
 			return syndromeResult;
 		}
 
