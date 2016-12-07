@@ -230,6 +230,7 @@ int main(void)
 #ifdef LinearBlockCoding
 			GenerateMatrix(k,n);
 			TransposeMatrix(8,12);
+			CreationOfCMatrices();
 			ReceiverSideCMatrix();
 			printf("Enter the number of error bits to induce in data: ");
 			scanf("%d", &errorBitCount);
@@ -442,7 +443,6 @@ int main(void)
 #endif
 
 #ifdef LinearBlockCoding
-						CreationOfCMatrices();
 						IntroduceErrorBit(errorBitCount);
 						LinearBlockDecoding();
 #endif
