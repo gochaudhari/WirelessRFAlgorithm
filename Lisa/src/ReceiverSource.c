@@ -32,6 +32,7 @@ extern int sizeOfsyncField;
 // For LBC Coding
 extern uint16_t CMatrix[256];			// This matrix is used for caculation of distances
 extern int generatorMatrix[8][12];
+extern uint16_t receivedCMatrix[256];
 
 #ifdef EncryptedCommunication
 extern bool encryptEntireData;
@@ -416,7 +417,7 @@ int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
 	for(counter = 0; counter < 256; counter++)
 	{
 		xoredNumber = 0;
-		xoredNumber = (receivedEncodedBytes^counter);
+		xoredNumber = (receivedEncodedBytes^receivedCMatrix[counter]);
 
 		xoredNumber = xoredNumber - ((xoredNumber >> 1) & 0x5555);
 		xoredNumber = (xoredNumber & 0x3333) + ((xoredNumber >> 2) & 0x3333);
@@ -439,9 +440,18 @@ int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes)
 	return minIndex;
 }
 
-void IntroduceErrorBit()
+void IntroduceErrorBit(int numberOfErrorBits)
 {
-	uint8_t errorByte = 0x10;
+	uint8_t errorByte;
+
+	if(numberOfErrorBits == 1)
+	{
+		errorByte = 0x01;
+	}
+	else if(numberOfErrorBits == 2)
+	{
+		errorByte = 0x03;
+	}
 	ReceivedData[0] = ReceivedData[0] | errorByte;
 }
 
@@ -488,7 +498,7 @@ void LinearBlockDecoding()
 		if(isError)
 		{
 			minDistanceIndex = DistanceCalculationAndDetectionOfData(encodedBytes);
-			dataExtracted = (CMatrix[minDistanceIndex] >> 4);
+			dataExtracted = minDistanceIndex;
 		}
 		else
 		{

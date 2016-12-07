@@ -83,34 +83,21 @@ void TransposeMatrix(int k, int n)
 void ReceiverSideCMatrix()
 {
 	int nCount = 0, kCount = 0;
-	int nVal = 12, kVal = 8, tempCount = 0, similarCount;
-	uint8_t gMatrix, middleCalc;
+	int nVal = 12, kVal = 8, tempCount = 0, similarCount, middleVarSum;
+	uint8_t middleCalc;
 
 	// Encoding using generator matrix
 	for(tempCount = 0; tempCount < 256; tempCount++)
 	{
 		for(nCount = 0; nCount < nVal; nCount++)
 		{
-			gMatrix = 0;
+			middleVarSum = 0;
 			for(kCount = 0; kCount < kVal; kCount++)
 			{
 				// Performing matrix multiplication of input and Generator matrix bits
-				gMatrix |= ((generatorMatrix[kCount][nCount] & 0x01) << (7 - kCount));
+				middleVarSum = middleVarSum ^ (((tempCount >> (7 - kCount)) & 0x01) * generatorMatrix[kCount][nCount]);
 			}
-			middleCalc = gMatrix ^ tempCount;
-
-			middleCalc = middleCalc - ((middleCalc >> 1) & 0x55);
-			middleCalc = (middleCalc & 0x33) + ((middleCalc >> 2) & 0x33);
-			similarCount = (((middleCalc + (middleCalc >> 4)) & 0x0F) * 0x01) >> 0;
-
-			if(similarCount%2 == 0)
-			{
-				receivedCMatrix[tempCount] |= (0 << (11 - nCount));
-			}
-			else
-			{
-				receivedCMatrix[tempCount] |= (1 << (11 - nCount));
-			}
+			receivedCMatrix[tempCount] |= (middleVarSum << (11 - nCount));
 		}
 	}
 }

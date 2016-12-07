@@ -38,7 +38,7 @@ int k=8, n=12;
 int generatorMatrix[8][12];
 int transposeMatrix[12][4];
 uint16_t CMatrix[256];
-uint16_t receivedCMatrix[265];
+uint16_t receivedCMatrix[256];
 
 #ifdef ScramblingAndDescrambling
 int scrambleAndDescrambleOrder;
@@ -107,7 +107,7 @@ void SetUpTimer()
 	LPC_TIM0->TCR = 0x2;
 	LPC_TIM0->CTCR = 0;
 
-	LPC_TIM0->PR = 200;			//200
+	LPC_TIM0->PR = 100;			//200
 	LPC_TIM0->PC = 0;
 
 	/*4. Interrupts: See register T0/1/2/3MCR (Table 430) and T0/1/2/3CCR (Table 431) for
@@ -156,7 +156,7 @@ int main(void)
 	char dataFormat;
 	bool transmit = false, receive = false, sendAckowledgement = false, receiveAcknowledgement = false;
 	int* dataReceivedStatus;
-	int counter, byteCounter = 0, printLength = 0;
+	int counter, byteCounter = 0, printLength = 0, errorBitCount = 0;
 
 	SetUpGPIOPins();
 
@@ -230,6 +230,9 @@ int main(void)
 #ifdef LinearBlockCoding
 			GenerateMatrix(k,n);
 			TransposeMatrix(8,12);
+			ReceiverSideCMatrix();
+			printf("Enter the number of error bits to induce in data: ");
+			scanf("%d", &errorBitCount);
 #endif
 
 			if(dataFormat == 'B')
@@ -440,7 +443,7 @@ int main(void)
 
 #ifdef LinearBlockCoding
 						CreationOfCMatrices();
-						IntroduceErrorBit();
+						IntroduceErrorBit(errorBitCount);
 						LinearBlockDecoding();
 #endif
 						// Descramble and Print Received data

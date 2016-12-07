@@ -19,7 +19,7 @@ uint8_t FindMostOccuringElement(uint8_t key_arr[]);
 bool IsSyndromeNonZero(int *receivedMatrix);
 
 void CreationOfCMatrices();
-void IntroduceErrorBit();
+void IntroduceErrorBit(int numberOfErrorBits);
 void LinearBlockDecoding();
 int DistanceCalculationAndDetectionOfData(uint16_t receivedEncodedBytes);
 

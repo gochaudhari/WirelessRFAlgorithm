@@ -10,5 +10,6 @@
 
 void GenerateMatrix(int k, int n);
 void TransposeMatrix(int k, int n);
+void ReceiverSideCMatrix();
 
 #endif /* GHMATRIX_H_ */

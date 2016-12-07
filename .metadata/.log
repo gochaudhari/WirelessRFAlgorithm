@@ -3634,3 +3634,78 @@ Press 'Cancel' to terminate this launch.
 
 !ENTRY com.crt.log 1 0 2016-12-03 21:59:08.049
 !MESSAGE Drivers loaded in 1437 milliseconds
+!SESSION 2016-12-07 05:30:12.374 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_65
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.crt.log 1 0 2016-12-07 06:33:45.800
+!MESSAGE Drivers loaded in 1646 milliseconds
+
+!ENTRY com.crt.debugcommon 2 0 2016-12-07 07:56:24.742
+!MESSAGE All SWD targets are currently connected to other debug sessions.
+
+
+Press 'Cancel' to terminate this launch.
+
+!ENTRY com.crt.dsfdebug 4 0 2016-12-07 07:56:24.978
+!MESSAGE 16: Target error from status-poll
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-07 07:56:24.978
+!MESSAGE 16: Target error from status-poll
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-07 07:56:24.978
+!MESSAGE ACK Fault
+
+!ENTRY com.crt.dsfdebug 4 0 2016-12-07 07:56:35.394
+!MESSAGE 16: Target error from status-poll
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-07 07:56:35.394
+!MESSAGE 16: Target error from status-poll
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-07 07:56:35.394
+!MESSAGE ACK Fault
+
+!ENTRY com.crt.debugcommon 2 0 2016-12-07 07:56:37.507
+!MESSAGE All SWD targets are currently connected to other debug sessions.
+
+
+Press 'Cancel' to terminate this launch.
+
+!ENTRY com.crt.dsfdebug 4 0 2016-12-07 07:56:41.998
+!MESSAGE 16: Target error from status-poll
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-07 07:56:41.998
+!MESSAGE 16: Target error from status-poll
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-07 07:56:41.998
+!MESSAGE Hardware Transfer Error
+
+!ENTRY com.crt.dsfdebug 4 0 2016-12-07 07:56:46.614
+!MESSAGE 16: Target error from status-poll: Ee(FF). Redlink interface error 255.
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-07 07:56:46.614
+!MESSAGE 16: Target error from status-poll: Ee(FF). Redlink interface error 255.
+
+!ENTRY com.crt.dsfdebug 2 0 2016-12-07 07:56:53.124
+!MESSAGE Termi&nate/Disconnect All is not enabled.
+
+To terminate debug sessions, first select a debug session in the Debug View and then select Terminate again.
+
+!ENTRY com.crt.log 1 0 2016-12-07 07:57:02.592
+!MESSAGE Drivers loaded in 1336 milliseconds
+
+!ENTRY com.crt.dsfdebug 2 0 2016-12-07 07:58:59.059
+!MESSAGE Termi&nate/Disconnect All is not enabled.
+
+To terminate debug sessions, first select a debug session in the Debug View and then select Terminate again.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2016-12-07 08:05:35.552
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@8c0f83): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2016-12-07 08:05:35.552
+!MESSAGE Interrupt failed.
+
+!ENTRY org.eclipse.cdt.dsf 4 10004 2016-12-07 08:05:35.552
+!MESSAGE Invalid breakpoint parameter(s)
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2016-12-07 08:05:35.552
+!MESSAGE Invalid breakpoint parameter(s)
+
+!ENTRY com.crt.dsfdebug 2 0 2016-12-07 08:08:12.555
+!MESSAGE Termi&nate/Disconnect All is not enabled.
+
+To terminate debug sessions, first select a debug session in the Debug View and then select Terminate again.
