@@ -452,6 +452,10 @@ void IntroduceErrorBit(int numberOfErrorBits)
 	{
 		errorByte = 0x03;
 	}
+	else
+	{
+		errorByte = 0x00;
+	}
 	ReceivedData[0] = ReceivedData[0] | errorByte;
 }
 

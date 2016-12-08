@@ -695,68 +695,67 @@ END GROUP
                 0x000012f0       0xcc ./src/ReceiverSource.o
                 0x000012f0                DistanceCalculationAndDetectionOfData
  .text.IntroduceErrorBit
-                0x000013bc       0x40 ./src/ReceiverSource.o
+                0x000013bc       0x44 ./src/ReceiverSource.o
                 0x000013bc                IntroduceErrorBit
  .text.LinearBlockDecoding
-                0x000013fc      0x158 ./src/ReceiverSource.o
-                0x000013fc                LinearBlockDecoding
+                0x00001400      0x158 ./src/ReceiverSource.o
+                0x00001400                LinearBlockDecoding
  .text.IsSyndromeNonZero
-                0x00001554       0xbc ./src/ReceiverSource.o
-                0x00001554                IsSyndromeNonZero
+                0x00001558       0xbc ./src/ReceiverSource.o
+                0x00001558                IsSyndromeNonZero
  .text.CreateSyncStream
-                0x00001610       0x98 ./src/TransmitterSource.o
-                0x00001610                CreateSyncStream
+                0x00001614       0x98 ./src/TransmitterSource.o
+                0x00001614                CreateSyncStream
  .text.AppendUserData
-                0x000016a8       0x50 ./src/TransmitterSource.o
-                0x000016a8                AppendUserData
+                0x000016ac       0x50 ./src/TransmitterSource.o
+                0x000016ac                AppendUserData
  .text.TransmitData
-                0x000016f8       0x68 ./src/TransmitterSource.o
-                0x000016f8                TransmitData
+                0x000016fc       0x68 ./src/TransmitterSource.o
+                0x000016fc                TransmitData
  .text.ScrambleData
-                0x00001760      0x114 ./src/TransmitterSource.o
-                0x00001760                ScrambleData
+                0x00001764      0x114 ./src/TransmitterSource.o
+                0x00001764                ScrambleData
  .text.EncodeUsingLinearBlockCoding
-                0x00001874      0x1e8 ./src/TransmitterSource.o
-                0x00001874                EncodeUsingLinearBlockCoding
+                0x00001878      0x1e8 ./src/TransmitterSource.o
+                0x00001878                EncodeUsingLinearBlockCoding
  .text.SystemInit
-                0x00001a5c       0xe4 D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug\libCMSIS_CORE_LPC17xx.a(system_LPC17xx.o)
-                0x00001a5c                SystemInit
- .text.__main   0x00001b40       0x14 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_semihost.a(_cr__main.o)
-                0x00001b40                __CR_SEMIHOST
-                0x00001b40                __main
+                0x00001a60       0xe4 D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug\libCMSIS_CORE_LPC17xx.a(system_LPC17xx.o)
+                0x00001a60                SystemInit
+ .text.__main   0x00001b44       0x14 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_semihost.a(_cr__main.o)
+                0x00001b44                __CR_SEMIHOST
+                0x00001b44                __main
  .text._Csys_read_
-                0x00001b54       0x22 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__fillbuf.o)
-                0x00001b54                _Csys_read_
- *fill*         0x00001b76        0x2 ff
+                0x00001b58       0x22 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__fillbuf.o)
+                0x00001b58                _Csys_read_
+ *fill*         0x00001b7a        0x2 ff
  .text.__filbuf
-                0x00001b78      0x178 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__fillbuf.o)
-                0x00001b78                __filbuf
+                0x00001b7c      0x178 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__fillbuf.o)
+                0x00001b7c                __filbuf
  .text._deferredlazyseek
-                0x00001cf0       0x44 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(_deferredlazyseek.o)
-                0x00001cf0                _deferredlazyseek
+                0x00001cf4       0x44 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(_deferredlazyseek.o)
+                0x00001cf4                _deferredlazyseek
  .text.__flsbuf
-                0x00001d34      0x140 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(_deferredlazyseek.o)
-                0x00001d34                __flsbuf
- .text._fflush  0x00001e74       0x58 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(_fflush.o)
-                0x00001e74                _fflush
+                0x00001d38      0x140 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(_deferredlazyseek.o)
+                0x00001d38                __flsbuf
+ .text._fflush  0x00001e78       0x58 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(_fflush.o)
+                0x00001e78                _fflush
  .text._Cwritebuf
-                0x00001ecc       0x68 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(_writebuf.o)
-                0x00001ecc                _Cwritebuf
- .text.malloc   0x00001f34       0xc8 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(alloc.o)
-                0x00001f34                malloc
- .text.free     0x00001ffc       0x30 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(alloc.o)
-                0x00001ffc                free
+                0x00001ed0       0x68 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(_writebuf.o)
+                0x00001ed0                _Cwritebuf
+ .text.malloc   0x00001f38       0xc8 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(alloc.o)
+                0x00001f38                malloc
+ .text.free     0x00002000       0x30 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(alloc.o)
+                0x00002000                free
  .text._Csys_alloc
-                0x0000202c       0x20 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(alloc.o)
-                0x0000202c                _Csys_alloc
+                0x00002030       0x20 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(alloc.o)
+                0x00002030                _Csys_alloc
  .text.fp_round
-                0x0000204c       0x4c c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
+                0x00002050       0x4c c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
  .text.pr_dec.constprop.1
-                0x00002098       0x26 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
- *fill*         0x000020be        0x2 ff
- .text.sprintf  0x000020c0       0x6c c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
-                0x000020c0                sprintf
- *fill*         0x0000212c        0x4 ff
+                0x0000209c       0x26 c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
+ *fill*         0x000020c2        0x2 ff
+ .text.sprintf  0x000020c4       0x6c c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
+                0x000020c4                sprintf
  .text.fp_display
                 0x00002130      0x8ec c:/nxp/lpcxpresso_8.2.2_650/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(fpprintf.o)
  .text.vsnprintf
@@ -1195,15 +1194,15 @@ OUTPUT(Lisa.axf elf32-littlearm)
  .debug_macro   0x000024bf      0x12d D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug\libCMSIS_CORE_LPC17xx.a(system_LPC17xx.o)
  .debug_macro   0x000025ec      0x88c D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug\libCMSIS_CORE_LPC17xx.a(system_LPC17xx.o)
 
-.debug_line     0x00000000     0x1437
+.debug_line     0x00000000     0x1438
  .debug_line    0x00000000      0x205 ./src/Common.o
  .debug_line    0x00000205      0x220 ./src/GHmatrix.o
  .debug_line    0x00000425      0x3dc ./src/Lisa.o
- .debug_line    0x00000801      0x502 ./src/ReceiverSource.o
- .debug_line    0x00000d03      0x3c8 ./src/TransmitterSource.o
- .debug_line    0x000010cb       0xd5 ./src/cr_startup_lpc175x_6x.o
- .debug_line    0x000011a0       0x78 ./src/crp.o
- .debug_line    0x00001218      0x21f D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug\libCMSIS_CORE_LPC17xx.a(system_LPC17xx.o)
+ .debug_line    0x00000801      0x503 ./src/ReceiverSource.o
+ .debug_line    0x00000d04      0x3c8 ./src/TransmitterSource.o
+ .debug_line    0x000010cc       0xd5 ./src/cr_startup_lpc175x_6x.o
+ .debug_line    0x000011a1       0x78 ./src/crp.o
+ .debug_line    0x00001219      0x21f D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug\libCMSIS_CORE_LPC17xx.a(system_LPC17xx.o)
 
 .debug_str      0x00000000     0xb591
  .debug_str     0x00000000     0x3f01 ./src/Common.o

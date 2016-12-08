@@ -3709,3 +3709,35 @@ To terminate debug sessions, first select a debug session in the Debug View and 
 !MESSAGE Termi&nate/Disconnect All is not enabled.
 
 To terminate debug sessions, first select a debug session in the Debug View and then select Terminate again.
+
+!ENTRY com.crt.log 1 0 2016-12-07 09:47:40.961
+!MESSAGE Drivers loaded in 1453 milliseconds
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2016-12-07 09:58:21.871
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@89a731): Status ERROR: org.eclipse.cdt.dsf.gdb code=10001 Context cannot be suspended. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10001 2016-12-07 09:58:21.871
+!MESSAGE Context cannot be suspended.
+!SESSION 2016-12-07 22:20:51.818 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_65
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.crt.log 1 0 2016-12-07 22:24:40.472
+!MESSAGE Drivers loaded in 1659 milliseconds
+
+!ENTRY com.crt.dsfdebug 4 0 2016-12-07 22:53:35.896
+!MESSAGE 16: Target error from status-poll
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-07 22:53:35.896
+!MESSAGE 16: Target error from status-poll
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-07 22:53:35.896
+!MESSAGE Hardware Transfer Error
+
+!ENTRY com.crt.dsfdebug 4 0 2016-12-07 23:09:51.423
+!MESSAGE 16: Target error from status-poll: Ee(FF). Redlink interface error 255.
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-07 23:09:51.423
+!MESSAGE 16: Target error from status-poll: Ee(FF). Redlink interface error 255.
+
+!ENTRY com.crt.log 1 0 2016-12-07 23:12:31.748
+!MESSAGE Drivers loaded in 1484 milliseconds
