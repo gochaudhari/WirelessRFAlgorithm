@@ -145,7 +145,7 @@ void SetUpTimer()
 	LPC_TIM1->TCR = 0x2;
 	LPC_TIM1->CTCR = 0;
 
-	LPC_TIM1->PR = 200;			//200
+	LPC_TIM1->PR = 1000;			//200
 	LPC_TIM1->PC = 0;
 
 	/*4. Interrupts: See register T0/1/2/3MCR (Table 430) and T0/1/2/3CCR (Table 431) for
@@ -153,7 +153,7 @@ void SetUpTimer()
 	LPC_TIM1->MCR |= (0x3 << 0);
 
 	/* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
-	LPC_TIM1->MR0 = 100;			//1000
+	LPC_TIM1->MR0 = 1000;			//1000
 
 	IRQn_Type timer1IRQType = TIMER1_IRQn;
 	NVIC_EnableIRQ(timer1IRQType);
@@ -317,33 +317,39 @@ int main(void)
 				printf("Enter the number of error bits to induce in data: ");
 				scanf("%d", &errorBitCount);
 #endif
+				if(dataFormat == 'B')
+				{
+					binaryDataFormat = true;
+					characterDataFormat = false;
 				}
-			if(dataFormat == 'B')
-			{
-				binaryDataFormat = true;
-				characterDataFormat = false;
-			}
-			else if(dataFormat == 'C')
-			{
-				characterDataFormat = true;
-				binaryDataFormat = false;
-			}
+				else if(dataFormat == 'C')
+				{
+					characterDataFormat = true;
+					binaryDataFormat = false;
+				}
 
-			if(communicationSelect == 'T')
+				if(communicationSelect == 'T')
+				{
+					transmit = true;
+					receive = false;
+				}
+				else if(communicationSelect == 'R')
+				{
+					receive = true;
+					transmit = false;
+				}
+				else
+				{
+					receive = false;
+					transmit = false;
+				}
+			}
+			else
 			{
 				transmit = true;
 				receive = false;
 			}
-			else if(communicationSelect == 'R')
-			{
-				receive = true;
-				transmit = false;
-			}
-			else
-			{
-				receive = false;
-				transmit = false;
-			}
+
 			LPC_TIM0->TCR = 0x1;
 		}
 #endif
@@ -608,7 +614,8 @@ int main(void)
 						// There was some problem in transmission. So, send the data again.
 						if(receiveAcknowledgement & receiveAckTimerFinished)
 						{
-							// Stop the transmit and receive since it would be dealt with in later lines.
+							printf("\nWait timer finished. Increasing Sync bytes.");
+							// Stop the receive and start the transmit
 							transmit = false;
 							receive = false;
 
@@ -619,7 +626,7 @@ int main(void)
 
 							// This would reform the sync field by incrementing 8.
 							isSyncFieldFormed = false;
-							sizeOfsyncField += 8;
+							sizeOfsyncField = sizeOfsyncField + 8;
 						}
 						// Else means, the receive ACK timer is still waiting for ACK.
 						// Data not received in this buffer, start listening again.
