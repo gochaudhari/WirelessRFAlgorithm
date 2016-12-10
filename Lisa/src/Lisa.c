@@ -225,13 +225,15 @@ int main(void)
 	bool isSyncFieldFormed = false, repeatSend = false;
 	int* dataReceivedStatus;
 	int counter, byteCounter = 0, printLength = 0, errorBitCount = 0;
+	int receivedSyncFieldSize = 8;				// Lets keep initial value as 8 but would be received as well
+												// from the ProcessLISAReceived function.
 
 	// Initial sizeOfsyncField is to be kept 8 and then depending on unsuccessful communications
 	// increment the value by 8
 	sizeOfsyncField = 8;
 
 	// Since the data length would be received after the source and destination
-	dataLengthByte = sizeOfsyncField + 2;
+	dataLengthByte = receivedSyncFieldSize + 2;
 
 	SetUpGPIOPins();
 
@@ -463,7 +465,7 @@ int main(void)
 					// start the new communication cycle. i.e means making transmit and receive false.
 					if(sendAckowledgement)
 					{
-						printf("\nAcknowledgment Sent. Starting new data cycle");
+						printf("\nAcknowledgment Sent. Starting new data cycle\n");
 						receiveAcknowledgement = false;
 					}
 					// Else means, this was not acknowledgment and was normal data. Start to received the acknowledgment
@@ -509,14 +511,15 @@ int main(void)
 				{
 					dataReceivedStatus = ProcessLISAOnReceivedData();
 					dataReceived = dataReceivedStatus[0];
-
 #ifdef ReceiveTest
 					dataReceived = true;
 #endif
 
 					if(dataReceived)
 					{
+						receivedSyncFieldSize = dataReceivedStatus[3];
 						dataReceived = false;
+						dataLengthByte = receivedSyncFieldSize + 2;
 						byteCounter = 0;
 						
 						// Copy the received data

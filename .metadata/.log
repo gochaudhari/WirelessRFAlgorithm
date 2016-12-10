@@ -3779,3 +3779,6 @@ C Model Exception: C Model Status [Element Lisa.c does not exist.]
 	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:206)
 !SUBENTRY 1 org.eclipse.cdt.core 4 969 2016-12-10 10:48:24.863
 !MESSAGE Element Lisa.c does not exist.
+
+!ENTRY com.crt.log 1 0 2016-12-10 14:03:48.632
+!MESSAGE Drivers loaded in 1642 milliseconds
