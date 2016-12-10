@@ -14,6 +14,7 @@
 //define EncryptedCommunication
 #define ScramblingAndDescrambling
 #define LinearBlockCoding
+#define CognitiveRadio
 //#define TransmitDebug
 //#define ReceiveDebug
 
@@ -23,7 +24,7 @@
 #define true						1
 #define false						0
 
-#if defined(ScramblingAndDescrambling) || defined(LinearBlockCoding)
+#if defined(ScramblingAndDescrambling) || defined(LinearBlockCoding) || defined(CognitiveRadio)
 #define ScramblingAndDescrambling
 #define LinearBlockCoding
 #endif
@@ -45,9 +46,11 @@ typedef int bool;
 #define ReceiveBits					14
 #define ReceivePinValue				LPC_GPIO2->FIOPIN0
 
-// Timer defs
+// Timer0/1 defs
 #define Timer0PCONP					1
+#define Timer1PCONP					2
 #define Timer0PCLK					2
+#define Timer1PCLK					4
 
 #define MachingSyncCapability		8
 

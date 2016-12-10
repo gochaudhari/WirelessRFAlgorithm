@@ -41,6 +41,7 @@ void CreateSyncStream()
 	int dataCounter;
 	uint8_t firstRepeatPattern = 0x5;
 	uint8_t secondRepeatPattern = 0xA;
+	transmitBufferLength = 0;
 
 	for(dataCounter = 0; dataCounter < sizeOfsyncField; dataCounter++)
 	{

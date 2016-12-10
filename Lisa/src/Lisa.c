@@ -33,8 +33,9 @@ int transmitBufferLength;
 int transmitDataLength;
 int transmitBufferCounter, transmitBitCounter = 7;
 
-int sizeOfsyncField = 32, dataLengthAdditions = 3, dataLengthByte = 34;
-int k=8, n=12;
+int sizeOfsyncField = 8;
+int dataLengthAdditions = 3, dataLengthByte;
+int k = 8, n = 12;
 int generatorMatrix[8][12];
 int transposeMatrix[12][4];
 uint16_t CMatrix[256];
@@ -54,12 +55,14 @@ uint8_t Buffer[1024];
 char *ReceivedData;
 int receiveBufferLength = 1024, receivedDataLength, actualDataLength = 0, receivedBinaryDataLength;
 bool bitReceived = false, receiveBufferFull = false, bitReadyForTransmit = false, dataReceived = false;
+bool receiveAckTimerFinished = false;
 
 #ifdef EncryptedCommunication
 	bool encryptEntireData = false;
 #endif
 int receiverBufferCounter, bitCount = 8, receiverBitCounter = 7;
 const char *acknowledgement = "ACKSENT";
+const char *negativeAcknowledgement = "NACKSENT";
 
 bool binaryDataFormat = false, characterDataFormat = true;
 
@@ -89,20 +92,26 @@ void SetUpGPIOPins()
 #endif
 }
 
+/*
+	Add a new timer or manage in this timer only, if the acknowledgement is not received in this time
+	send the data again with higher sync and if not then also, send again with higher
+	There is no way to detect the sync, but if the sync is corrupted, send with higher scrambling
+*/
 #if defined(Transmit) || defined(Receive)
 void SetUpTimer()
 {
+	/// Configurations for Timer 0
 	// PCONP register for Timer 0
 	LPC_SC->PCONP |= (1 << Timer0PCONP);
 
 	/*2. Peripheral clock: In the PCLKSEL0 register (Table 40), select PCLK_TIMER0/1*/
-//	LPC_SC->PCLKSEL0 &= ~(3 << Timer0PCLK);
+	//	LPC_SC->PCLKSEL0 &= ~(3 << Timer0PCLK);
 	LPC_SC->PCLKSEL0 |= (3 << Timer0PCLK);
 
 	/*3. Pins: Select timer pins through the PINSEL registers. Select the pin modes for the
 	port pins with timer functions through the PINMODE registers.*/
 
-	/* Enable the timer, and increment on PCLK */
+	/* Enable the timer0, and increment on PCLK */
 	LPC_TIM0->TC = 0;
 	LPC_TIM0->TCR = 0x2;
 	LPC_TIM0->CTCR = 0;
@@ -117,8 +126,37 @@ void SetUpTimer()
 	/* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
 	LPC_TIM0->MR0 = 100;			//1000
 
-	IRQn_Type timerIRQType = TIMER0_IRQn;
-	NVIC_EnableIRQ(timerIRQType);
+	IRQn_Type timer0IRQType = TIMER0_IRQn;
+	NVIC_EnableIRQ(timer0IRQType);
+
+	/// Configurations for Timer 1
+	// PCONP register for Timer 0
+	LPC_SC->PCONP |= (1 << Timer1PCONP);
+
+	/*2. Peripheral clock: In the PCLKSEL0 register (Table 40), select PCLK_TIMER0/1*/
+	//	LPC_SC->PCLKSEL0 &= ~(3 << Timer0PCLK);
+	LPC_SC->PCLKSEL1 |= (3 << Timer1PCLK);
+
+	/*3. Pins: Select timer pins through the PINSEL registers. Select the pin modes for the
+	port pins with timer functions through the PINMODE registers.*/
+
+	/* Enable the timer0, and increment on PCLK */
+	LPC_TIM1->TC = 0;
+	LPC_TIM1->TCR = 0x2;
+	LPC_TIM1->CTCR = 0;
+
+	LPC_TIM1->PR = 200;			//200
+	LPC_TIM1->PC = 0;
+
+	/*4. Interrupts: See register T0/1/2/3MCR (Table 430) and T0/1/2/3CCR (Table 431) for
+	match and capture events. */
+	LPC_TIM1->MCR |= (0x3 << 0);
+
+	/* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
+	LPC_TIM1->MR0 = 100;			//1000
+
+	IRQn_Type timer1IRQType = TIMER1_IRQn;
+	NVIC_EnableIRQ(timer1IRQType);
 }
 #endif
 
@@ -128,7 +166,7 @@ void TIMER0_IRQHandler()
 	// Reset the interrupt
 	LPC_TIM0->IR |= (1 << 0);
 
-	// Reset the counter.
+	// Reset the counter
 	LPC_TIM0->TCR = 0x02;
 
 #ifdef Receive
@@ -139,6 +177,22 @@ void TIMER0_IRQHandler()
 	bitReadyForTransmit = true;
 #endif
 }
+
+// Even if this IRQ is made for only Cognitive radio, I am not restricting it with the defs.
+// The reason is that it is preferable to have the Timer IRQ even if it is not used for anything else.
+void TIMER1_IRQHandler()
+{
+	// Reset the interrupt
+	LPC_TIM1->IR |= (1 << 0);
+
+	// Reset the counter
+	LPC_TIM1->TCR = 0x02;
+
+	// Enable the receiveAckTimerFinished flag here telling about the finished timer
+	// This timer indicates, that there was no ACK received within a specific time
+	// So, the flag would be used to check make sure the data is sent again
+	receiveAckTimerFinished = true;
+}
 #endif
 
 #ifdef ReceiveDebug
@@ -148,6 +202,19 @@ void EINT3_IRQHandler(void)
 }
 #endif
 
+// This function would start the timer (No need to reset since the reset would be done when
+// it is reset in the previous cycle
+void StartTimer1()
+{
+	LPC_TIM1->TCR = 0x1;
+}
+
+// This function would stop and reset the timer
+void ResetAndStopTimer1()
+{
+	LPC_TIM1->TCR = 0x02;
+}
+
 int main(void)
 {
 
@@ -155,8 +222,16 @@ int main(void)
 	char communicationSelect;
 	char dataFormat;
 	bool transmit = false, receive = false, sendAckowledgement = false, receiveAcknowledgement = false;
+	bool isSyncFieldFormed = false, repeatSend = false;
 	int* dataReceivedStatus;
 	int counter, byteCounter = 0, printLength = 0, errorBitCount = 0;
+
+	// Initial sizeOfsyncField is to be kept 8 and then depending on unsuccessful communications
+	// increment the value by 8
+	sizeOfsyncField = 8;
+
+	// Since the data length would be received after the source and destination
+	dataLengthByte = sizeOfsyncField + 2;
 
 	SetUpGPIOPins();
 
@@ -170,9 +245,6 @@ int main(void)
 	// Setup the interrupts
 	SetUpReceiveInterrupt();
 #endif
-
-	// Force the counter to be placed into memory
-	volatile static int i = 0 ;
 
 	// The target now is to store the data in the format given and then receive the data in the required format
 	/* Algorithm::
@@ -189,10 +261,11 @@ int main(void)
 	SetUpTimer();
 #endif
 
-#ifdef Transmit
-	// 1) T: Create the sync stream for 64 bits.
-	CreateSyncStream();
-	//	PrintData(TransmitBuffer, transmitBufferLength, 0);
+#ifdef LinearBlockCoding
+	GenerateMatrix(k,n);
+	TransposeMatrix(8,12);
+	CreationOfCMatrices();
+	ReceiverSideCMatrix();
 #endif
 
 	while(1)
@@ -216,26 +289,33 @@ int main(void)
 		}
 		else
 		{
-			printf("\nWant to Transmit or Receive (T or R): ");
-			scanf("%c", &communicationSelect);
-			getchar();
-			printf("Enter the data format (B: Binary, C: Character): ");
-			scanf("%c", &dataFormat);
+#ifdef Transmit
+			if(!isSyncFieldFormed)
+			{
+				// 1) T: Create the sync stream for 64 bits.
+				CreateSyncStream();
+				isSyncFieldFormed = true;
+			}
+#endif
+
+			if(!repeatSend)
+			{
+				printf("\nWant to Transmit or Receive (T or R): ");
+				scanf("%c", &communicationSelect);
+				getchar();
+				printf("Enter the data format (B: Binary, C: Character): ");
+				scanf("%c", &dataFormat);
 
 #ifdef ScramblingAndDescrambling
-			printf("Scrabmling order: ");
-			scanf("%d", &scrambleAndDescrambleOrder);
+				printf("Scrabmling order: ");
+				scanf("%d", &scrambleAndDescrambleOrder);
 #endif
 
 #ifdef LinearBlockCoding
-			GenerateMatrix(k,n);
-			TransposeMatrix(8,12);
-			CreationOfCMatrices();
-			ReceiverSideCMatrix();
-			printf("Enter the number of error bits to induce in data: ");
-			scanf("%d", &errorBitCount);
+				printf("Enter the number of error bits to induce in data: ");
+				scanf("%d", &errorBitCount);
 #endif
-
+				}
 			if(dataFormat == 'B')
 			{
 				binaryDataFormat = true;
@@ -291,7 +371,7 @@ int main(void)
 				EncodeUsingLinearBlockCoding();
 #endif
 
-				// Storing Data Length: Before scrambling and LBC Encoding
+				// Storing Data Length: After scrambling and LBC Encoding
 				TransmitBuffer[transmitBufferLength] = transmitDataLength;
 				transmitBufferLength++;
 
@@ -300,24 +380,26 @@ int main(void)
 			}
 			else
 			{
-				if(characterDataFormat)
+				if(!repeatSend)
 				{
-					// 2) T: Take data from user
-					printf("Enter the data to be transmitted (Characters): ");
-					transmitDataLength = 30;						// Fixing the maximum buffer length
-					scanf("%s", &TransmittedData);
-					transmitDataLength = strlen(TransmittedData);
-				}
-				else if(binaryDataFormat)
-				{
-					printf("Enter the data to be transmitted (in Binary): ");
-					scanf("%s", &BinaryData);
+					if(characterDataFormat)
+					{
+						// 2) T: Take data from user
+						printf("Enter the data to be transmitted (Characters): ");
+						transmitDataLength = 30;						// Fixing the maximum buffer length
+						scanf("%s", &TransmittedData);
+						transmitDataLength = strlen(TransmittedData);
+					}
+					else if(binaryDataFormat)
+					{
+						printf("Enter the data to be transmitted (in Binary): ");
+						scanf("%s", &BinaryData);
 
-					// Should return transmitDataLength and it would be number of bits not bytes
-					transmitDataLength = BinaryDataFormatConversion((int8_t *)TransmittedData, transmitDataLength, (int8_t *)BinaryData, strlen(BinaryData), "BtoC");
-					transmitDataLength = strlen(BinaryData);
+						// Should return transmitDataLength and it would be number of bits not bytes
+						transmitDataLength = BinaryDataFormatConversion((int8_t *)TransmittedData, transmitDataLength, (int8_t *)BinaryData, strlen(BinaryData), "BtoC");
+						transmitDataLength = strlen(BinaryData);
+					}
 				}
-
 				// Storing Source ID
 				TransmitBuffer[transmitBufferLength] = 0x03;
 				transmitBufferLength++;
@@ -334,7 +416,7 @@ int main(void)
 				EncodeUsingLinearBlockCoding();
 #endif
 
-				// Storing Data Length: Before scrambling and LBC Encoding
+				// Storing Data Length: After scrambling and LBC Encoding
 				TransmitBuffer[transmitBufferLength] = transmitDataLength;
 				transmitBufferLength++;
 
@@ -376,11 +458,41 @@ int main(void)
 					transmitBufferCounter = 0;
 					transmit = false;
 					receive = false;
+
+					// If means, to send the acknowledgment. Just send the ACK and make sure you
+					// start the new communication cycle. i.e means making transmit and receive false.
+					if(sendAckowledgement)
+					{
+						printf("\nAcknowledgment Sent. Starting new data cycle");
+						receiveAcknowledgement = false;
+					}
+					// Else means, this was not acknowledgment and was normal data. Start to received the acknowledgment
+					// Also, start the timer which waits for the acknowledgment. If not received within that time,
+					// send the data again with good quality. Don't start the timer here. Start in the lines below where
+					// the condition for receiveAcknowledgement is checked for true.
+					else
+					{
+						receiveAcknowledgement = true;
+					}
+
+					// Make sendAckowledgement false here since this this routine is for telling any kind
+					// of transmitting was completed. It can be either acknowledgment or normal data.
 					sendAckowledgement = false;
-					receiveAcknowledgement = true;
 
 					// This makes the transmitter go low when the transmission is done
 					LPC_GPIO2->FIOCLR0 |= (1 << TransmitPin);
+
+#ifdef CognitiveRadio
+					// When this transmission is done and if it is into receiveAcknowledgement mode,
+					// this would start the receive timer which would start the timer and wait for specific
+					// amount of time to receive the data. If the data is not received within that specific time
+					// This would stop the timer and send the data again with improved syncfield or scrambling
+					if(receiveAcknowledgement)
+					{
+						receiveAckTimerFinished = false;
+						StartTimer1();
+					}
+#endif
 				}
 			}
 #endif
@@ -473,16 +585,45 @@ int main(void)
 						}
 						else
 						{
-							printf("\nAcknowledgement Received.Transmission Successful.");
+							printf("\nAcknowledgement Received. Transmission Successful.");
 							receiveAcknowledgement = false;
+
+							// repeatSend is false since the data ack was sent was ready to move to new cycle
+							repeatSend = false;
 						}
 						transmit = false;
 						receive = false;
 						free(ReceivedData);
+
+						// Now, when all the receptions are done, make the sizeOfSyncField as 8(default min required)
+						sizeOfsyncField = 8;
 					}
 					else
 					{
-						bitReceived = true;
+						// But if the routine is meant for receiving the ACK and receiveAckTimerFinished is true.
+						// That means the receiveAkc timer is finished and its enough time to wait for ACK.
+						// There was some problem in transmission. So, send the data again.
+						if(receiveAcknowledgement & receiveAckTimerFinished)
+						{
+							// Stop the transmit and receive since it would be dealt with in later lines.
+							transmit = false;
+							receive = false;
+
+							receiveAckTimerFinished = false;
+							receiveAcknowledgement = false;
+							// Start the sending thing here and make the receiveAck
+							repeatSend = true;
+
+							// This would reform the sync field by incrementing 8.
+							isSyncFieldFormed = false;
+							sizeOfsyncField += 8;
+						}
+						// Else means, the receive ACK timer is still waiting for ACK.
+						// Data not received in this buffer, start listening again.
+						else
+						{
+							bitReceived = true;
+						}
 					}
 					receiveBufferFull = false;
 				}
