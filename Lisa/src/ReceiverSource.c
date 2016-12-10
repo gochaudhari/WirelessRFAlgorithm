@@ -74,10 +74,11 @@ int * FindMessage()
 	int no_of_sync_bytes = 32;
 	bool startOfDataString = false;
 	int error_count = 0;
-	static int retValues[3] = {0, 0, 0};
+	static int retValues[4] = {0, 0, 0, 0};
 	int receiveBufferLength = 50;
 	uint8_t key;
 	uint8_t key_arr[31];
+	uint8_t sync_field_size;
 	bool keyFound=false;
 
 	uint8_t Kernel[32]=
@@ -132,6 +133,24 @@ int * FindMessage()
 				error_count++;
 				sync_field_count++;
 			}
+
+			if(sync_field_count==8 && error_count<3)
+			{
+				sync_field_size =8;
+			}
+			else if(sync_field_count == 16 && error_count<6)
+			{
+				sync_field_size = 16;
+			}
+			else if(sync_field_count == 24 && error_count<8)
+			{
+				sync_field_size = 24;
+			}
+			else if(sync_field_count == 32 && error_count<11)
+			{
+				sync_field_size = 32;
+			}
+
 		}
 		else if(startOfDataString == false)
 		{
@@ -145,6 +164,7 @@ int * FindMessage()
 			retValues[0] = startOfDataString;
 			retValues[1] = error_count;
 			retValues[2] = key;
+			retValues[3] = sync_field_size;
 			return retValues;
 		}
 	}
