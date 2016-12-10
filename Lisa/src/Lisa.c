@@ -297,6 +297,7 @@ int main(void)
 				// 1) T: Create the sync stream for 64 bits.
 				CreateSyncStream();
 				isSyncFieldFormed = true;
+				dataLengthByte = sizeOfsyncField + 2;
 			}
 #endif
 
