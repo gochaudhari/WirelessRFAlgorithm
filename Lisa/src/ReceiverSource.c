@@ -69,12 +69,12 @@ void ReceiveData()
 
 int * FindMessage()
 {
-	int dataCounter = 0;
+	int dataCounter = 0, count;
 	char dataByte;
 	int no_of_sync_bytes = 32;
 	bool startOfDataString = false;
-	int error_count = 0;
-	int final_error_count = 0;
+	int error_count_block[4] = {0, 0, 0, 0}, error_count;
+	int final_error_count = 0, block_detected = 0;
 	static int retValues[4] = {0, 0, 0, 0};
 	int receiveBufferLength = 50;
 	uint8_t key;
@@ -135,50 +135,58 @@ int * FindMessage()
 				sync_field_count++;
 			}
 
-			if(sync_field_count==8)
+			if(sync_field_count == 8)
 			{
 				if(error_count <= 2)
 				{
-					sync_field_size =8;
+					sync_field_size = 8;
+					block_detected = 1;
 				}
-				final_error_count = error_count;
-				error_count=0;
+				error_count_block[0] = error_count;
+				error_count = 0;
 			}
 			else if(sync_field_count == 16)
 			{
 				if(error_count <= 2)
 				{
-					sync_field_size =16;
+					sync_field_size = 16;
+					block_detected = 2;
 				}
-				final_error_count += error_count;
-				error_count=0;
+				error_count_block[1] = error_count;
+				error_count = 0;
 			}
 			else if(sync_field_count == 24)
 			{
 				if(error_count <= 2)
 				{
-					sync_field_size =24;
+					sync_field_size = 24;
+					block_detected = 3;
 				}
-				final_error_count += error_count;
-				error_count=0;
+				error_count_block[2] = error_count;
+				error_count = 0;
 			}
 			else if(sync_field_count == 32)
 			{
 				if(error_count <= 2)
 				{
-					sync_field_size =32;
+					sync_field_size = 32;
+					block_detected = 4;
 				}
-				final_error_count += error_count;
-				error_count=0;
+				error_count_block[3] = error_count;
+				error_count = 0;
 			}
-
 		}
 		else
 		{
-			sync_field_count = 0;
-			if(final_error_count < 8)
+			for(count = 0; count < block_detected; count++)
 			{
-				printf("error count %d\n", final_error_count);
+				final_error_count = final_error_count + error_count_block[count];
+			}
+
+			sync_field_count = 0;
+			if(final_error_count <= (2*block_detected))
+			{
+				printf("\nerror count %d\n", final_error_count);
 				startOfDataString = true;
 			}
 			retValues[0] = startOfDataString;
