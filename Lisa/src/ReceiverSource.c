@@ -184,7 +184,8 @@ int * FindMessage()
 			}
 
 			sync_field_count = 0;
-			if(final_error_count <= (2*block_detected))
+
+			if((final_error_count <= (2*block_detected)) && (block_detected > 0))
 			{
 				printf("\nerror count %d\n", final_error_count);
 				startOfDataString = true;
