@@ -135,33 +135,48 @@ int * FindMessage()
 				sync_field_count++;
 			}
 
-			if(sync_field_count==8 && error_count<3)
+			if(sync_field_count==8)
 			{
-				sync_field_size =8;
+				if(error_count <= 2)
+				{
+					sync_field_size =8;
+				}
 				final_error_count = error_count;
+				error_count=0;
 			}
-			else if(sync_field_count == 16 && error_count<6)
+			else if(sync_field_count == 16)
 			{
-				sync_field_size = 16;
-				final_error_count = error_count;
+				if(error_count <= 2)
+				{
+					sync_field_size =16;
+				}
+				final_error_count += error_count;
+				error_count=0;
 			}
-			else if(sync_field_count == 24 && error_count<8)
+			else if(sync_field_count == 24)
 			{
-				sync_field_size = 24;
-				final_error_count = error_count;
+				if(error_count <= 2)
+				{
+					sync_field_size =24;
+				}
+				final_error_count += error_count;
+				error_count=0;
 			}
-			else if(sync_field_count == 32 && error_count<11)
+			else if(sync_field_count == 32)
 			{
-				sync_field_size = 32;
-				final_error_count = error_count;
+				if(error_count <= 2)
+				{
+					sync_field_size =32;
+				}
+				final_error_count += error_count;
+				error_count=0;
 			}
 
 		}
-		else if(startOfDataString == false)
+		else
 		{
 			sync_field_count = 0;
-
-			if(final_error_count < 10)
+			if(final_error_count < 8)
 			{
 				printf("error count %d\n", final_error_count);
 				startOfDataString = true;
