@@ -187,7 +187,6 @@ int * FindMessage()
 
 			if((final_error_count <= (2*block_detected)) && (block_detected > 0))
 			{
-				printf("\nerror count %d\n", final_error_count);
 				startOfDataString = true;
 			}
 			retValues[0] = startOfDataString;

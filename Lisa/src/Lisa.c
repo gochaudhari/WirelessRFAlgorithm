@@ -28,6 +28,7 @@
 int maxTransmitData = 30;
 uint8_t TransmitBuffer[1024];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
 char TransmittedData[30];
+char DataEntered[30];
 char BinaryData[30];
 int transmitBufferLength;
 int transmitDataLength;
@@ -116,7 +117,7 @@ void SetUpTimer()
 	LPC_TIM0->TCR = 0x2;
 	LPC_TIM0->CTCR = 0;
 
-	LPC_TIM0->PR = 200;			//200
+	LPC_TIM0->PR = 50;			//200
 	LPC_TIM0->PC = 0;
 
 	/*4. Interrupts: See register T0/1/2/3MCR (Table 430) and T0/1/2/3CCR (Table 431) for
@@ -124,7 +125,7 @@ void SetUpTimer()
 	LPC_TIM0->MCR |= (0x3 << 0);
 
 	/* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
-	LPC_TIM0->MR0 = 100;			//1000
+	LPC_TIM0->MR0 = 50;			//1000
 
 	IRQn_Type timer0IRQType = TIMER0_IRQn;
 	NVIC_EnableIRQ(timer0IRQType);
@@ -145,7 +146,7 @@ void SetUpTimer()
 	LPC_TIM1->TCR = 0x2;
 	LPC_TIM1->CTCR = 0;
 
-	LPC_TIM1->PR = 1000;			//200
+	LPC_TIM1->PR = 100000;			//200
 	LPC_TIM1->PC = 0;
 
 	/*4. Interrupts: See register T0/1/2/3MCR (Table 430) and T0/1/2/3CCR (Table 431) for
@@ -153,7 +154,7 @@ void SetUpTimer()
 	LPC_TIM1->MCR |= (0x3 << 0);
 
 	/* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
-	LPC_TIM1->MR0 = 1000;			//1000
+	LPC_TIM1->MR0 = 10000;			//1000
 
 	IRQn_Type timer1IRQType = TIMER1_IRQn;
 	NVIC_EnableIRQ(timer1IRQType);
@@ -396,8 +397,9 @@ int main(void)
 						// 2) T: Take data from user
 						printf("Enter the data to be transmitted (Characters): ");
 						transmitDataLength = 30;						// Fixing the maximum buffer length
-						scanf("%s", &TransmittedData);
-						transmitDataLength = strlen(TransmittedData);
+						scanf("%s", &DataEntered);
+						transmitDataLength = strlen(DataEntered);
+						strcpy(TransmittedData, DataEntered);
 					}
 					else if(binaryDataFormat)
 					{
@@ -409,6 +411,12 @@ int main(void)
 						transmitDataLength = strlen(BinaryData);
 					}
 				}
+				// If this is repeat send, copy the previous data to TransmittedData
+				else
+				{
+					strcpy(TransmittedData, DataEntered);
+				}
+
 				// Storing Source ID
 				TransmitBuffer[transmitBufferLength] = 0x03;
 				transmitBufferLength++;
