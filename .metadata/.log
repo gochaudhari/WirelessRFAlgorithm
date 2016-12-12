@@ -4132,3 +4132,27 @@ Command-line arguments:  -os win32 -ws win32 -arch x86
 
 !ENTRY org.eclipse.ui 4 4 2016-12-12 11:09:10.436
 !MESSAGE Plugin org.eclipse.cdt.ui, extension org.eclipse.ui.decorators, id org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator: Unknown extension tag found: decorator
+
+!ENTRY com.crt.log 1 0 2016-12-12 12:11:46.745
+!MESSAGE Drivers loaded in 1760 milliseconds
+
+!ENTRY com.crt.dsfdebug 4 0 2016-12-12 12:54:59.557
+!MESSAGE 15: Target error from Write register
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-12 12:54:59.557
+!MESSAGE 15: Target error from Write register
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-12 12:54:59.557
+!MESSAGE Invalid register index for read/write.
+
+!ENTRY com.crt.dsfdebug 4 0 2016-12-12 12:55:34.848
+!MESSAGE 15: Target error from Write register
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-12 12:55:34.848
+!MESSAGE 15: Target error from Write register
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-12 12:55:34.848
+!MESSAGE Invalid register index for read/write.
+
+!ENTRY com.crt.dsfdebug 4 0 2016-12-12 13:39:18.908
+!MESSAGE 15: Target error from Write register
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-12 13:39:18.908
+!MESSAGE 15: Target error from Write register
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-12 13:39:18.908
+!MESSAGE Invalid register index for read/write.

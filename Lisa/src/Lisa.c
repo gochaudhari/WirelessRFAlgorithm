@@ -224,6 +224,7 @@ int main(void)
 	char dataFormat;
 	bool transmit = false, receive = false, sendAckowledgement = false, receiveAcknowledgement = false;
 	bool isSyncFieldFormed = false, repeatSend = false;
+	int retryCount = 0;
 	int* dataReceivedStatus;
 	int counter, byteCounter = 0, printLength = 0, errorBitCount = 0;
 	int receivedSyncFieldSize = 8;				// Lets keep initial value as 8 but would be received as well
@@ -414,7 +415,14 @@ int main(void)
 				// If this is repeat send, copy the previous data to TransmittedData
 				else
 				{
+					static int count = 0;
+					// Clear the TransmittedDataBuffer here
+					for(count = 0; count < maxTransmitData; count++)
+					{
+						TransmittedData[count] = '\0';
+					}
 					strcpy(TransmittedData, DataEntered);
+					transmitDataLength = strlen(TransmittedData);
 				}
 
 				// Storing Source ID
@@ -603,7 +611,7 @@ int main(void)
 						}
 						else
 						{
-							printf("\nAcknowledgement Received. Transmission Successful.");
+							printf("\nAcknowledgement Received. Transmission Successful.\n");
 							receiveAcknowledgement = false;
 
 							// repeatSend is false since the data ack was sent was ready to move to new cycle
@@ -615,6 +623,12 @@ int main(void)
 
 						// Now, when all the receptions are done, make the sizeOfSyncField as 8(default min required)
 						sizeOfsyncField = 8;
+
+						// Finally after this data is received. If the error count is more, we can ask
+						// the transmitter to resend the data. Not doing this since we won't be able to test this
+						// properly.
+						// This is pretty easy since it can be implemented just by using one flag.
+						// repeatSend = true;
 					}
 					else
 					{
@@ -623,19 +637,38 @@ int main(void)
 						// There was some problem in transmission. So, send the data again.
 						if(receiveAcknowledgement & receiveAckTimerFinished)
 						{
-							printf("\nWait timer finished. Increasing Sync bytes.");
-							// Stop the receive and start the transmit
-							transmit = false;
-							receive = false;
+							retryCount++;
 
-							receiveAckTimerFinished = false;
-							receiveAcknowledgement = false;
-							// Start the sending thing here and make the receiveAck
-							repeatSend = true;
+							if(retryCount > 3)
+							{
+								printf("\nError: Wait timer finished. Sync Bytes cannot be increased. Retry Count exceeded");
+								printf("\nStarting new Data Cycle\n");
+								transmit = false;
+								receive = false;
+								repeatSend = false;
 
-							// This would reform the sync field by incrementing 8.
-							isSyncFieldFormed = false;
-							sizeOfsyncField = sizeOfsyncField + 8;
+								receiveAckTimerFinished = false;
+								receiveAcknowledgement = false;
+
+								isSyncFieldFormed = false;
+								sizeOfsyncField = 8;
+							}
+							else
+							{
+								printf("\nWait timer finished. Increasing Sync bytes. \n\nRetry number %d", retryCount);
+								// Stop the receive and start the transmit
+								transmit = false;
+								receive = false;
+
+								receiveAckTimerFinished = false;
+								receiveAcknowledgement = false;
+								// Start the sending thing here and make the receiveAck
+								repeatSend = true;
+
+								// This would reform the sync field by incrementing 8.
+								isSyncFieldFormed = false;
+								sizeOfsyncField = sizeOfsyncField + 8;
+							}
 						}
 						// Else means, the receive ACK timer is still waiting for ACK.
 						// Data not received in this buffer, start listening again.
