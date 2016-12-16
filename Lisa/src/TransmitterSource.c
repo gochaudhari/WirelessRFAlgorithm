@@ -60,11 +60,11 @@ void CreateSyncStream()
 	}
 }
 
-void AppendUserData(char *transmitDataAppend,int transmitDataLength)
+void AppendUserData(char *transmitDataAppend, int dataLength)
 {
 	int counter;
 
-	for(counter = 0; counter < transmitDataLength; counter++)
+	for(counter = 0; counter < dataLength; counter++)
 	{
 		TransmitBuffer[transmitBufferLength] = (transmitDataAppend[counter] & 0xFF);
 		transmitBufferLength++;
@@ -214,31 +214,28 @@ void EncodeUsingLinearBlockCoding()
 }
 #endif
 
-void setPIparameters(int sizeOfsyncField, int scrambleAndDescrambleOrder, int sizeOfLBCmatrix, int dataSpeed){
-
-	uint8_t PIMax=1;
-	uint8_t PIGood=0.75;
+void SetPIparameters(int * PerformanceIndexParameters, int sizeOfsyncField, int scrambleAndDescrambleOrder, int sizeOfLBCmatrix, int dataSpeed)
+{
+	uint8_t PIMax = 1;
+	uint8_t PIGood = 0.75;
 	uint8_t PIAvg = 0.50;
 	uint8_t PIBad = 0.25;
 
-	uint8_t PIofsyncField=0;
-	uint8_t PIofScramblingandDescrambling=0;
-	uint8_t PIoflinearBlockCoding=PIMax;
-	uint8_t PIofspeed=0;
+	uint8_t PIofsyncField = 0;
+	uint8_t PIofScramblingandDescrambling = 0;
+	uint8_t PIoflinearBlockCoding = PIMax;
+	uint8_t PIofspeed = 0;
 
-	int numberOfParams = 4;
-	char paramsDataAppend[4];
-
-	if(sizeOfsyncField==8){
+	if(sizeOfsyncField == 8){
 		PIofsyncField = PIMax;
 	}
-	else if(sizeOfsyncField ==16){
+	else if(sizeOfsyncField == 16){
 		PIofsyncField = PIGood;
 	}
-	else if(sizeOfsyncField ==24){
+	else if(sizeOfsyncField == 24){
 		PIofsyncField = PIAvg;
 	}
-	else if(sizeOfsyncField ==32){
+	else if(sizeOfsyncField == 32){
 		PIofsyncField = PIBad;
 	}
 
@@ -255,23 +252,21 @@ void setPIparameters(int sizeOfsyncField, int scrambleAndDescrambleOrder, int si
 		PIofScramblingandDescrambling = PIBad;
 	}
 
-	if(	LPC_TIM0->MR0 == 50){
+	if(dataSpeed == 9){
 		PIofspeed = PIMax;
 	}
-	else if(LPC_TIM0->MR0 == 100){
+	else if(dataSpeed == 4){
 		PIofspeed = PIGood;
 	}
-	else if(LPC_TIM0->MR0 == 200){
+	else if(dataSpeed == 2){
 		PIofspeed = PIAvg;
 	}
-	else if(LPC_TIM0->MR0 == 500){
+	else if(dataSpeed == 1){
 		PIofspeed = PIBad;
 	}
 
-	paramsDataAppend[0] = PIofsyncField;
-	paramsDataAppend[1] = PIofScramblingandDescrambling;
-	paramsDataAppend[2] = PIoflinearBlockCoding;
-	paramsDataAppend[3] = PIofspeed;
-
-	AppendUserData(paramsDataAppend,numberOfParams);
+	PerformanceIndexParameters[0] = PIofsyncField;
+	PerformanceIndexParameters[1] = PIofScramblingandDescrambling;
+	PerformanceIndexParameters[2] = PIoflinearBlockCoding;
+	PerformanceIndexParameters[3] = PIofspeed;
 }

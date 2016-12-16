@@ -15,6 +15,6 @@ void TransmitData();
 void EncryptTransmitSyncField();
 void ScrambleData(int scrambleAndDescrambleOrder);
 void EncodeUsingLinearBlockCoding();
-void setPIparameters(int sizeOfsyncField, int scrambleAndDescrambleOrder, int sizeOfLBCmatrix, int dataSpeed);
+void SetPIparameters(int sizeOfsyncField, int scrambleAndDescrambleOrder, int sizeOfLBCmatrix, int dataSpeed);
 
 #endif /* TRANSMITTERSOURCE_H_ */

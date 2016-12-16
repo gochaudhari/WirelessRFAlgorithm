@@ -35,7 +35,7 @@ int transmitDataLength;
 int transmitBufferCounter, transmitBitCounter = 7;
 
 int sizeOfsyncField = 8;
-int dataLengthAdditions = 3, dataLengthByte;
+int dataLengthAdditions = 7, dataLengthByte;
 int k = 8, n = 12;
 int generatorMatrix[8][12];
 int transposeMatrix[12][4];
@@ -232,6 +232,7 @@ int main(void)
 	int counter, byteCounter = 0, printLength = 0, errorBitCount = 0;
 	int receivedSyncFieldSize = 8;				// Lets keep initial value as 8 but would be received as well
 												// from the ProcessLISAReceived function.
+	int PerformanceIndexParameters[4], performanceIndex;
 
 	// Initial sizeOfsyncField is to be kept 8 and then depending on unsuccessful communications
 	// increment the value by 8
@@ -390,7 +391,15 @@ int main(void)
 				TransmitBuffer[transmitBufferLength] = transmitDataLength;
 				transmitBufferLength++;
 
-				setPIparameters(sizeOfsyncField,scrambleAndDescrambleOrder, sizeOfLBCmatrix,dataSpeed);
+				SetPIparameters(PerformanceIndexParameters, sizeOfsyncField, scrambleAndDescrambleOrder, sizeOfLBCmatrix, dataSpeed);
+				static count = 0;
+				for(count = 0; count < 4; count++)
+				{
+					performanceIndex = performanceIndex + PerformanceIndexParameters[count];
+				}
+				performanceIndex = performanceIndex/4;
+
+				AppendUserData(PerformanceIndexParameters, 4);
 
 				// 3) T: Combine the repeating pattern and the user input data
 				AppendUserData(TransmittedData, transmitDataLength);
