@@ -22,7 +22,7 @@ void PrintData(uint8_t *buffer, int length, int characterPosition)
 			printf("%x", buffer[counter]);
 		}
 
-		if(counter < characterPosition)
+		if(counter <= characterPosition)
 		{
 			printf("%x", buffer[counter]);
 		}

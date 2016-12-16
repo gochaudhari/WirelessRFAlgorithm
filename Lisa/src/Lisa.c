@@ -35,7 +35,7 @@ int transmitDataLength;
 int transmitBufferCounter, transmitBitCounter = 7;
 
 int sizeOfsyncField = 8;
-int dataLengthAdditions = 7, dataLengthByte;
+int dataLengthAdditions = 7, dataLengthByte, characterPosition;
 int k = 8, n = 12;
 int generatorMatrix[8][12];
 int transposeMatrix[12][4];
@@ -120,7 +120,7 @@ void SetUpTimer()
 	LPC_TIM0->TCR = 0x2;
 	LPC_TIM0->CTCR = 0;
 
-	LPC_TIM0->PR = 50;			//200
+	LPC_TIM0->PR = 100;			//200
 	LPC_TIM0->PC = 0;
 
 	/*4. Interrupts: See register T0/1/2/3MCR (Table 430) and T0/1/2/3CCR (Table 431) for
@@ -128,7 +128,7 @@ void SetUpTimer()
 	LPC_TIM0->MCR |= (0x3 << 0);
 
 	/* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
-	LPC_TIM0->MR0 = 50;			//1000
+	LPC_TIM0->MR0 = 100;			//1000
 
 	IRQn_Type timer0IRQType = TIMER0_IRQn;
 	NVIC_EnableIRQ(timer0IRQType);
@@ -227,7 +227,7 @@ int main(void)
 	char dataFormat;
 	bool transmit = false, receive = false, sendAckowledgement = false, receiveAcknowledgement = false;
 	bool isSyncFieldFormed = false, repeatSend = false;
-	int retryCount = 0, dataSpeed, performanceIndex;
+	int retryCount = 0, dataSpeed, performanceIndex = 0;
 	int* dataReceivedStatus;
 	int counter, byteCounter = 0, printLength = 0, errorBitCount = 0;
 	int receivedSyncFieldSize = 8;				// Lets keep initial value as 8 but would be received as well
@@ -240,6 +240,7 @@ int main(void)
 
 	// Since the data length would be received after the source and destination
 	dataLengthByte = receivedSyncFieldSize + 2;
+	dataLengthByte = receivedSyncFieldSize + (dataLengthAdditions - 1);
 
 	SetUpGPIOPins();
 
@@ -305,6 +306,7 @@ int main(void)
 				CreateSyncStream();
 				isSyncFieldFormed = true;
 				dataLengthByte = sizeOfsyncField + 2;
+				characterPosition = receivedSyncFieldSize + (dataLengthAdditions - 1);
 			}
 #endif
 
@@ -467,7 +469,7 @@ int main(void)
 					performanceIndex = performanceIndex + PerformanceIndexParameters[count];
 				}
 				performanceIndex = performanceIndex/4;
-
+				printf("\n Sending with PI = %d", performanceIndex);
 				AppendUserData(PerformanceIndexParameters, 4);
 
 				// 3) T: Combine the repeating pattern and the user input data
@@ -478,14 +480,14 @@ int main(void)
 			// 3) T: Print the created final stream
 			// transmitBufferLength variable can also be used but needs to be edited to actual value.
 			printLength = sizeOfsyncField + TransmitBuffer[dataLengthByte] + dataLengthAdditions;
-			PrintData(TransmitBuffer, printLength, dataLengthByte);
+			PrintData(TransmitBuffer, printLength, characterPosition);
 
 			#ifdef EncryptedCommunication
 				EncryptTransmitSyncField();
 				printf("\nEncrypted data transmission: ");
 				// 3) T: Print the created final stream
 				printLength = sizeOfsyncField + TransmitBuffer[dataLengthByte] + dataLengthAdditions;
-				PrintData(TransmitBuffer, printLength, dataLengthByte);
+				PrintData(TransmitBuffer, printLength, characterPosition);
 			#endif
 		}
 #endif
@@ -568,6 +570,7 @@ int main(void)
 						receivedSyncFieldSize = dataReceivedStatus[3];
 						dataReceived = false;
 						dataLengthByte = receivedSyncFieldSize + 2;
+						characterPosition = receivedSyncFieldSize + (dataLengthAdditions - 1);
 						byteCounter = 0;
 						
 						// Copy the received data
@@ -584,7 +587,7 @@ int main(void)
 						ReceivedData = (char *)malloc(sizeof(char) * Buffer[dataLengthByte]);
 						receivedDataLength = sizeOfsyncField + Buffer[dataLengthByte] + dataLengthAdditions;
 
-						for(counter = dataLengthByte + 1; counter < receivedDataLength; counter++)
+						for(counter = characterPosition + 1; counter < receivedDataLength; counter++)
 						{
 							ReceivedData[byteCounter] = Buffer[counter];
 							byteCounter++;
@@ -597,7 +600,7 @@ int main(void)
 						DecryptReceivedSyncField(dataReceivedStatus[2]);
 #endif					
 						// Displaying all Sync Field + Data
-						PrintData((uint8_t *)Buffer, receivedDataLength, dataLengthByte);
+						PrintData((uint8_t *)Buffer, receivedDataLength, characterPosition);
 
 #ifdef EncryptedCommunication
 						DecryptReceivedSyncField(dataReceivedStatus[2]);						
