@@ -62,6 +62,7 @@ bool receiveAckTimerFinished = false;
 	bool encryptEntireData = false;
 #endif
 int receiverBufferCounter, bitCount = 8, receiverBitCounter = 7;
+const char *ackOrNack;
 const char *acknowledgement = "ACKSENT";
 const char *negativeAcknowledgement = "NACKSENT";
 
@@ -106,7 +107,7 @@ void SetUpTimer()
 	LPC_SC->PCONP |= (1 << Timer0PCONP);
 
 	/*2. Peripheral clock: In the PCLKSEL0 register (Table 40), select PCLK_TIMER0/1*/
-	//	LPC_SC->PCLKSEL0 &= ~(3 << Timer0PCLK);
+//	LPC_SC->PCLKSEL0 &= ~(3 << Timer0PCLK);
 	LPC_SC->PCLKSEL0 |= (3 << Timer0PCLK);
 
 	/*3. Pins: Select timer pins through the PINSEL registers. Select the pin modes for the
@@ -363,8 +364,8 @@ int main(void)
 		{
 			if(sendAckowledgement)
 			{
-				strcpy((char *)TransmittedData, acknowledgement);
-				transmitDataLength = strlen(acknowledgement);
+				strcpy((char *)TransmittedData, ackOrNack);
+				transmitDataLength = strlen(ackOrNack);
 
 				// Storing Source ID
 				TransmitBuffer[transmitBufferLength] = 0x03;
@@ -605,17 +606,65 @@ int main(void)
 						PrintData((uint8_t *)ReceivedData, actualDataLength, -1);
 #endif
 
+						uint8_t param1;
+						uint8_t param2;
+						uint8_t param3;
+						uint8_t param4;
+
 						if(!receiveAcknowledgement)
 						{
 							sendAckowledgement = true;
+
+							// dataReceivedStatus[1] is error count. If error is more
+							if(dataReceivedStatus[1] > 3)
+							{
+								// Now, handling the data that was received and what to do with that data.
+								// If the data is not acknowledgment and it has errors, send the data again
+								// alongwith changing the performance index parameters
+								// Finally after this data is received. If the error count is more, we can ask
+								// the transmitter to resend the data.
+								// This is pretty easy since it can be implemented just by using one flag.
+								param1 = 75;
+								param2 = 75;
+								param3 = 75;
+								param4 = 75;
+								ackOrNack = negativeAcknowledgement;
+							}
+							else
+							{
+								param1 = '0';
+								param2 = '0';
+								param3 = '0';
+								param4 = '0';
+								ackOrNack = acknowledgement;
+							}
+
 						}
 						else
 						{
-							printf("\nAcknowledgement Received. Transmission Successful.\n");
-							receiveAcknowledgement = false;
+							// If all the parameters are '0' as we decided, the transmission was successful
+							if(param1 == '0' && param2 == '0' && param3 == '0' && param4 == '0' &&
+									ReceivedData == acknowledgement)
+							{
+								printf("\nACK Received. Transmission Successful.\n");
 
-							// repeatSend is false since the data ack was sent was ready to move to new cycle
-							repeatSend = false;
+								// repeatSend is false since the data ack was sent was ready to move to new cycle
+								repeatSend = false;
+							}
+							// Else if NACKSENT was received or any of the parameters are set,
+							// that means, there was some data receive error and I(transmitter)
+							// was asked to resend the data with better parameters. I would set the parameters here.
+							else
+							{
+								printf("\nNACK Received. Transmission full with errors.\nResending the data.\n");
+
+								// repeatSend is false since the data ack was sent was ready to move to new cycle
+								isSyncFieldFormed = false;
+								repeatSend = true;
+							}
+
+							// In either of the cases, receiveAcknowledgement is made to be false
+							receiveAcknowledgement = false;
 						}
 						transmit = false;
 						receive = false;
@@ -623,12 +672,6 @@ int main(void)
 
 						// Now, when all the receptions are done, make the sizeOfSyncField as 8(default min required)
 						sizeOfsyncField = 8;
-
-						// Finally after this data is received. If the error count is more, we can ask
-						// the transmitter to resend the data. Not doing this since we won't be able to test this
-						// properly.
-						// This is pretty easy since it can be implemented just by using one flag.
-						// repeatSend = true;
 					}
 					else
 					{

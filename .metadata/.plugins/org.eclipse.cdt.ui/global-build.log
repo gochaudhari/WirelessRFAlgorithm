@@ -39400,3 +39400,219 @@ arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "
    text	   data	    bss	    dec	    hex	filename
   22656	    180	   5196	  28032	   6d80	Lisa.axf
  
+13:46:29 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+13:48:37 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       22836 B       512 KB      4.36%
+        RamLoc32:        5376 B        32 KB     16.41%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  22656	    180	   5196	  28032	   6d80	Lisa.axf
+ 
+13:51:10 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+13:53:28 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+13:54:27 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+make: Nothing to be done for `all'.
+13:56:42 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       22836 B       512 KB      4.36%
+        RamLoc32:        5376 B        32 KB     16.41%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  22656	    180	   5196	  28032	   6d80	Lisa.axf
+ 
+13:59:37 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       22836 B       512 KB      4.36%
+        RamLoc32:        5376 B        32 KB     16.41%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  22656	    180	   5196	  28032	   6d80	Lisa.axf
+ 
+07:25:15 **** Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+07:25:19 **** Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:624:17: warning: unused variable 'param4' [-Wunused-variable]
+         uint8_t param4 = 75;
+                 ^
+../src/Lisa.c:623:17: warning: unused variable 'param3' [-Wunused-variable]
+         uint8_t param3 = 75;
+                 ^
+../src/Lisa.c:622:17: warning: unused variable 'param2' [-Wunused-variable]
+         uint8_t param2 = 75;
+                 ^
+../src/Lisa.c:621:17: warning: unused variable 'param1' [-Wunused-variable]
+         uint8_t param1 = 75;
+                 ^
+../src/Lisa.c:631:17: warning: unused variable 'param4' [-Wunused-variable]
+         uint8_t param4 = '0';
+                 ^
+../src/Lisa.c:630:17: warning: unused variable 'param3' [-Wunused-variable]
+         uint8_t param3 = '0';
+                 ^
+../src/Lisa.c:629:17: warning: unused variable 'param2' [-Wunused-variable]
+         uint8_t param2 = '0';
+                 ^
+../src/Lisa.c:628:17: warning: unused variable 'param1' [-Wunused-variable]
+         uint8_t param1 = '0';
+                 ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       22884 B       512 KB      4.36%
+        RamLoc32:        5376 B        32 KB     16.41%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  22704	    180	   5196	  28080	   6db0	Lisa.axf
+ 
+07:26:47 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+07:26:48 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+../src/Lisa.c: In function 'main':
+../src/Lisa.c:615:16: warning: variable 'param4' set but not used [-Wunused-but-set-variable]
+        uint8_t param4 = 75;
+                ^
+../src/Lisa.c:614:16: warning: variable 'param3' set but not used [-Wunused-but-set-variable]
+        uint8_t param3 = 75;
+                ^
+../src/Lisa.c:613:16: warning: variable 'param2' set but not used [-Wunused-but-set-variable]
+        uint8_t param2 = 75;
+                ^
+../src/Lisa.c:612:16: warning: variable 'param1' set but not used [-Wunused-but-set-variable]
+        uint8_t param1 = 75;
+                ^
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       22900 B       512 KB      4.37%
+        RamLoc32:        5376 B        32 KB     16.41%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  22720	    180	   5196	  28096	   6dc0	Lisa.axf
+ 
+07:31:42 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+07:31:44 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       22924 B       512 KB      4.37%
+        RamLoc32:        5380 B        32 KB     16.42%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  22744	    180	   5200	  28124	   6ddc	Lisa.axf
+ 
+07:33:00 **** Incremental Build of configuration Debug for project CMSIS_CORE_LPC17xx ****
+make -r all 
+make: Nothing to be done for `all'.
+07:33:01 **** Incremental Build of configuration Debug for project Lisa ****
+make -r all 
+Building file: ../src/Lisa.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_CMSIS=CMSIS_CORE_LPC17xx -D__USE_CMSIS_DSPLIB=CMSIS_DSPLIB_CM3 -D__LPC17XX__ -D__REDLIB__ -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\Lisa\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\inc" -I"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\inc" -O0 -fno-common -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/Lisa.d" -MT"src/Lisa.o" -MT"src/Lisa.d" -o "src/Lisa.o" "../src/Lisa.c"
+Finished building: ../src/Lisa.c
+ 
+Building target: Lisa.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_CORE_LPC17xx\Debug" -L"D:\Career\4 - MS\Sem 3 - Fall 2016\CMPE 245\Codes\Workspace\CMSIS_DSPLIB_CM3\lib" -Xlinker -Map="Lisa.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "Lisa_Debug.ld" -o "Lisa.axf"  ./src/Common.o ./src/GHmatrix.o ./src/Lisa.o ./src/ReceiverSource.o ./src/TransmitterSource.o ./src/cr_startup_lpc175x_6x.o ./src/crp.o   -lCMSIS_CORE_LPC17xx -lCMSIS_DSPLIB_CM3
+Memory region         Used Size  Region Size  %age Used
+       MFlash512:       22940 B       512 KB      4.38%
+        RamLoc32:        5380 B        32 KB     16.42%
+        RamAHB32:          0 GB        32 KB      0.00%
+Finished building target: Lisa.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Lisa.axf"; # arm-none-eabi-objcopy -v -O binary "Lisa.axf" "Lisa.bin" ; # checksum -p LPC1769 -d "Lisa.bin";
+   text	   data	    bss	    dec	    hex	filename
+  22760	    180	   5200	  28140	   6dec	Lisa.axf
+ 

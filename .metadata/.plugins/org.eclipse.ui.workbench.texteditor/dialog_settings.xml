@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="StartTimer1" key="selection"/>
+		<item value="counter" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="counter"/>
 			<item value="StartTimer1"/>
 			<item value="LPC_TIM1-&gt;TCR = 0x01"/>
 			<item value="LPC_TIM1-&gt;TCR = 0x1"/>
@@ -15,7 +16,6 @@
 			<item value="isSyncFieldFormed"/>
 			<item value="i"/>
 			<item value="send"/>
-			<item value="sendacknow"/>
 		</list>
 		<list key="replacehistory">
 			<item value="&apos;0x"/>
