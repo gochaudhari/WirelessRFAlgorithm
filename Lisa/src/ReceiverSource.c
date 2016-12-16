@@ -559,6 +559,7 @@ void LinearBlockDecoding()
 		ReceivedData[finalDataIndex] = dataExtracted;
 	}
 	actualDataLength = finalDataIndex + 1;
+	ReceivedData[actualDataLength] = '\0';
 }
 
 bool IsSyndromeNonZero(int *receivedMatrix)

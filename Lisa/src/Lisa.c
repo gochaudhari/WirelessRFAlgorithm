@@ -306,7 +306,7 @@ int main(void)
 				CreateSyncStream();
 				isSyncFieldFormed = true;
 				dataLengthByte = sizeOfsyncField + 2;
-				characterPosition = receivedSyncFieldSize + (dataLengthAdditions - 1);
+				characterPosition = sizeOfsyncField + (dataLengthAdditions - 1);
 			}
 #endif
 
@@ -393,7 +393,6 @@ int main(void)
 				TransmitBuffer[transmitBufferLength] = transmitDataLength;
 				transmitBufferLength++;
 
-				SetPIparameters(PerformanceIndexParameters, sizeOfsyncField, scrambleAndDescrambleOrder, sizeOfLBCmatrix, dataSpeed);
 				static int count = 0;
 				performanceIndex = 0;
 				for(count = 0; count < 4; count++)
@@ -667,7 +666,11 @@ int main(void)
 								param4 = 0;
 								ackOrNack = acknowledgement;
 							}
-
+							PerformanceIndexParameters[0] = param1;
+							PerformanceIndexParameters[1] = param2;
+							PerformanceIndexParameters[2] = param3;
+							PerformanceIndexParameters[3] = param4;
+							GetPIparameters(param1, param2, param3, param4);
 						}
 						else
 						{
