@@ -2,4 +2,4 @@
 *.ini
 *.metadata/
 *.exe
-Lisa/Debug/
+Lisa/Debug/*

@@ -214,7 +214,7 @@ void EncodeUsingLinearBlockCoding()
 }
 #endif
 
-void SetPIparameters(int * PerformanceIndexParameters, int sizeOfsyncField, int scrambleAndDescrambleOrder, int sizeOfLBCmatrix, int dataSpeed)
+void SetPIparameters(uint8_t * PerformanceIndexParameters, int sizeOfsyncField, int scrambleAndDescrambleOrder, int sizeOfLBCmatrix, int dataSpeed)
 {
 	uint8_t PIMax = 1;
 	uint8_t PIGood = 0.75;
