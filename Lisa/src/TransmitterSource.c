@@ -60,7 +60,7 @@ void CreateSyncStream()
 	}
 }
 
-void AppendUserData(char *transmitDataAppend)
+void AppendUserData(char *transmitDataAppend,int transmitDataLength)
 {
 	int counter;
 
@@ -213,3 +213,65 @@ void EncodeUsingLinearBlockCoding()
 	}
 }
 #endif
+
+void setPIparameters(int sizeOfsyncField, int scrambleAndDescrambleOrder, int sizeOfLBCmatrix, int dataSpeed){
+
+	uint8_t PIMax=1;
+	uint8_t PIGood=0.75;
+	uint8_t PIAvg = 0.50;
+	uint8_t PIBad = 0.25;
+
+	uint8_t PIofsyncField=0;
+	uint8_t PIofScramblingandDescrambling=0;
+	uint8_t PIoflinearBlockCoding=PIMax;
+	uint8_t PIofspeed=0;
+
+	int numberOfParams = 4;
+	char paramsDataAppend[4];
+
+	if(sizeOfsyncField==8){
+		PIofsyncField = PIMax;
+	}
+	else if(sizeOfsyncField ==16){
+		PIofsyncField = PIGood;
+	}
+	else if(sizeOfsyncField ==24){
+		PIofsyncField = PIAvg;
+	}
+	else if(sizeOfsyncField ==32){
+		PIofsyncField = PIBad;
+	}
+
+	if(scrambleAndDescrambleOrder == 7){
+		PIofScramblingandDescrambling = PIMax;
+	}
+	else if(scrambleAndDescrambleOrder == 9){
+		PIofScramblingandDescrambling = PIGood;
+	}
+	else if(scrambleAndDescrambleOrder == 11){
+		PIofScramblingandDescrambling = PIAvg;
+	}
+	else if(scrambleAndDescrambleOrder == 13){
+		PIofScramblingandDescrambling = PIBad;
+	}
+
+	if(	LPC_TIM0->MR0 == 50){
+		PIofspeed = PIMax;
+	}
+	else if(LPC_TIM0->MR0 == 100){
+		PIofspeed = PIGood;
+	}
+	else if(LPC_TIM0->MR0 == 200){
+		PIofspeed = PIAvg;
+	}
+	else if(LPC_TIM0->MR0 == 500){
+		PIofspeed = PIBad;
+	}
+
+	paramsDataAppend[0] = PIofsyncField;
+	paramsDataAppend[1] = PIofScramblingandDescrambling;
+	paramsDataAppend[2] = PIoflinearBlockCoding;
+	paramsDataAppend[3] = PIofspeed;
+
+	AppendUserData(paramsDataAppend,numberOfParams);
+}
