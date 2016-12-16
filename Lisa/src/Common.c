@@ -7,6 +7,7 @@
 
 #include <Common.h>
 #include <AllDefs.h>
+#include <LPC17xx.h>
 
 #if defined(Transmit) || defined(Receive)
 void PrintData(uint8_t *buffer, int length, int characterPosition)
@@ -143,4 +144,31 @@ int BinaryDataFormatConversion(int8_t *ConsolidatedData, int lengthOfConsolidate
 	}
 
 	return lengthReturnData;
+}
+
+/*
+Function decides the data communication speed from the parameters
+*/
+int GetDataSpeed()
+{
+	int dataSpeed = 0;
+
+	if(LPC_TIM0->PR == 50 && LPC_TIM0->MR0 == 50 && (LPC_SC->PCLKSEL0 & 0x0C) == 0x0C)
+	{
+		dataSpeed = 9;
+	}
+	else if(LPC_TIM0->PR == 50 && LPC_TIM0->MR0 == 50)
+	{
+		dataSpeed = 4;
+	}
+	else if(LPC_TIM0->PR == 100 && LPC_TIM0->MR0 == 100)
+	{
+		dataSpeed = 2;
+	}
+	else if(LPC_TIM0->PR == 200 && LPC_TIM0->MR0 == 200)
+	{
+		dataSpeed = 1;
+	}
+
+	return dataSpeed;
 }

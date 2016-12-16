@@ -225,7 +225,7 @@ int main(void)
 	char dataFormat;
 	bool transmit = false, receive = false, sendAckowledgement = false, receiveAcknowledgement = false;
 	bool isSyncFieldFormed = false, repeatSend = false;
-	int retryCount = 0;
+	int retryCount = 0, dataSpeed;
 	int* dataReceivedStatus;
 	int counter, byteCounter = 0, printLength = 0, errorBitCount = 0;
 	int receivedSyncFieldSize = 8;				// Lets keep initial value as 8 but would be received as well
@@ -261,6 +261,7 @@ int main(void)
 	 * 6) R: Ignore rest of the bits and then read the actual data
 	 */
 
+	dataSpeed = GetDataSpeed();
 #if defined(Transmit) || defined(Receive)
 	// Turn on the timer
 	SetUpTimer();
