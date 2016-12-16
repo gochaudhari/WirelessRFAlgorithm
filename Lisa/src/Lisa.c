@@ -109,8 +109,8 @@ void SetUpTimer()
 	LPC_SC->PCONP |= (1 << Timer0PCONP);
 
 	/*2. Peripheral clock: In the PCLKSEL0 register (Table 40), select PCLK_TIMER0/1*/
-//	LPC_SC->PCLKSEL0 &= ~(3 << Timer0PCLK);
-	LPC_SC->PCLKSEL0 |= (3 << Timer0PCLK);
+	LPC_SC->PCLKSEL0 &= ~(3 << Timer0PCLK);
+//	LPC_SC->PCLKSEL0 |= (3 << Timer0PCLK);
 
 	/*3. Pins: Select timer pins through the PINSEL registers. Select the pin modes for the
 	port pins with timer functions through the PINMODE registers.*/
@@ -120,7 +120,7 @@ void SetUpTimer()
 	LPC_TIM0->TCR = 0x2;
 	LPC_TIM0->CTCR = 0;
 
-	LPC_TIM0->PR = 100;			//200
+	LPC_TIM0->PR = 50;			//200
 	LPC_TIM0->PC = 0;
 
 	/*4. Interrupts: See register T0/1/2/3MCR (Table 430) and T0/1/2/3CCR (Table 431) for
@@ -128,7 +128,7 @@ void SetUpTimer()
 	LPC_TIM0->MCR |= (0x3 << 0);
 
 	/* Interrupts are enabled in the NVIC using the appropriate Interrupt Set Enable register.*/
-	LPC_TIM0->MR0 = 100;			//1000
+	LPC_TIM0->MR0 = 50;			//1000
 
 	IRQn_Type timer0IRQType = TIMER0_IRQn;
 	NVIC_EnableIRQ(timer0IRQType);
@@ -675,8 +675,8 @@ int main(void)
 						else
 						{
 							// If all the parameters are '0' as we decided, the transmission was successful
-							if(param1 == '0' && param2 == '0' && param3 == '0' && param4 == '0' &&
-									ReceivedData == acknowledgement)
+							if((param1 == '0' && param2 == '0' && param3 == '0' && param4 == '0') ||
+									!strcmp(ReceivedData, acknowledgement))
 							{
 								printf("\nACK Received. Transmission Successful.\n");
 
