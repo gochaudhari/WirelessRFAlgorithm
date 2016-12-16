@@ -41,6 +41,8 @@ int generatorMatrix[8][12];
 int transposeMatrix[12][4];
 uint16_t CMatrix[256];
 uint16_t receivedCMatrix[256];
+int sizeOfLBCmatrix = 0;
+int dataSpeed = 0;
 
 #ifdef ScramblingAndDescrambling
 int scrambleAndDescrambleOrder;
@@ -388,8 +390,10 @@ int main(void)
 				TransmitBuffer[transmitBufferLength] = transmitDataLength;
 				transmitBufferLength++;
 
+				setPIparameters(sizeOfsyncField,scrambleAndDescrambleOrder, sizeOfLBCmatrix,dataSpeed);
+
 				// 3) T: Combine the repeating pattern and the user input data
-				AppendUserData(TransmittedData);
+				AppendUserData(TransmittedData, transmitDataLength);
 			}
 			else
 			{
@@ -447,8 +451,10 @@ int main(void)
 				TransmitBuffer[transmitBufferLength] = transmitDataLength;
 				transmitBufferLength++;
 
+				setPIparameters(sizeOfsyncField,scrambleAndDescrambleOrder, sizeOfLBCmatrix,dataSpeed);
+
 				// 3) T: Combine the repeating pattern and the user input data
-				AppendUserData(TransmittedData);
+				AppendUserData(TransmittedData, transmitDataLength);
 			}
 
 			printf("\nData transmission: ");
