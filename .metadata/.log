@@ -4308,3 +4308,10 @@ Press 'Cancel' to terminate this launch.
 !MESSAGE Termi&nate/Disconnect All is not enabled.
 
 To terminate debug sessions, first select a debug session in the Debug View and then select Terminate again.
+
+!ENTRY com.crt.dsfdebug 4 0 2016-12-16 00:50:31.777
+!MESSAGE 15: Target error from Write register
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-16 00:50:31.777
+!MESSAGE 15: Target error from Write register
+!SUBENTRY 1 com.crt.dsfdebug 4 0 2016-12-16 00:50:31.777
+!MESSAGE Invalid register index for read/write.

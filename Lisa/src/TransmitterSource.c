@@ -22,7 +22,7 @@ extern int maxTransmitData;
 extern char TransmitBuffer[50];				// 8 bytes of initial sync and then next is the data. Assume 8 + 8
 extern char TransmittedData[30];
 extern int transmitBufferLength, transmitDataLength;
-extern int sizeOfsyncField;
+extern int sizeOfsyncField, scrambleAndDescrambleOrder;;
 extern int transmitBufferCounter, transmitBitCounter;
 extern int bitCount;
 extern int dataLengthByte;
@@ -216,10 +216,10 @@ void EncodeUsingLinearBlockCoding()
 
 void SetPIparameters(uint8_t * PerformanceIndexParameters, int sizeOfsyncField, int scrambleAndDescrambleOrder, int sizeOfLBCmatrix, int dataSpeed)
 {
-	uint8_t PIMax = 1;
-	uint8_t PIGood = 0.75;
-	uint8_t PIAvg = 0.50;
-	uint8_t PIBad = 0.25;
+	uint8_t PIMax = 100;
+	uint8_t PIGood = 75;
+	uint8_t PIAvg = 50;
+	uint8_t PIBad = 25;
 
 	uint8_t PIofsyncField = 0;
 	uint8_t PIofScramblingandDescrambling = 0;
@@ -269,4 +269,47 @@ void SetPIparameters(uint8_t * PerformanceIndexParameters, int sizeOfsyncField, 
 	PerformanceIndexParameters[1] = PIofScramblingandDescrambling;
 	PerformanceIndexParameters[2] = PIoflinearBlockCoding;
 	PerformanceIndexParameters[3] = PIofspeed;
+}
+
+void GetPIparameters(uint8_t piOfSyncField, uint8_t piOfScramblingAndDescrambling,
+						uint8_t piOfLinearBlockCoding, uint8_t piOfSpeed)
+{
+	if(piOfSyncField == 100){
+		sizeOfsyncField = 8;
+	}
+	else if(piOfSyncField == 75){
+		sizeOfsyncField = 16;
+	}
+	else if(piOfSyncField == 50){
+		sizeOfsyncField = 24;
+	}
+	else if(piOfSyncField == 25){
+		sizeOfsyncField = 32;
+	}
+
+	if(piOfScramblingAndDescrambling == 100){
+		scrambleAndDescrambleOrder = 7;
+	}
+	else if(piOfScramblingAndDescrambling == 75){
+		scrambleAndDescrambleOrder = 9;
+	}
+	else if(piOfScramblingAndDescrambling == 50){
+		scrambleAndDescrambleOrder = 11;
+	}
+	else if(piOfScramblingAndDescrambling == 25){
+		scrambleAndDescrambleOrder = 13;
+	}
+
+/*	if(dataSpeed == 9){
+		PIofspeed = PIMax;
+	}
+	else if(dataSpeed == 4){
+		PIofspeed = PIGood;
+	}
+	else if(dataSpeed == 2){
+		PIofspeed = PIAvg;
+	}
+	else if(dataSpeed == 1){
+		PIofspeed = PIBad;
+	}*/
 }

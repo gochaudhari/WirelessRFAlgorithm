@@ -394,7 +394,8 @@ int main(void)
 				transmitBufferLength++;
 
 				SetPIparameters(PerformanceIndexParameters, sizeOfsyncField, scrambleAndDescrambleOrder, sizeOfLBCmatrix, dataSpeed);
-				static count = 0;
+				static int count = 0;
+				performanceIndex = 0;
 				for(count = 0; count < 4; count++)
 				{
 					performanceIndex = performanceIndex + PerformanceIndexParameters[count];
@@ -463,7 +464,8 @@ int main(void)
 				transmitBufferLength++;
 
 				SetPIparameters(PerformanceIndexParameters, sizeOfsyncField, scrambleAndDescrambleOrder, sizeOfLBCmatrix, dataSpeed);
-				static count = 0;
+				static int count = 0;
+				performanceIndex = 0;
 				for(count = 0; count < 4; count++)
 				{
 					performanceIndex = performanceIndex + PerformanceIndexParameters[count];
@@ -633,17 +635,17 @@ int main(void)
 						PrintData((uint8_t *)ReceivedData, actualDataLength, -1);
 #endif
 
-						uint8_t param1;
-						uint8_t param2;
-						uint8_t param3;
-						uint8_t param4;
+						uint8_t param1 = Buffer[receivedSyncFieldSize + 3];
+						uint8_t param2 = Buffer[receivedSyncFieldSize + 4];
+						uint8_t param3 = Buffer[receivedSyncFieldSize + 5];
+						uint8_t param4 = Buffer[receivedSyncFieldSize + 6];
 
 						if(!receiveAcknowledgement)
 						{
 							sendAckowledgement = true;
 
 							// dataReceivedStatus[1] is error count. If error is more
-							if(dataReceivedStatus[1] > 3)
+							if(dataReceivedStatus[1] > 2)
 							{
 								// Now, handling the data that was received and what to do with that data.
 								// If the data is not acknowledgment and it has errors, send the data again
@@ -652,17 +654,17 @@ int main(void)
 								// the transmitter to resend the data.
 								// This is pretty easy since it can be implemented just by using one flag.
 								param1 = 75;
-								param2 = 75;
-								param3 = 75;
-								param4 = 75;
+								param2 = 100;
+								param3 = 100;
+								param4 = 50;
 								ackOrNack = negativeAcknowledgement;
 							}
 							else
 							{
-								param1 = '0';
-								param2 = '0';
-								param3 = '0';
-								param4 = '0';
+								param1 = 0;
+								param2 = 0;
+								param3 = 0;
+								param4 = 0;
 								ackOrNack = acknowledgement;
 							}
 
@@ -683,7 +685,10 @@ int main(void)
 							// was asked to resend the data with better parameters. I would set the parameters here.
 							else
 							{
-								printf("\nNACK Received. Transmission full with errors.\nResending the data.\n");
+								printf("\nNACK Received. Transmission with errors.\nResending the data.\n");
+
+								//Get PI parameters here itself
+								GetPIparameters(param1, param2, param3, param4);
 
 								// repeatSend is false since the data ack was sent was ready to move to new cycle
 								isSyncFieldFormed = false;
